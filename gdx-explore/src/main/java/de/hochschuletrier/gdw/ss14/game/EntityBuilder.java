@@ -8,18 +8,19 @@ import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ss14.game.components.factories.EntityFactoryParam;
 
 public class EntityBuilder {
-	
-	private final PooledEngine engine;
-	
+
+    private final PooledEngine engine;
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	private final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", Game.class);
+    private final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory(
+            "data/json/entities.json", Game.class);
 
     public EntityBuilder(PooledEngine engine) {
-    	this.engine = engine;
+        this.engine = engine;
     }
 
     public Entity createEntity(String name, float x, float y) {
-    	EntityFactoryParam factoryParam = new EntityFactoryParam();
+        EntityFactoryParam factoryParam = new EntityFactoryParam();
         factoryParam.x = x;
         factoryParam.y = y;
         // TODO: set factoryParam.game ?
@@ -28,9 +29,9 @@ public class EntityBuilder {
         engine.addEntity(entity);
         return entity;
     }
-    
+
     public void init(AssetManagerX assetManager) {
         entityFactory.init(engine, assetManager);
     }
-    
+
 }
