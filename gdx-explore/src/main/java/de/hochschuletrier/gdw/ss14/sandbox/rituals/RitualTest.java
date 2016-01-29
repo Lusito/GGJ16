@@ -1,11 +1,13 @@
-package de.hochschuletrier.gdw.ss14.game;
+package de.hochschuletrier.gdw.ss14.sandbox.rituals;
 
 import java.util.function.Consumer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -23,15 +25,28 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss14.Main;
+import de.hochschuletrier.gdw.ss14.game.EntityBuilder;
+import de.hochschuletrier.gdw.ss14.game.GameConstants;
 import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.ResourceDescWithCount;
+import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.RitualDesc;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.utils.PhysixUtil;
+import de.hochschuletrier.gdw.ss14.sandbox.SandboxGame;
 
-public class Game extends InputAdapter {
+/**
+ *
+ * @author Santo Pfingsten
+ */
+public class RitualTest extends SandboxGame {
+
+    private static final Logger logger = LoggerFactory.getLogger(RitualTest.class);
 
     private final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
     private final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
@@ -49,8 +64,9 @@ public class Game extends InputAdapter {
     private final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
     private final AnimationRenderSystem animationRenderSystem = new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS);
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
+    private final RitualSystem ritualSystem = new RitualSystem(entityBuilder);
 
-    public Game() {
+    public RitualTest() {
         // If this is a build jar file, disable hotkeys
         if (!Main.IS_RELEASE) {
             togglePhysixDebug.register();
@@ -122,14 +138,43 @@ public class Game extends InputAdapter {
         });
         engine.addEntity(entity);
     }
+
+    private Entity lastCreated = null;
     
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(button == 0)
-        	entityBuilder.createEntity("ball", screenX, screenY);
-        else
+        if(button == 0) {
+        	lastCreated = entityBuilder.createEntity("player", screenX, screenY);
+        	lastCreated.getComponent(RitualCasterComponent.class).addRitual("fireball");
+        	lastCreated.getComponent(RitualCasterComponent.class).addRitual("test");
+
+        	lastCreated.getComponent(RitualCasterComponent.class).addResource("mana");
+        	lastCreated.getComponent(RitualCasterComponent.class).addResource("mana");
+
+        	lastCreated.getComponent(RitualCasterComponent.class).addResource("phosphorus");
+        } else
         	entityBuilder.createEntity("box", screenX, screenY);
         return true;
+    }
+    
+    @Override
+    public boolean keyUp(int keycode) {
+    	if(lastCreated!=null) {
+    		StringBuilder out = new StringBuilder();
+    		
+    		out.append("Debug print:").append('\n');
+    		for(ResourceDescWithCount res : ritualSystem.listResources(lastCreated)) {
+    			out.append("Res: "+res.count+" * "+res.desc.getId()+"; "+res.desc.getName()+"; "+res.desc.getDescription()).append('\n');
+    		}
+    		for(RitualDesc ritual : ritualSystem.listRituals(lastCreated)) {
+    			out.append("Ritual: "+ritual.getId()+"; "+ritual.getName()+"; "+ritual.getDescription()).append('\n');
+    			out.append(ritualSystem.isReady(lastCreated, ritual) ? "  - ready" : "  - not ready").append('\n');
+    		}
+    		logger.info(out.toString());
+    		ritualSystem.castRitual(lastCreated, "fireball");
+    	}
+    	
+    	return true;
     }
 
     public InputProcessor getInputProcessor() {
