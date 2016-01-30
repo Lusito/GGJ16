@@ -206,10 +206,67 @@
             "PhysixBody": {
                 "type": "box",
                 "size": 32,
-                "static": true,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "static": true
+            }
+        }
+    },
+    "small_dragon": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "small_dragon"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 32,
+                "static": true
+            }
+        }
+    },
+    "bridge_vertical": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "bridge_vertical"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 32,
+                "static": true
+            }
+        }
+    },
+    "bridge_vertical_fixed": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "bridge_vertical_fixed"
+            }
+        }
+    },
+    "bridge_horizontal": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "bridge_horizontal"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 32,
+                "static": true
+            }
+        }
+    },
+    "bridge_horizontal_fixed": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "bridge_horizontal_fixed"
             }
         }
     },

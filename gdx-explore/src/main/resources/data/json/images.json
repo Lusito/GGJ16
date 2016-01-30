@@ -12,6 +12,9 @@
     "ice": "data/textures/items/ice.png",
     "tree": "data/textures/items/tree.png",
     
+    "bridge_horizontal": "data/maps/tiles/bridge_horizontal.png",
+    "bridge_vertical": "data/maps/tiles/bridge_vertical.png",
+    
     "knight": "data/textures/monsters/knight.png",
     "small_dragon": "data/textures/monsters/small_dragon.png",
     "medium_dragon": "data/textures/monsters/medium_dragon.png",

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="180" height="120" tilewidth="32" tileheight="32" nextobjectid="87">
+ <tileset firstgid="1" source="tiles/items.tsx"/>
+ <tileset firstgid="17" source="tiles/monsters.tsx"/>
+ <tileset firstgid="33" source="tiles/scrolls.tsx"/>
+ <tileset firstgid="49" source="tiles/world.tsx"/>
+ <tileset firstgid="69" source="tiles/world_noblock.tsx"/>
+ <layer name="base" width="180" height="120">
+  <data encoding="base64" compression="zlib">
+   eJzt3etu2zAMhmFdUwesO6/V/V/UKmzEGJaUJR9iM31/PEjaYol/fCNoSZZeSikvF/P5zfM/1bz/coHrA2Z8f/Ot/M1vI1n++ubnBa4PmNVqdC239fnXm08XuDZglvQc1aDfQEa653hWyDOykp5D55meA1npHlqjRiMj3UPrMTtqNDKSHlpnuhZqNPKy43bynjwjI3tPKO/pOZCRnSsUjN0hK12ja6FGI7fovpAajaz0mjv6aGTnrbljDSky8+a/qdHISvfR9t6QGo2MvLGOhhqNjKJ1pO1najQy8sbv6KORmddL00cjM6+XpkYjK1uj6TuQnbdeib4DmXlrSqnRyCqaZyHTyCqaZ6HvQEZ2TLoW7g2Rm63RerzjqZBr5OLNhddye4/4pJBvXN1Spu04NbnG1XnrpL2f5Xe2blvkHWfqrcGzWV7KenuljuNs0Xql6Gcvx73+m2zj3qK5cP1+JMfe3+lRcAZvDK+W/+dX/BgQ3V9GeW8Y98YRorNYZtYstc/wsq0/0+tb6E9wBG9daS3r5sKjbPd69PbK2Df25I15bF3bobOt8y3foV/t7+hHsJXdYynK1Gtg6fOX+hKLTGML7zlaXaN7mZ3JtXyX5LpXqxnbxhZ27tDmeTSvo7xc1/K+blOrsYat0baH3jvP+nu9Hpv1JNhKnzPk5fmoTDe2XvfG+cg1RuieY+me0P5ur2uw9dob86MHwQh7xlA0bmczPZrnmdxH940814tR9lzDpXHopbGNPep2b902mUaPzc7IvMqrel0zNj17XXJt1GmM0D3HSFa8Xvqo8b1oTSCZRkTPFdYy13McOf7R9M7FJdPw2Do4W6PvnWmNTMNj13P0xjn2/u6ROk8/jRkz43ZHfP/oGie7tolMw2PH7Xr5OLq/6Ok930umIbyxhN594RUy7T0vwB59EKNrosUVMl0nrxkfh1f3RsfuzrzeWm57fzINMdNHa0eNe4xe7x7PQ+LxeGfdn1XvZsbxeCYAnmhPg9l6t2e9nh2bluumRqOxPUd7na13e/fVM5nm3hBaNBd3dqblM6O/2XUoZBpiz3OU71Wn7RynvKfvQBPtd7e15m3Jd+/fcm4Meo5cq3nUuHV0Ti41Gk307FNz1Uxzpih6vPEwMbpWeq/czqzDs30HNRoiuj9s79c8o7XG7B5jdm0pNRraUu+xtO/LGeN3cn300fBE91u1zPcfe9Xs6G96Xmjm+vCxRPt01XK799zIPl1bn60dGb+rhT4ay6J9urbsP+dle2nv3t7n6Z5DkGf09Pbp0vdia/dV7NXvNes6yDNG9M45rOU211uzrX9e+jf2vpAeGqO8cyYsvRbkHnvhev/PqNGYtdRf21wfed6VHesgz1hr5MxCeT0q3/a+kJ4De+j1I3ZM295LbjlHec2zvsCMpTML7VyItw50JuOze10DW3j59taq1vK+R4lquc732mfXgT1E52DJa0T/Xef7d7n9P1ELmcb9RXXbG+O2fYrXt1TzO87Qwpl6fXfjZdq+evWcfhpXYPPd68GjdYH008jAm9OpJa7TZBoZeGtca/BK34EsojXRGjUamfTOrRDUaGQS7TspqNHIJjq3QlCjkU3v+V5qNDLy+ml5T6aRkd17UqPvQDbeM72CGo2s7F6OrP1HZt6eSg01GhlF4x3UaGTl7ePY3pNnZOSds8HYHbKKzgan50BW9tlZeg5kFp1HQJ6RlXdOLnlGVnuc+wxcRbT/LzUaWdFz4JGQZzwS72xO8ozMpEYzT4hH4K0hpUYjK289B3lGVvasCvKMzDgHHI/Em1fhnhCZ2eewqNHIjHkVPBLGOPBI9JxKLdRn5GbH7Jqr5/kPLMb6pA==
+  </data>
+ </layer>
+ <layer name="stoneborder" width="180" height="120">
+  <data encoding="base64" compression="zlib">
+   eJzt0gEJAAAMw7CLmn9t91ESqIPu7iaFggI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlfqbEz5T4mRI/U+JnSvxMiZ8p8TMlk2I9PQx5EQ==
+  </data>
+ </layer>
+ <layer name="stones2" width="180" height="120">
+  <data encoding="base64" compression="zlib">
+   eJztnFuOo1AQQ7Oo7H9trWiEOp2B8KqH7fKR5i8NtstcCJB5PIw6z24BxgTiPhsl3GejgrtslHCfjQrPh/tsdHCXjRLu8zxUZ67qy3xHde6qviJ4rvxTQc3PgqKnLNb6zZwfs/Y11vywz6ga5m4zav7GNy/Mc+qCMStGzWuc9eBuH4Mxn4y5bl2bZayTd7bjXu/DmM3dmV7palSXIo8Lxtllw5rJlX5FdLLrb7e2xzq/LNgzOXqtEOnx6vaycmaeXwbO4zxXzg2ZsK9LkTiHXKrydaf/4Qxyqc53+jyn+8+kK9vJa/VU39l05zq10xM9V4CQ68ROT/NbBUqukzo9yWslaJlOmfMEj9WgZqreaXV/XSBnqjxzVV+dMGSq2Gk1PwgwZarUaRUfaLDlyqZ3DQUPiKzlypA1g8Y1lM4viGxly5A5g8YF97iGbxkzzABd3wuGHBU4mjH6PNC1IetT4mzOqHOxLnP1d1eoM0LThaZHnYjfmSOBpAlJywQiskacGYoeFB0TiOwhWqdRtKDomID6/6WBoAVBwwQyc0aZIYIOBA0TyO4zyhy7dXTv38SA0uluDd37X3g+cGbCCkJ23TPszsA9jgMlx24NHft3j3NAyBRh/1Ua3ON8urNFmG+mBne4FoSsu/f/4vmI617ktsx5nPlfPvu418sznzX5eAb7bHXcuWGiMBcFDyYG1rXGa6XZgqEPPt+boyB2w901V0HojPt7Duf1HT//xcb9PYef/WLge4PYeC7/43vanHg+v7izfHit8brLzvSZubcaTJ2f+6vB9DlO9a3G5DlmH79Tc61k+jr8osr/1HwrmNzfherjeHreGbjHfecjZx/D9OuJBYQMuvfPiK+J/4KUA5IWwwPyMY2mx+DA+K4PsjZznqjOsfYC/Xgzx2BYO6twBtyw9Nj3os0eLF1+UamzMxOWeaDBllvHM5ZqmNYXJBgzm/DMkHEu3TCvAcqdZp1JJ8xdftF1DaCwDzXYu7yg1mmFmXSgkluXj4z1QGUm1ajl1t3pqP2rzaUCleuMd7r9RLyT0u2BFcXc0Dyd7TSafhYU1+YFNF9Hs0bTzYR6doz+GDWjoJ4dmz82vWhMyI/JI5NWRCbkx/Idofr9QJZczqDmZwsGn34P5D7K3j5B95qtT3E9/kTd3zvI83SXY5jg8R1UvxV9nsAUnwuI65S7HMckrwtonXaf45jk9R2kTrvPcSDNtRoE7/5tSzzT/L7T3WnEtXntXVe2jrDpjabz/X+k7W91l63TTFqzqJ4Z2rXGnn+mtZpFZwUVWSA+2z76WZauMGisJHNuzH1ePoveFwaNHWTkwt7n5fPofWHQ2EXU9SPqNfrVeyHoMGjs5E6vq7NV+R5wFxad3ZztdUeumftk6omvPeJxn3thuueIjuIzG9ZesD//RECtz0od2HrG765v09nnjH17znPpnj3r/XODSff8I9don4NngzL7qGdBKH5MD0jzv/McCMmH6QOtB3vf5f0d32zhHhgl3Gejgrs8hx+SxZGl
+  </data>
+ </layer>
+ <objectgroup name="trees">
+  <object id="2" gid="10" x="2336" y="1344"/>
+  <object id="3" gid="10" x="2464" y="1312"/>
+  <object id="4" gid="10" x="2624" y="1440"/>
+  <object id="5" gid="10" x="2272" y="1472"/>
+  <object id="6" gid="10" x="2240" y="1632"/>
+  <object id="7" gid="10" x="2400" y="1824"/>
+  <object id="8" gid="10" x="2464" y="1952"/>
+  <object id="9" gid="10" x="2656" y="1568"/>
+  <object id="10" gid="10" x="2528" y="1728"/>
+  <object id="11" gid="10" x="2176" y="1248"/>
+  <object id="13" gid="10" x="3072" y="1760"/>
+  <object id="14" gid="10" x="3168" y="1984"/>
+  <object id="15" gid="10" x="2848" y="2144"/>
+  <object id="16" gid="10" x="2624" y="2080"/>
+  <object id="17" gid="10" x="2816" y="2272"/>
+  <object id="18" gid="10" x="3136" y="2272"/>
+  <object id="19" gid="10" x="3104" y="2112"/>
+  <object id="21" gid="10" x="3200" y="2400"/>
+  <object id="22" gid="10" x="3392" y="2304"/>
+  <object id="23" gid="10" x="3616" y="2400"/>
+  <object id="24" gid="10" x="3488" y="2112"/>
+  <object id="25" gid="10" x="3488" y="2496"/>
+  <object id="26" gid="10" x="3264" y="2112"/>
+  <object id="27" gid="10" x="3424" y="1888"/>
+  <object id="28" gid="10" x="3200" y="1824"/>
+  <object id="33" gid="10" x="3040" y="1568"/>
+  <object id="34" gid="10" x="2944" y="1536"/>
+  <object id="35" gid="10" x="2816" y="1440"/>
+  <object id="36" gid="10" x="2432" y="1632"/>
+  <object id="37" gid="10" x="2496" y="1472"/>
+  <object id="38" gid="10" x="2304" y="1536"/>
+  <object id="39" gid="10" x="2240" y="1760"/>
+  <object id="40" gid="10" x="2976" y="2304"/>
+  <object id="42" gid="10" x="2720" y="2112"/>
+  <object id="43" gid="10" x="2688" y="2208"/>
+  <object id="44" gid="10" x="2336" y="1888"/>
+  <object id="45" gid="10" x="2336" y="1664"/>
+  <object id="46" gid="10" x="3296" y="2240"/>
+  <object id="47" gid="10" x="3168" y="1696"/>
+  <object id="48" gid="10" x="3584" y="2208"/>
+  <object id="49" gid="10" x="3744" y="2496"/>
+  <object id="50" gid="10" x="2144" y="1408"/>
+  <object id="51" gid="10" x="2112" y="1312"/>
+  <object id="52" gid="10" x="2176" y="1504"/>
+ </objectgroup>
+ <objectgroup name="teleports">
+  <object id="55" gid="7" x="2880" y="1888"/>
+ </objectgroup>
+ <objectgroup name="items">
+  <object id="56" gid="6" x="3040" y="1888"/>
+  <object id="58" gid="6" x="3040" y="2048"/>
+  <object id="59" gid="6" x="2944" y="2048"/>
+  <object id="60" gid="6" x="3008" y="2240"/>
+  <object id="61" gid="6" x="3232" y="2144"/>
+  <object id="62" gid="6" x="3392" y="2112"/>
+  <object id="63" gid="6" x="2496" y="1408"/>
+  <object id="64" gid="6" x="2240" y="1568"/>
+  <object id="65" gid="6" x="2304" y="1792"/>
+  <object id="66" gid="6" x="2752" y="1440"/>
+  <object id="68" gid="5" x="3456" y="2240"/>
+  <object id="69" gid="5" x="3296" y="2304"/>
+  <object id="70" gid="5" x="2464" y="1728"/>
+  <object id="71" gid="5" x="2784" y="1600"/>
+  <object id="72" gid="5" x="2272" y="1376"/>
+  <object id="73" gid="5" x="2400" y="1280"/>
+  <object id="74" gid="5" x="3136" y="1632"/>
+  <object id="75" gid="5" x="3328" y="1824"/>
+  <object id="76" gid="5" x="3072" y="2400"/>
+ </objectgroup>
+</map>
