@@ -12,16 +12,21 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss14.Main;
+import de.hochschuletrier.gdw.ss14.events.PlayerMessageEvent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.RitualDesc;
 
-public class Hud {
+public class Hud implements PlayerMessageEvent.Listener {
 
+    private static final float MESSAGE_DURATION = 2.f;
+    
     private static final Color COLOR_READY = Color.WHITE;
     private static final Color COLOR_NOT_READY = new Color(0.4f, 0.4f, 0.4f, 1);
     
     private Texture overlay;
+    
+    private Texture messageBubble;
     
     private BitmapFont font;
     
@@ -29,11 +34,18 @@ public class Hud {
     
     private Entity player;
     
+    private String message;
+    
+    private float messageTimout = 0.f;
+    
     public Hud(AssetManagerX assetManager, RitualSystem ritualSystem, Entity player) {
         overlay = assetManager.getTexture("hud_bg");
+        messageBubble = assetManager.getTexture("hud_msg_bg");
         font = assetManager.getFont("verdana_24");
         this.ritualSystem = ritualSystem;
         this.player = player;
+        
+        PlayerMessageEvent.register(this);
     }
 
     public void render() {
@@ -69,6 +81,20 @@ public class Hud {
         offset += 15;
         font.drawWrapped(DrawUtil.batch, ready ? "Press SPACE to cast" : ("Missing: "+missingResourceList), 50, offset, textBoxWidth);
         
+        
+        if(messageTimout>0.f) {
+            int msgX = 200; // TODO
+            int msgY = 400;
+            int msgDir = -1;
+            
+            DrawUtil.batch.draw(messageBubble, msgX, msgY + (msgDir<0 ? messageBubble.getHeight() : 0), messageBubble.getWidth(), msgDir*messageBubble.getHeight());
+            
+            font.setColor(Color.WHITE);
+            font.setScale(1.2f);
+            font.drawWrapped(DrawUtil.batch, message, msgX+20, msgY+20, messageBubble.getWidth()-40);
+        }
+
+        
         font.setScale(fontScaleX, fontScaleY);
     }
 
@@ -92,9 +118,23 @@ public class Hud {
     }
 
     public void update(float delta) {
+        if(messageTimout>0.f)
+            messageTimout-=delta;
     }
     
     public void dispose() {
+    }
+
+    @Override
+    public void onPlayerMessageEvent(String message) {
+        if(messageTimout>0.5f && message!=null) {
+            this.message+="\n"+message;
+            
+        } else {
+            this.message=message;
+        }
+
+        messageTimout = MESSAGE_DURATION;
     }
 
 }
