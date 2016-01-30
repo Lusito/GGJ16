@@ -1,17 +1,17 @@
 package de.hochschuletrier.gdw.ss14.game;
 
+import java.util.function.Consumer;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
-import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
-import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
@@ -26,18 +26,14 @@ import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
-import de.hochschuletrier.gdw.ss14.game.components.AnimationComponent;
 import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
-import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
-import de.hochschuletrier.gdw.ss14.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.utils.PhysixUtil;
-import java.util.function.Consumer;
 
 public class Game extends InputAdapter {
 
@@ -49,6 +45,8 @@ public class Game extends InputAdapter {
             GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE
     );
 
+    private final EntityBuilder entityBuilder = new EntityBuilder(engine);
+
     private final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE,
             GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX
     );
@@ -56,8 +54,6 @@ public class Game extends InputAdapter {
     private final AnimationRenderSystem animationRenderSystem = new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS);
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
 
-    private final EntityFactoryParam factoryParam = new EntityFactoryParam();
-    private final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", Game.class);
     private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem();
 
     public Game() {
@@ -78,10 +74,10 @@ public class Game extends InputAdapter {
         addSystems();
         addContactListeners();
         setupPhysixWorld();
-        entityFactory.init(engine, assetManager);
         
         TiledMap map = loadMap("data/maps/tryanewone.tmx");
         basemapRenderSystem.initMap(map);
+        entityBuilder.init(assetManager);
     }
 
     private void addSystems() {
@@ -100,7 +96,7 @@ public class Game extends InputAdapter {
                     for (LayerObject obj : layer.getObjects()) {
                         String type = obj.getProperty("EntityType", null);
                         if (type != null) {
-                            createEntity(type, obj.getX() + obj.getWidth() / 2.0f,
+                            entityBuilder.createEntity(type, obj.getX() + obj.getWidth() / 2.0f,
                                     obj.getY() - obj.getHeight() / 2.0f);
                         }
                     }
@@ -156,23 +152,13 @@ public class Game extends InputAdapter {
         });
         engine.addEntity(entity);
     }
-
-    public Entity createEntity(String name, float x, float y) {
-        factoryParam.game = this;
-        factoryParam.x = x;
-        factoryParam.y = y;
-        Entity entity = entityFactory.createEntity(name, factoryParam);
-
-        engine.addEntity(entity);
-        return entity;
-    }
-
+    
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(button == 0)
-            createEntity("ball", screenX, screenY);
+        	entityBuilder.createEntity("ball", screenX, screenY);
         else
-            createEntity("box", screenX, screenY);
+        	entityBuilder.createEntity("box", screenX, screenY);
         return true;
     }
 
