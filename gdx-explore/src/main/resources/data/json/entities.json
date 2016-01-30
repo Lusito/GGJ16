@@ -27,8 +27,8 @@
                 "template": "Player"
             },
             "RitualCaster": {
-                "resources": "phosphor, coal",
-                "rituals": "bomb"
+                "resources": "",
+                "rituals": "winRitual"
             },
             "PointLight": {
                 "color": "0.3, 0, 0",
