@@ -36,9 +36,9 @@
    <property name="EntityType" value="teleport_out"/>
   </properties>
  </tile>
- <tile id="7">
+ <tile id="8">
   <properties>
-   <property name="EntityType" value="stone"/>
+   <property name="EntityType" value="boulder"/>
   </properties>
  </tile>
  <tile id="9">
