@@ -32,6 +32,7 @@
     
     "menu_fg": "data/ui/menu/fg_border.png",
     "menu_bg": "data/ui/menu/bg_root.png",
+    "new_menu_bg": "data/ui/menu/bg_menu.png",
     
     "hud_bg": "data/ui/hud/background.png",
     "hud_msg_bg": "data/ui/hud/message_background.png"
