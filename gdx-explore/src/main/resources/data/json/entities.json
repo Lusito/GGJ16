@@ -13,6 +13,7 @@
             },
             "Animation": {
                 "animation": "ball"
+                "offsetY": 10
             },
             "PhysixBody": {
                 "type": "circle",
@@ -55,7 +56,7 @@
             }
         }
     },
-    
+
     "mana": {
         "meta": { },
         "components": {
@@ -181,10 +182,24 @@
             }
         }
     },
-    "tree": {
-        "meta": {},
+    "ice": {
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
+            "Texture": {
+                "animation": "ice"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            }
+        }
+    },
+    "tree": {
+        "meta": { },
+        "components": {
+            "Position": { },
             "Texture": {
                 "animation": "tree"
             },
@@ -199,9 +214,9 @@
         }
     },
     "small_dragon": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "small_dragon"
             },
@@ -216,9 +231,9 @@
         }
     },
     "bridge_vertical": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "bridge_vertical"
             },
@@ -226,6 +241,9 @@
                 "type": "box",
                 "size": 32,
                 "static": true
+            },
+            "BrokenBridge": { 
+                "vertical": true
             }
         }
     },
@@ -249,6 +267,9 @@
                 "type": "box",
                 "size": 32,
                 "static": true
+            },
+            "BrokenBridge": { 
+                "vertical": false
             }
         }
     },
