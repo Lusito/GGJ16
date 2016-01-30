@@ -15,5 +15,7 @@
     "big_dragon": "data/textures/monsters/big_dragon.png",
     
     "menu_fg": "data/ui/menu/fg_border.png",
-    "menu_bg": "data/ui/menu/bg_root.png"
+    "menu_bg": "data/ui/menu/bg_root.png",
+    
+    "hud_bg": "data/ui/hud/background.png"
 }

@@ -1,9 +1,9 @@
 {
-    "summonDistance": 1.0,
+    "summonDistance": 80.0,
     "resources": [
         {
             "id": "mana",
-            "name": "Small mana potion",
+            "name": "Mana potion",
             "description": "..."
         },
         {
@@ -23,14 +23,18 @@
             "name": "Fireball",
             "description": "Summons a fireball",
             "resources": ["mana", "phosphorus"],
-            "entityName": "fireball"
+            "action": "SPAWN",
+            "entityName": "fireball",
+            "entityImpulse": 10000.0
         },
         {
             "id": "test",
             "name": "Mighty fireball of Testing",
-            "description": "Hopefully casts a fireball and throws it into the general direction the player is targeting.\nAlso a line-break for testing!",
+            "description": "Hopefully casts a fireball",
             "resources": ["mana", "phosphorus", "wood"],
-            "entityName": "fireball"
+            "action": "SPAWN",
+            "entityName": "fireball",
+            "entityImpulse": 20000.0
         }
     ]
 }

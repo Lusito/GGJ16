@@ -16,6 +16,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.math.Vector2;
 
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
+import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
@@ -94,7 +96,11 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
         }
 
         removeUsedResources(comp, desc);
-        createSummonedEntity(mage, desc);
+        
+        switch(desc.action) {
+            case SPAWN:
+                createSummonedEntity(mage, desc);
+        }
     }
 
     private void createSummonedEntity(Entity mage, RitualDesc ritual) {
@@ -107,7 +113,18 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
         Entity e = entityBuilder.createEntity(ritual.entityName, summonPos.x,
                 summonPos.y);
         ComponentMappers.position.get(e).rotation = magePos.rotation;
-        // TODO: impulse ?
+        
+        if(ritual.entityImpulse>0) {
+            PhysixModifierComponent modifier = ComponentMappers.physixModifier.get(e);
+            if(modifier!=null) {
+                modifier.schedule(()->{
+                    PhysixBodyComponent body = ComponentMappers.physixBody.get(e);
+                    if(body!=null) {
+                        body.applyImpulse(magePos.getDirectionVector().scl(ritual.entityImpulse));
+                    }
+                });
+            }
+        }
     }
 
     private void removeUsedResources(RitualCasterComponent caster,
@@ -177,6 +194,21 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
         comp.ritualIndex = normalizeIndex(comp.ritualIndex + diff, comp.availableRituals.size());
     }
     
+    public RitualDesc getCurrentRitual(Entity mage) {
+        RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
+        if(comp==null)
+            return null;
+
+        if(comp.availableRituals.isEmpty())
+            return null;
+        
+        comp.ritualIndex = normalizeIndex(comp.ritualIndex, comp.availableRituals.size());
+        
+        String ritualId = comp.availableRituals.get(comp.ritualIndex);
+        
+        return rituals.get(ritualId);
+    }
+    
     public List<RitualDesc> listRituals(Entity mage) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
         if (comp == null) {
@@ -194,6 +226,10 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
         return ret;
     }
 
+    public ResourceDesc getResource(String resourceId) {
+        return resources.get(resourceId);
+    }
+    
     public List<ResourceDescWithCount> listResources(Entity mage) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
         if (comp == null) {
@@ -235,14 +271,19 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
         List<RitualDesc> rituals;
     }
 
+    public static enum RitualAction {
+        SPAWN
+    }
     public static final class RitualDesc {
 
-        private String id;
-        private String name;
-        private String description;
-        private String entityName;
+        String id;
+        String name;
+        String description;
+        RitualAction action;
+        String entityName;
+        float entityImpulse;
         @JacksonList(String.class)
-        private List<String> resources;
+        List<String> resources;
 
         public String getId() {
             return id;
@@ -254,10 +295,6 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
 
         public String getDescription() {
             return description;
-        }
-
-        public String getEntityName() {
-            return entityName;
         }
 
         public List<String> getResources() {

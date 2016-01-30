@@ -66,6 +66,8 @@ public class Game extends InputAdapter {
     private final RitualSystem ritualSystem = new RitualSystem(entityBuilder);
 
     private Entity player;
+    
+    private Hud hud;
 
     private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
 
@@ -78,6 +80,7 @@ public class Game extends InputAdapter {
 
     public void dispose() {
         togglePhysixDebug.unregister();
+        hud.dispose();
     }
 
     public void init(AssetManagerX assetManager) {
@@ -92,6 +95,8 @@ public class Game extends InputAdapter {
         basemapRenderSystem.initMap(map);
         cameraSystem.adjustToMap(map);
         entityBuilder.createEntitiesFromMap(map);
+        
+        hud = new Hud(assetManager, ritualSystem, player);
     }
 
     private void addSystems() {
@@ -132,6 +137,8 @@ public class Game extends InputAdapter {
     public void update(float delta) {
         Main.getInstance().screenCamera.bind();
         engine.update(delta);
+        hud.update(delta);
+        hud.render();
     }
 
     public void createTrigger(float x, float y, float width, float height, Consumer<Entity> consumer) {
