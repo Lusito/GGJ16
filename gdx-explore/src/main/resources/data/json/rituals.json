@@ -1,5 +1,5 @@
 {
-    "summonDistance": 80.0,
+    "summonDistance": 50.0,
     "resources": [
         {
             "id": "mana",

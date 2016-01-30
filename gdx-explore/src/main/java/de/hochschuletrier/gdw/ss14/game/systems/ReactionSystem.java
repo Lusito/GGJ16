@@ -39,6 +39,16 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         case ICE:
             if(mat2.type == MaterialType.FIRE)
                 onFireIceReaction(second, first);
+            else if(mat2.type == MaterialType.EXPLOSION)
+                onStoneExplosionReaction(second, first);
+            break;
+        case STONE:
+            if(mat2.type == MaterialType.EXPLOSION)
+                onStoneExplosionReaction(first, second);
+            break;
+        case EXPLOSION:
+            if(mat2.type == MaterialType.ICE || mat2.type == MaterialType.STONE)
+                onStoneExplosionReaction(second,first);
             break;
         case NONE:
             break;
@@ -47,6 +57,12 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         }
     }
     
+    private void onStoneExplosionReaction(Entity stone, Entity expl) {
+        PositionComponent posComp = ComponentMappers.position.get(stone);
+        Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
+        engine.removeEntity(stone);
+    }
+
     private void onFireIceReaction(Entity fire, Entity ice) {
         PositionComponent posComp = ComponentMappers.position.get(fire);
         Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);

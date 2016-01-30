@@ -17,6 +17,7 @@ public class DeathComponentFactory extends ComponentFactory<EntityFactoryParam> 
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
         DeathComponent component = engine.createComponent(DeathComponent.class);
         component.timer = properties.getFloat("time", 0.0f);
+        component.explosionRadius = properties.getFloat("explosionRadius", 0.f);
         entity.add(component);
     }
 }
