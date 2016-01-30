@@ -1,5 +1,4 @@
-{
-    "ball": {
+{  "ball": {
         "filename": "data/textures/ball.png",
         "frames": 2,
         "frameDuration": [ 0.5, 0.5 ],
@@ -134,5 +133,41 @@
         "playType" : "LOOP_PINGPONG",
         "columns": 4,
         "rows" : 8
+    },
+	"fireBallRight": {
+        "filename": "data/textures/effects/feuerball_atlas.png",
+        "frames" : 2,
+        "startRow": 0,
+        "frameDuration": [ 0.1] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 2,
+        "rows" : 4
+    },
+	"fireBallLeft": {
+        "filename": "data/textures/effects/feuerball_atlas.png",
+        "frames" : 2,
+        "startRow": 1,
+        "frameDuration": [ 0.1] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 2,
+        "rows" : 4
+    },
+	"fireBallUp": {
+        "filename": "data/textures/effects/feuerball_atlas.png",
+        "frames" : 2,
+        "startRow": 2,
+        "frameDuration": [ 0.1] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 2,
+        "rows" : 4
+    },
+	"fireBallDown": {
+        "filename": "data/textures/effects/feuerball_atlas.png",
+        "frames" : 2,
+        "startRow": 3,
+        "frameDuration": [ 0.1] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 2,
+        "rows" : 4
     }
 }

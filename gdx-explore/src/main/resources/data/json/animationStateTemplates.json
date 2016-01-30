@@ -12,5 +12,15 @@
         "SUMMON_UP": "playerSummonUp",
         "SUMMON_LEFT": "playerSummonLeft",
         "SUMMON_RIGHT": "playerSummonRight"
+    },
+        "Fireball": {
+        "IDLE_DOWN": "fireBallDown",
+        "IDLE_UP": "fireBallUp",
+        "IDLE_LEFT": "fireBallLeft",
+        "IDLE_RIGHT": "fireBallRight",
+        "WALK_DOWN": "fireBallDown",
+        "WALK_UP": "fireBallUp",
+        "WALK_LEFT": "fireBallLeft",
+        "WALK_RIGHT": "fireBallRight"
     }
 }
