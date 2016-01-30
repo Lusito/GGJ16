@@ -53,7 +53,9 @@
     "runeCircle": {
         "meta": { },
         "components": {
-            "Position": { },
+            "Position": {
+                "layer": -1
+            },
             "Animation": {
                 "animation": "runeCircle"
             },
@@ -527,7 +529,7 @@
             },
             "Pickable": {
                 "resourceCount": 1,
-                "resourceId": "ball"
+                "resourceId": "orb1"
             }
         }
     },
@@ -545,7 +547,7 @@
             },
             "Pickable": {
                 "resourceCount": 1,
-                "resourceId": "ball"
+                "resourceId": "orb2"
             }
         }
     },
@@ -563,7 +565,7 @@
             },
             "Pickable": {
                 "resourceCount": 1,
-                "resourceId": "ball"
+                "resourceId": "orb3"
             }
         }
     },
@@ -581,7 +583,7 @@
             },
             "Pickable": {
                 "resourceCount": 1,
-                "resourceId": "ball"
+                "resourceId": "orb4"
             }
         }
     },
@@ -599,7 +601,7 @@
             },
             "Pickable": {
                 "resourceCount": 1,
-                "resourceId": "ball"
+                "resourceId": "orb5"
             }
         }
     },
@@ -617,7 +619,7 @@
             },
             "Pickable": {
                 "resourceCount": 1,
-                "resourceId": "ball"
+                "resourceId": "orb6"
             }
         }
     },
@@ -635,7 +637,7 @@
             },
             "Pickable": {
                 "resourceCount": 1,
-                "resourceId": "ball"
+                "resourceId": "orb7"
             }
         }
     }

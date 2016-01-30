@@ -108,12 +108,25 @@ public class Hud implements PlayerMessageEvent.Listener {
         
         StringBuilder str = new StringBuilder();
         boolean first = true;
+        int sameResCount = 0;
+        String lastName = null;
         for(String id : missingIds) {
             if(first) first = false;
             else str.append(", ");
             
-            str.append(ritualSystem.getResource(id).getName());
+            String name = ritualSystem.getResource(id).getName();
+            str.append(name);
+            
+            if(lastName==null)
+                lastName = name;
+                
+            if(lastName.equals(name))
+                sameResCount++;
         }
+        
+        if(sameResCount==missingIds.size() && sameResCount>1)
+            return sameResCount+" "+lastName+"s";
+        
         return str.toString();
     }
 
@@ -127,7 +140,7 @@ public class Hud implements PlayerMessageEvent.Listener {
 
     @Override
     public void onPlayerMessageEvent(String message, boolean clear) {
-        if(message!=null && (messageTimout>1.0f || message.length()<3) && !clear) {
+        if(this.message!=null && (messageTimout>1.0f || this.message.length()<3) && !clear) {
             this.message+="\n"+message;
             
             String[] lines = this.message.split("\n");

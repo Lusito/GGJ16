@@ -83,7 +83,7 @@
             "resources": ["mana", "phosphor"],
             "action": "SPAWN",
             "entityName": "fireball",
-            "entityImpulse": 10000.0
+            "entityImpulse": 1000.0
         },
         {
             "id": "bomb",
@@ -107,7 +107,8 @@
             "description": "Summons a poison elemental",
             "resources": ["mana", "mushroom"],
             "action": "SPAWN",
-            "entityName": "poison_elemental"
+            "entityName": "poison_elemental",
+            "entityImpulse": 300.0
         }
     ]
 }
