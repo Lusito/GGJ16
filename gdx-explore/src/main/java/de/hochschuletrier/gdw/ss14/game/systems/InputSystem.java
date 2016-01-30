@@ -5,10 +5,9 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.math.MathUtils;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
+import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
 
@@ -18,12 +17,15 @@ public class InputSystem extends IteratingSystem {
             DOWN = Input.Keys.DOWN,
             LEFT = Input.Keys.LEFT,
             RIGHT = Input.Keys.RIGHT,
-            ACTION = Input.Keys.SPACE;
+            ACTION = Input.Keys.SPACE,
+            ACTION_UP = Input.Keys.E,
+            ACTION_DOWN = Input.Keys.Q;
 
     public InputSystem() {
         this(0);
     }
 
+    @SuppressWarnings("unchecked")
     public InputSystem(int priority) {
         super(Family.all(InputComponent.class, PhysixBodyComponent.class).get(), priority);
     }
@@ -56,7 +58,23 @@ public class InputSystem extends IteratingSystem {
             input.moveX = 0;
         }
 
-        input.isActionPressed = Gdx.input.isKeyPressed(ACTION);
+        boolean actionPressedNow = Gdx.input.isKeyPressed(ACTION);
+        if(!actionPressedNow && input.isActionPressed) {
+            InputActionEvent.emitDoAction(entity);
+        }
+        input.isActionPressed = actionPressedNow;
+
+        boolean actionUpPressedNow = Gdx.input.isKeyPressed(ACTION_UP);
+        if(!actionUpPressedNow && input.isActionUpPressed) {
+            InputActionEvent.emitChangeAction(entity, 1);
+        }
+        input.isActionUpPressed = actionUpPressedNow;
+
+        boolean actionDownPressedNow = Gdx.input.isKeyPressed(ACTION_DOWN);
+        if(!actionDownPressedNow && input.isActionDownPressed) {
+            InputActionEvent.emitChangeAction(entity, -1);
+        }
+        input.isActionDownPressed = actionDownPressedNow;
     }
 
     private void adjustMovements(Entity entity, float deltaTime) {

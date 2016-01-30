@@ -34,6 +34,7 @@ import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
 
@@ -58,8 +59,9 @@ public class Game extends InputAdapter {
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
     private final InputSystem inputSystem = new InputSystem();
     private final CameraSystem cameraSystem = new CameraSystem(0);
+    private final RitualSystem ritualSystem = new RitualSystem(entityBuilder);
 
-    private Entity Player;
+    private Entity player;
 
     private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
 
@@ -96,6 +98,7 @@ public class Game extends InputAdapter {
         engine.addSystem(inputSystem);
         engine.addSystem(basemapRenderSystem);
         engine.addSystem(cameraSystem);
+        engine.addSystem(ritualSystem);
     }
 
     private TiledMap loadMap(String filename) {
@@ -118,16 +121,7 @@ public class Game extends InputAdapter {
     private void setupPhysixWorld() {
         physixSystem.setGravity(0, 0);
 
-        this.Player = entityBuilder.createEntity("ball", 50, 50);
-
-        /*  PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
-        Body body = physixSystem.getWorld().createBody(bodyDef);
-        body.createFixture(new PhysixFixtureDef(physixSystem).density(1).friction(0.5f).shapeBox(800, 20));
-        PhysixUtil.createHollowCircle(physixSystem, 180, 180, 150, 30, 6);
-
-        createTrigger(410, 600, 3200, 40, (Entity entity) -> {
-            engine.removeEntity(entity);
-        });*/
+        player = entityBuilder.createEntity("player", 50, 50);
     }
 
     public void update(float delta) {
@@ -153,53 +147,6 @@ public class Game extends InputAdapter {
             entity.add(bodyComponent);
         });
         engine.addEntity(entity);
-    }
-
-    /*
-    @Override
-	public boolean keyDown(int keycode) {
-    	final int speed = 50;
-    	if (this.Player != null){
-    		PhysixBodyComponent body = Player.getComponent(PhysixBodyComponent.class);
-    		switch(keycode){
-	    	case Input.Keys.LEFT:
-	    		body.setLinearVelocityX(-speed);
-	    		break;
-	    	case Input.Keys.RIGHT:
-	    		body.setLinearVelocityX(speed);
-	    		break;
-	    	case Input.Keys.DOWN:
-	    		body.setLinearVelocityY(speed);
-	    		break;
-	    	case Input.Keys.UP:
-	    		body.setLinearVelocityY(-speed);
-	    		break;
-	    	case Input.Keys.SPACE:
-	    		
-	    		break;
-	    	}
-    	}
-		return super.keyDown(keycode);
-	}
-    
-    
-
-	@Override
-	public boolean keyUp(int keycode) {
-		if (this.Player != null){
-			PhysixBodyComponent body = Player.getComponent(PhysixBodyComponent.class);
-			body.setLinearVelocity(new Vector2());
-		}
-		return super.keyUp(keycode);
-	}*/
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (button == 0) {
-            this.Player = entityBuilder.createEntity("ball", screenX, screenY);
-        } else {
-            entityBuilder.createEntity("box", screenX, screenY);
-        }
-        return true;
     }
 
     public InputProcessor getInputProcessor() {

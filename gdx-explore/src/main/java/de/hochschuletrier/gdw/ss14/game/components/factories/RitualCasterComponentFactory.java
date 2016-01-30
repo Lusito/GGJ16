@@ -16,6 +16,12 @@ public class RitualCasterComponentFactory extends ComponentFactory<EntityFactory
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
         RitualCasterComponent component = engine.createComponent(RitualCasterComponent.class);
+        for(String resource : properties.getString("resources", "").split(",")) {
+            component.addResource(resource.trim()); 
+        }
+        for(String ritual : properties.getString("rituals", "").split(",")) {
+            component.addRitual(ritual.trim());
+        }
         entity.add(component);
     }
 }
