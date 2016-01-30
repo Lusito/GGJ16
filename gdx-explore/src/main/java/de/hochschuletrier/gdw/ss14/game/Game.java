@@ -25,14 +25,15 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
-import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
-import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.ReactionListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationStateSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.ReactionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
@@ -45,12 +46,12 @@ public class Game extends InputAdapter {
     private final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
     private final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
 
-    private final PooledEngine engine = new PooledEngine(
+    public static final PooledEngine engine = new PooledEngine(
             GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE,
             GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE
     );
 
-    private final EntityBuilder entityBuilder = new EntityBuilder(engine);
+    public static final EntityBuilder entityBuilder = new EntityBuilder(engine);
 
     private final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE,
             GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX
@@ -111,6 +112,7 @@ public class Game extends InputAdapter {
         engine.addSystem(animStateSystem);
         engine.addSystem(ritualSystem);
         engine.addSystem(soundSystem);
+        engine.addSystem(new ReactionSystem());
     }
 
     private TiledMap loadMap(String filename) {
@@ -126,6 +128,7 @@ public class Game extends InputAdapter {
         PhysixComponentAwareContactListener contactListener = new PhysixComponentAwareContactListener();
         physixSystem.getWorld().setContactListener(contactListener);
 //        contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
+        contactListener.addListener(MaterialComponent.class, new ReactionListener());
         contactListener.addListener(TriggerComponent.class, new TriggerListener());
         contactListener.addListener(PlayerComponent.class, new PickUpListener());
     }
@@ -134,6 +137,7 @@ public class Game extends InputAdapter {
         physixSystem.setGravity(0, 0);
 
         player = entityBuilder.createEntity("player", 50, 50);
+        entityBuilder.createEntity("ice", 500, 100);
     }
 
     public void update(float delta) {
