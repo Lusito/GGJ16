@@ -41,12 +41,17 @@ public class RitualCasterComponent extends Component implements Pool.Poolable {
         addResources(name, 1);
     }
     public void addResources(String name, int incr) {
+        name = name.trim();
+        if(name.isEmpty())
+            return;
+        
         Integer count = availableResources.getOrDefault(name, 0);
         availableResources.put(name, count + incr);
     }
 
     public void addRitual(String name) {
-        if(!availableRituals.contains(name))
+        name = name.trim();
+        if(!availableRituals.contains(name) && !name.isEmpty())
             availableRituals.add(name);
     }
 
@@ -54,6 +59,7 @@ public class RitualCasterComponent extends Component implements Pool.Poolable {
     public void reset() {
         availableRituals.clear();
         availableResources.clear();
+        ritualIndex = 0;
     }
 
 }

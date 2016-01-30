@@ -4,17 +4,37 @@
         {
             "id": "mana",
             "name": "Mana potion",
-            "description": "..."
+            "description": ""
         },
         {
-            "id": "phosphorus",
-            "name": "Phosphorus",
+            "id": "coal",
+            "name": "coal",
+            "description": ""
+        },
+        {
+            "id": "mushroom",
+            "name": "mushroom",
+            "description": ""
+        },
+        {
+            "id": "phosphor",
+            "name": "phosphor",
             "description": "Things that burn"
+        },
+        {
+            "id": "rope",
+            "name": "rope",
+            "description": ""
+        },
+        {
+            "id": "stone",
+            "name": "stone",
+            "description": ""
         },
         {
             "id": "wood",
             "name": "Wood",
-            "description": "..."
+            "description": ""
         }
     ],
     "rituals": [
@@ -22,7 +42,7 @@
             "id": "fireball",
             "name": "Fireball",
             "description": "Summons a fireball",
-            "resources": ["mana", "phosphorus"],
+            "resources": ["mana", "phosphor"],
             "action": "SPAWN",
             "entityName": "fireball",
             "entityImpulse": 10000.0
@@ -31,7 +51,7 @@
             "id": "test",
             "name": "Mighty fireball of Testing",
             "description": "Hopefully casts a fireball",
-            "resources": ["mana", "phosphorus", "wood"],
+            "resources": ["mana", "phosphor", "wood"],
             "action": "SPAWN",
             "entityName": "fireball",
             "entityImpulse": 20000.0

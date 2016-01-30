@@ -26,8 +26,8 @@
                 "template": "Player"
             },
             "RitualCaster": {
-                "resources": "phosphorus, phosphorus",
-                "rituals": "fireball, test"
+                "resources": "",
+                "rituals": ""
             },
             "PointLight": {
                 "color": "0, 1, 0",
@@ -222,6 +222,9 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
+            },
+            "Pickable": {
+                "ritualId": "fireball"
             }
         }
     },

@@ -24,6 +24,6 @@ public class PositionComponent extends Component implements Pool.Poolable {
     }
 
     public Vector2 getDirectionVector() {
-        return new Vector2(1, 0).rotate(rotation);
+        return new Vector2(directionX, directionY).nor();
     }
 }
