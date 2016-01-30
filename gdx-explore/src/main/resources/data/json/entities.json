@@ -22,11 +22,11 @@
                 "restitution": 0.4,
                 "isFixedRotation": true
             },
-            "AnimationState": { 
+            "AnimationState": {
                 "template": "Player"
             },
             "RitualCaster": {
-                "resources": "phosphor, mana,phosphor, mana,phosphor, mana",
+                "resources": "phosphor, mana",
                 "rituals": "fireball"
             },
             "PointLight": {
@@ -49,14 +49,17 @@
                 "distance": 5,
                 "static": true,
                 "xRay": true
+            },
+            "SelfDestruct": {
+                "seconds": 1.0
             }
         }
     },
     
     "mana": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "mana_potion"
             },
@@ -72,9 +75,9 @@
         }
     },
     "coal": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "coal"
             },
@@ -90,9 +93,9 @@
         }
     },
     "mushroom": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "mushroom"
             },
@@ -108,9 +111,9 @@
         }
     },
     "phosphor": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "phosphor"
             },
@@ -126,9 +129,9 @@
         }
     },
     "rope": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "rope"
             },
@@ -144,9 +147,9 @@
         }
     },
     "stone": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "stone"
             },
@@ -162,9 +165,9 @@
         }
     },
     "wood": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "wood"
             },
@@ -226,7 +229,7 @@
         }
     },
     "teleport_out": {
-        "meta": {},
+        "meta": { },
         "components": {
             "TeleportOut": {},
             "Position": {},
@@ -236,9 +239,9 @@
         }
     },
     "scroll": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "scroll"
             },
@@ -374,10 +377,10 @@
 
 
     "fireball": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
-            "ImpactSound" : {
+            "Position": { },
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
@@ -392,6 +395,42 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
+            },
+            "Material": {
+                "type": "FIRE"
+            }
+        }
+    },
+    "ice": {
+        "meta": { },
+        "components": {
+            "Position": { },
+            "Animation": {
+                "animation": "ball"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 15,
+                "density": 5,
+                "friction": 0.2,
+                "restitution": 0.4,
+                "isFixedRotation": true
+            },
+            "Material": {
+                "type": "ICE"
+            }
+        }
+    },
+    "explosion": {
+        "meta": { },
+        "components": {
+            "Position": { },
+            "ParticleEffect": {
+                "effect": "explosion",
+                "loop": false
+            },
+            "Death": {
+                "time": 0.1
             }
         }
     },

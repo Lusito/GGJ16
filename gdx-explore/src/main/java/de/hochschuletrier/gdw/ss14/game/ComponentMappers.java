@@ -4,8 +4,10 @@ import com.badlogic.ashley.core.ComponentMapper;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
+import de.hochschuletrier.gdw.ss14.game.components.DeathComponent;
 import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
@@ -39,4 +41,6 @@ public class ComponentMappers {
     public static final ComponentMapper<InputComponent> input = ComponentMapper.getFor(InputComponent.class);
     public static final ComponentMapper<AnimationStateComponent> animState = ComponentMapper.getFor(AnimationStateComponent.class);
     public static final ComponentMapper<SelfDestructComponent> selfDestruct = ComponentMapper.getFor(SelfDestructComponent.class);
+    public static final ComponentMapper<MaterialComponent> mat = ComponentMapper.getFor(MaterialComponent.class);
+    public static final ComponentMapper<DeathComponent> death = ComponentMapper.getFor(DeathComponent.class);
 }
