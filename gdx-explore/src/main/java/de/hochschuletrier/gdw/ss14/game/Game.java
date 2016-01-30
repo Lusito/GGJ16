@@ -27,9 +27,11 @@ import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
+import de.hochschuletrier.gdw.ss14.game.components.TeleportInComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ReactionListener;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.TeleportListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationStateSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
@@ -40,6 +42,7 @@ import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.TeleportSystem;
 
 public class Game extends InputAdapter {
 
@@ -113,6 +116,7 @@ public class Game extends InputAdapter {
         engine.addSystem(ritualSystem);
         engine.addSystem(soundSystem);
         engine.addSystem(new ReactionSystem());
+        engine.addSystem(new TeleportSystem(0));
     }
 
     private TiledMap loadMap(String filename) {
@@ -131,6 +135,7 @@ public class Game extends InputAdapter {
         contactListener.addListener(MaterialComponent.class, new ReactionListener());
         contactListener.addListener(TriggerComponent.class, new TriggerListener());
         contactListener.addListener(PlayerComponent.class, new PickUpListener());
+        contactListener.addListener(TeleportInComponent.class, new TeleportListener());
     }
 
     private void setupPhysixWorld() {

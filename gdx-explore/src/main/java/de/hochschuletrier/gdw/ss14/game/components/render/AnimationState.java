@@ -8,5 +8,9 @@ public enum AnimationState {
     WALK_DOWN,
     WALK_UP,
     WALK_LEFT,
-    WALK_RIGHT
+    WALK_RIGHT,
+    SUMMON_DOWN,
+    SUMMON_UP,
+    SUMMON_LEFT,
+    SUMMON_RIGHT
 }

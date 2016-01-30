@@ -16,8 +16,9 @@ import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss14.events.RitualCastedEvent;
 
-public class SoundSystem extends IteratingSystem implements PickUpEvent.Listener {
+public class SoundSystem extends IteratingSystem implements PickUpEvent.Listener, RitualCastedEvent.Listener {
     private static final CVarEnum<SoundDistanceModel> distanceModel = new CVarEnum("snd_distanceModel", SoundDistanceModel.INVERSE, SoundDistanceModel.class, 0, "sound distance model");
     private static final CVarEnum<SoundEmitter.Mode> emitterMode = new CVarEnum("snd_mode", SoundEmitter.Mode.STEREO, SoundEmitter.Mode.class, 0, "sound mode");
     private AssetManagerX assetManager;
@@ -29,6 +30,7 @@ public class SoundSystem extends IteratingSystem implements PickUpEvent.Listener
         SoundEmitter.setWorldScale(1.f);
         assetManager = Main.getInstance().getAssetManager();
         PickUpEvent.register(this);
+        RitualCastedEvent.register(this);
     }
     
     public static void initCVars() {
@@ -85,5 +87,12 @@ public class SoundSystem extends IteratingSystem implements PickUpEvent.Listener
         SoundInstance si = playSound(entityWhoPickup, assetManager.getSound("click"));
         if(si != null)
             si.setVolume(0.1f);
+    }
+
+    @Override
+    public void onRitualCastedEvent(Entity mage) {
+        SoundInstance si = playSound(mage, assetManager.getSound("helicopter")); // TODO
+        if(si != null)
+            si.setVolume(0.3f);
     }
 }

@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 import de.hochschuletrier.gdw.ss14.game.components.render.AnimationComponent;
 import de.hochschuletrier.gdw.ss14.game.components.render.AnimationState;
 import de.hochschuletrier.gdw.ss14.game.components.render.AnimationStateComponent;
@@ -25,6 +26,20 @@ public class AnimationStateSystem extends IteratingSystem {
         AnimationComponent animComp = ComponentMappers.animation.get(entity);
         InputComponent inputComp = ComponentMappers.input.get(entity);
         PositionComponent posComp = ComponentMappers.position.get(entity);
+        
+        RitualCasterComponent ritualComp = ComponentMappers.ritualCaster.get(entity);
+        if(ritualComp!=null && ritualComp.remainingTime>0.f) {
+            if(posComp.directionY > 0.0f) {
+                animComp.animation = animState.changeTo(AnimationState.SUMMON_DOWN);
+            } else if(posComp.directionY < 0.0f) {
+                animComp.animation = animState.changeTo(AnimationState.SUMMON_UP);
+            } else if(posComp.directionX < 0.0f) {
+                animComp.animation = animState.changeTo(AnimationState.SUMMON_LEFT);
+            } else {
+                animComp.animation = animState.changeTo(AnimationState.SUMMON_RIGHT);
+            }
+            return;
+        }
         
         if(inputComp.moveY > 0.0f) {
             animComp.animation = animState.changeTo(AnimationState.WALK_DOWN);

@@ -33,7 +33,7 @@
  </tile>
  <tile id="6">
   <properties>
-   <property name="EntityType" value="teleport"/>
+   <property name="EntityType" value="teleport_out"/>
   </properties>
  </tile>
  <tile id="7">
@@ -41,9 +41,19 @@
    <property name="EntityType" value="stone"/>
   </properties>
  </tile>
- <tile id="8">
+ <tile id="9">
   <properties>
-   <property name="EntityType" value="scroll"/>
+   <property name="EntityType" value="tree"/>
+  </properties>
+ </tile>
+ <tile id="10">
+  <properties>
+   <property name="EntityType" value="teleport_in"/>
+  </properties>
+ </tile>
+ <tile id="11">
+  <properties>
+   <property name="EntityType" value="ice"/>
   </properties>
  </tile>
 </tileset>

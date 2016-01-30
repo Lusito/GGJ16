@@ -13,24 +13,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
+import de.hochschuletrier.gdw.ss14.events.GameWonEvent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
+import de.hochschuletrier.gdw.ss14.events.RitualCastedEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.EntityBuilder;
+import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 
-public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, InputActionEvent.Listener {
+public class RitualSystem extends IteratingSystem implements PickUpEvent.Listener, InputActionEvent.Listener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RitualSystem.class);
+    
+    private static final float SUMMONING_TIME = 1.f;
     
     private final EntityBuilder entityBuilder;
 
@@ -44,8 +50,10 @@ public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, 
         this(entityBuilder, 0);
     }
 
+    @SuppressWarnings("unchecked")
     public RitualSystem(EntityBuilder entityBuilder, int priority) {
-        super(priority);
+        super(Family.all(RitualCasterComponent.class).get(), priority);
+        
         this.entityBuilder = entityBuilder;
 
         RitualSystemConfiguration conf = loadConf();
@@ -74,10 +82,10 @@ public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, 
 
     public void castRitual(Entity mage, String ritualId) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
-        if (comp == null) {
+        if (comp == null || comp.remainingTime>0.f) {
             return;
         }
-
+        
         if (!comp.availableRituals.contains(ritualId)) {
             LOGGER.info("Ritual \""+ritualId+"\n not available for player");
             return;
@@ -94,11 +102,40 @@ public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, 
             return;
         }
 
-        removeUsedResources(comp, desc);
+        RitualCastedEvent.emit(mage);
+        comp.remainingTime = SUMMONING_TIME;
+        InputComponent inputComp = ComponentMappers.input.get(mage);
+        if(inputComp!=null)
+            inputComp.blockInputTime = SUMMONING_TIME * 1.5f;
+    }
+    
+    @Override
+    protected void processEntity(Entity entity, float deltaTime) {
+        RitualCasterComponent comp = ComponentMappers.ritualCaster.get(entity);
         
-        switch(desc.action) {
-            case SPAWN:
-                createSummonedEntity(mage, desc);
+        if(comp!=null && comp.remainingTime>0.f) {
+            comp.remainingTime-=deltaTime;
+            
+            if(comp.remainingTime<=0.f) {
+                String ritualId = comp.availableRituals.get(comp.ritualIndex);
+                RitualDesc desc = rituals.get(ritualId);
+                
+                switch(desc.action) {
+                    case SPAWN:
+                        createSummonedEntity(entity, desc);
+                        break;
+                        
+                    case REPAIR_BRIDGE:
+                        // TODO:
+                        break;
+                        
+                    case WIN:
+                        GameWonEvent.emit(entity);
+                        break;
+                }
+
+                removeUsedResources(comp, desc);
+            }
         }
     }
 
@@ -271,7 +308,7 @@ public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, 
     }
 
     public static enum RitualAction {
-        SPAWN
+        SPAWN, REPAIR_BRIDGE, WIN
     }
     public static final class RitualDesc {
 

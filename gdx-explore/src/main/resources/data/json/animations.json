@@ -15,68 +15,114 @@
         "columns": 2,
         "rows": 1
     },
-    "knightWhiteIdleUp": {
-        "filename": "bunnybrawl/animations/knightWhite_idleUp.png",
-        "frames" : 3,
-        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+    "playerIdleUp": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 1,
+        "startRow": 3,
+        "frameDuration": [ 1.0 ] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
     },
-	"knightWhiteIdleDown": {
-        "filename": "bunnybrawl/animations/knightWhite_idleDown.png",
-        "frames" : 3,
-        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+	"playerIdleDown": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 1,
+        "startRow": 0,
+        "frameDuration": [ 1.0 ] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
     },
-	"knightWhiteIdleRight": {
-        "filename": "bunnybrawl/animations/knightWhite_idleRight.png",
-        "frames" : 3,
-        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+	"playerIdleRight": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 1,
+        "startRow": 2,
+        "frameDuration": [ 1.0 ] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
     },
-	"knightWhiteIdleLeft": {
-        "filename": "bunnybrawl/animations/knightWhite_idleLeft.png",
-        "frames" : 3,
-        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+	"playerIdleLeft": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 1,
+        "startRow": 1,
+        "frameDuration": [ 1.0 ] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
     },
-	"knightWhiteWalkUp": {
-        "filename": "bunnybrawl/animations/knightWhite_walkUp.png",
-        "frames" : 3,
-        "frameDuration": [ 0.1, 0.1, 0.1 ] ,
+    
+	"playerWalkUp": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 3,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
     },
-	"knightWhiteWalkDown": {
-        "filename": "bunnybrawl/animations/knightWhite_walkDown.png",
-        "frames" : 3,
-        "frameDuration": [ 0.1, 0.1, 0.1 ] ,
+	"playerWalkDown": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 0,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
     },
-    "knightWhiteWalkRight": {
-        "filename": "bunnybrawl/animations/knightWhite_walkRight.png",
-        "frames" : 3,
-        "frameDuration": [ 0.1, 0.1, 0.1 ] ,
+    "playerWalkRight": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 2,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
     },
-	"knightWhiteWalkLeft": {
-        "filename": "bunnybrawl/animations/knightWhite_walkLeft.png",
-        "frames" : 3,
-        "frameDuration": [ 0.1, 0.1, 0.1] ,
+	"playerWalkLeft": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 1,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1] ,
         "playType" : "LOOP_PINGPONG",
-        "columns": 3,
-        "rows" : 1
+        "columns": 4,
+        "rows" : 8
+    },
+    
+	"playerSummonUp": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 7,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
+        "playType" : "NORMAL",
+        "columns": 4,
+        "rows" : 8
+    },
+	"playerSummonDown": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 4,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
+        "playType" : "NORMAL",
+        "columns": 4,
+        "rows" : 8
+    },
+    "playerSummonRight": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 6,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
+        "playType" : "NORMAL",
+        "columns": 4,
+        "rows" : 8
+    },
+	"playerSummonLeft": {
+        "filename": "data/textures/character/hero_atlas.png",
+        "frames" : 4,
+        "startRow": 5,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.7] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 4,
+        "rows" : 8
     }
 }

@@ -34,6 +34,12 @@ public class InputSystem extends IteratingSystem {
     @Override
     public void processEntity(Entity entity, float deltaTime) {
 
+        InputComponent input = ComponentMappers.input.get(entity);
+        if(input.blockInputTime>0.f) {
+            input.blockInputTime -= deltaTime;
+            return;
+        }
+        
         adjustInputs(entity, deltaTime);
         adjustMovements(entity, deltaTime);
     }
@@ -90,7 +96,7 @@ public class InputSystem extends IteratingSystem {
     private void adjustMovements(Entity entity, float deltaTime) {
         PhysixBodyComponent body = ComponentMappers.physixBody.get(entity);
         InputComponent input = ComponentMappers.input.get(entity);
-
+        
         body.setLinearVelocityX(input.moveX);
         body.setLinearVelocityY(input.moveY);
     }

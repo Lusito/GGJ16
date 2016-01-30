@@ -20,11 +20,6 @@
    <property name="blocked" value="true"/>
   </properties>
  </tile>
- <tile id="3">
-  <properties>
-   <property name="blocked" value="true"/>
-  </properties>
- </tile>
  <tile id="5" terrain="1,0,1,0">
   <properties>
    <property name="blocked" value="true"/>

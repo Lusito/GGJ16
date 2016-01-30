@@ -12,7 +12,7 @@
                 "minDelay": 100
             },
             "Animation": {
-                "animation": "ball"
+                "animation": "player"
             },
             "PhysixBody": {
                 "type": "circle",
@@ -186,12 +186,59 @@
             }
         }
     },
-    "teleport": {
+    "ice": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ice"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            }
+        }
+    },
+    "tree": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "tree"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 32,
+                "static": true,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            }
+        }
+    },
+    "teleport_in": {
+        "meta": {},
+        "components": {
+            "TeleportIn": {},
+            "Position": {},
+            "Texture": {
+                "animation": "teleport_in"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 15,
+                "sensor": true
+            }
+        }
+    },
+    "teleport_out": {
         "meta": { },
         "components": {
-            "Position": { },
+            "TeleportOut": {},
+            "Position": {},
             "Texture": {
-                "animation": "teleport"
+                "animation": "teleport_out"
             }
         }
     },
@@ -208,10 +255,130 @@
                 "sensor": true
             },
             "Pickable": {
+                "ritualId": "test"
+            }
+        }
+    },
+    "scroll_fireball": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
                 "ritualId": "fireball"
             }
         }
     },
+    "scroll_bonfire": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "ritualId": "bonfire"
+            }
+        }
+    },
+    "scroll_bomb": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "ritualId": "bomb"
+            }
+        }
+    },
+    "scroll_bridge": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "ritualId": "bridge"
+            }
+        }
+    },
+    "scroll_fogElemental": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "ritualId": "fogElemental"
+            }
+        }
+    },
+    "scroll_poisonElemental": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "ritualId": "poisonElemental"
+            }
+        }
+    },
+    "scroll_fireElemental": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "ritualId": "fireElemental"
+            }
+        }
+    },
+
 
     "fireball": {
         "meta": { },
@@ -268,6 +435,142 @@
             },
             "Death": {
                 "time": 0.1
+            }
+        }
+    },
+    "bonfire": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "ImpactSound" : {
+                "sound": "click",
+                "minImpulseStrength": 20,
+                "minSpeed": 20,
+                "minDelay": 100
+            },
+            "Animation": {
+                "animation": "box"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            },
+            "Pickable": {
+                "ritualId": "fire"
+            }
+        }
+    },
+    "bomb": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "ImpactSound" : {
+                "sound": "click",
+                "minImpulseStrength": 20,
+                "minSpeed": 20,
+                "minDelay": 100
+            },
+            "Animation": {
+                "animation": "box"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            }
+        }
+    },
+    "bridge": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "ImpactSound" : {
+                "sound": "click",
+                "minImpulseStrength": 20,
+                "minSpeed": 20,
+                "minDelay": 100
+            },
+            "Animation": {
+                "animation": "box"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            }
+        }
+    },
+    
+    "fog_elemental": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "ImpactSound" : {
+                "sound": "click",
+                "minImpulseStrength": 20,
+                "minSpeed": 20,
+                "minDelay": 100
+            },
+            "Animation": {
+                "animation": "box"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            }
+        }
+    },
+    "poison_elemental": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "ImpactSound" : {
+                "sound": "click",
+                "minImpulseStrength": 20,
+                "minSpeed": 20,
+                "minDelay": 100
+            },
+            "Animation": {
+                "animation": "box"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            }
+        }
+    },
+    "fire_elemental": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "ImpactSound" : {
+                "sound": "click",
+                "minImpulseStrength": 20,
+                "minSpeed": 20,
+                "minDelay": 100
+            },
+            "Animation": {
+                "animation": "box"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
             }
         }
     }

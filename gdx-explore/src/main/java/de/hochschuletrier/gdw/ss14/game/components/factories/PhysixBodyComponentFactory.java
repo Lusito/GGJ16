@@ -58,7 +58,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private void addCircle(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent bodyComponent = getBodyComponent(param, entity, properties);
-        PhysixFixtureDef fixtureDef = getFixtureDef(properties).sensor(properties.getBoolean("sensor"))
+        PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeCircle(properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
         entity.add(bodyComponent);
@@ -75,14 +75,15 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private PhysixBodyComponent getBodyComponent(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent bodyComponent = engine.createComponent(PhysixBodyComponent.class);
-        PhysixBodyDef bodyDef = getBodyDef(param);
+        PhysixBodyDef bodyDef = getBodyDef(param, properties);
         bodyComponent.init(bodyDef, physixSystem, entity);
         bodyComponent.setFixedRotation(properties.getBoolean("isFixedRotation", false));
         return bodyComponent;
     }
 
-    private PhysixBodyDef getBodyDef(EntityFactoryParam param) {
-        return new PhysixBodyDef(BodyDef.BodyType.DynamicBody, physixSystem)
+    private PhysixBodyDef getBodyDef(EntityFactoryParam param, SafeProperties properties) {
+        final BodyType bodyType = properties.getBoolean("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody;
+        return new PhysixBodyDef(bodyType, physixSystem)
                 .position(param.x, param.y).fixedRotation(false);
     }
 
@@ -90,7 +91,8 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         PhysixFixtureDef pfd = new PhysixFixtureDef(physixSystem)
                 .density(properties.getFloat("density", 5))
                 .friction(properties.getFloat("friction", 5))
-                .restitution(properties.getFloat("restitution", 0));
+                .restitution(properties.getFloat("restitution", 0))
+                .sensor(properties.getBoolean("sensor"));
 
         if (properties.getBoolean("isPickable")) {
             pfd.category(PICKABLE);
