@@ -194,6 +194,21 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
         comp.ritualIndex = normalizeIndex(comp.ritualIndex + diff, comp.availableRituals.size());
     }
     
+    public RitualDesc getCurrentRitual(Entity mage) {
+        RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
+        if(comp==null)
+            return null;
+
+        if(comp.availableRituals.isEmpty())
+            return null;
+        
+        comp.ritualIndex = normalizeIndex(comp.ritualIndex, comp.availableRituals.size());
+        
+        String ritualId = comp.availableRituals.get(comp.ritualIndex);
+        
+        return rituals.get(ritualId);
+    }
+    
     public List<RitualDesc> listRituals(Entity mage) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
         if (comp == null) {
@@ -211,6 +226,10 @@ public class RitualSystem extends EntitySystem implements Listener, de.hochschul
         return ret;
     }
 
+    public ResourceDesc getResource(String resourceId) {
+        return resources.get(resourceId);
+    }
+    
     public List<ResourceDescWithCount> listResources(Entity mage) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
         if (comp == null) {

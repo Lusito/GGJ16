@@ -24,7 +24,7 @@
             },
             "RitualCaster": {
                 "resources": "phosphorus, phosphorus",
-                "rituals": "fireball"
+                "rituals": "fireball, test"
             }
         }
     },

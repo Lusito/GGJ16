@@ -3,7 +3,7 @@
     "resources": [
         {
             "id": "mana",
-            "name": "Small mana potion",
+            "name": "Mana potion",
             "description": "..."
         },
         {
@@ -30,7 +30,7 @@
         {
             "id": "test",
             "name": "Mighty fireball of Testing",
-            "description": "Hopefully casts a fireball and throws it into the general direction the player is targeting.\nAlso a line-break for testing!",
+            "description": "Hopefully casts a fireball",
             "resources": ["mana", "phosphorus", "wood"],
             "action": "SPAWN",
             "entityName": "fireball",

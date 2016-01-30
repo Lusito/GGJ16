@@ -2,5 +2,7 @@
     "straw": "data/textures/items/straw.png",
     
     "menu_fg": "data/ui/menu/fg_border.png",
-    "menu_bg": "data/ui/menu/bg_root.png"
+    "menu_bg": "data/ui/menu/bg_root.png",
+    
+    "hud_bg": "data/ui/hud/background.png"
 }
