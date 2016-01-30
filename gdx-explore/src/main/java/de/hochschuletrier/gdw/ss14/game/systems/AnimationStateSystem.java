@@ -40,15 +40,14 @@ public class AnimationStateSystem extends IteratingSystem {
             }
             return;
         }
-        
-        if(inputComp.moveY > 0.0f) {
-            animComp.animation = animState.changeTo(AnimationState.WALK_DOWN);
-        } else if(inputComp.moveY < 0.0f) {
-            animComp.animation = animState.changeTo(AnimationState.WALK_UP);
-        } else if(inputComp.moveX < 0.0f) {
+        if(inputComp.moveX < 0.0f) {
             animComp.animation = animState.changeTo(AnimationState.WALK_LEFT);
         } else if(inputComp.moveX > 0.0f) {
             animComp.animation = animState.changeTo(AnimationState.WALK_RIGHT);
+        } else if(inputComp.moveY > 0.0f) {
+            animComp.animation = animState.changeTo(AnimationState.WALK_DOWN);
+        } else if(inputComp.moveY < 0.0f) {
+            animComp.animation = animState.changeTo(AnimationState.WALK_UP);
         } else {
             if(posComp.directionY > 0.0f) {
                 animComp.animation = animState.changeTo(AnimationState.IDLE_DOWN);
