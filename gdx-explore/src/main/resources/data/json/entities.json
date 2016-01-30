@@ -195,7 +195,7 @@
                 "static": true
             },
             "Material": {
-                "type": "ICE"
+                "type": "WOOD"
             }
         }
     },
@@ -405,26 +405,6 @@
             },
             "Material": {
                 "type": "FIRE"
-            }
-        }
-    },
-    "ice": {
-        "meta": { },
-        "components": {
-            "Position": { },
-            "Animation": {
-                "animation": "ball"
-            },
-            "PhysixBody": {
-                "type": "circle",
-                "size": 15,
-                "density": 5,
-                "friction": 0.2,
-                "restitution": 0.4,
-                "isFixedRotation": true
-            },
-            "Material": {
-                "type": "ICE"
             }
         }
     },
