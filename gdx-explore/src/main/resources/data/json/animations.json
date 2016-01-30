@@ -1,6 +1,6 @@
 {
     "walking": {
-        "filename": "data/animations/walking.png",
+        "filename": "data/textures/walking.png",
         "frames" : 7,
         "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
         "playType" : "LOOP",
@@ -8,7 +8,7 @@
         "rows" : 1
     },
     "ball": {
-        "filename": "data/animations/ball.png",
+        "filename": "data/textures/ball.png",
         "frames" : 2,
         "frameDuration": [0.5, 0.5],
         "playType" : "LOOP",
@@ -16,7 +16,7 @@
         "rows" : 1
     },
     "box": {
-        "filename": "data/animations/box.png",
+        "filename": "data/textures/box.png",
         "frames" : 2,
         "frameDuration": [0.5, 0.5],
         "playType" : "LOOP",

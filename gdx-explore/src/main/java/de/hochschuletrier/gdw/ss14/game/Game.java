@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
+import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
@@ -23,16 +24,21 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
+import de.hochschuletrier.gdw.commons.tiled.Layer;
+import de.hochschuletrier.gdw.commons.tiled.LayerObject;
+import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
+import de.hochschuletrier.gdw.ss14.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ss14.game.utils.PhysixUtil;
@@ -58,10 +64,10 @@ public class Game extends InputAdapter {
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
     private final InputSystem inputSystem = new InputSystem();  
     
-    private final EntityFactoryParam factoryParam = new EntityFactoryParam();
-    private final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", Game.class);
     
     private Entity Player;
+
+    private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem();
 
     public Game() {
         // If this is a build jar file, disable hotkeys
@@ -77,13 +83,14 @@ public class Game extends InputAdapter {
     public void init(AssetManagerX assetManager) {
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
-
         addSystems();
         addContactListeners();
-        setupPhysixWorld();
-        entityFactory.init(engine, assetManager);
-        
         entityBuilder.init(assetManager);
+        setupPhysixWorld();
+        
+        TiledMap map = loadMap("data/maps/tryanewone.tmx");
+        basemapRenderSystem.initMap(map);
+        
     }
 
     private void addSystems() {
@@ -92,6 +99,28 @@ public class Game extends InputAdapter {
         engine.addSystem(animationRenderSystem);
         engine.addSystem(updatePositionSystem);
         engine.addSystem(inputSystem);
+        engine.addSystem(basemapRenderSystem);
+    }
+
+    private TiledMap loadMap(String filename) {
+        try {
+            TiledMap map = new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
+            for (Layer layer : map.getLayers()) {
+                if (layer.isObjectLayer()) {
+                    for (LayerObject obj : layer.getObjects()) {
+                        String type = obj.getProperty("EntityType", null);
+                        if (type != null) {
+                            entityBuilder.createEntity(type, obj.getX() + obj.getWidth() / 2.0f,
+                                    obj.getY() - obj.getHeight() / 2.0f);
+                        }
+                    }
+                }
+            }
+            return map;
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(
+                    "Map konnte nicht geladen werden: " + filename);
+        }
     }
 
     private void addContactListeners() {
@@ -105,7 +134,7 @@ public class Game extends InputAdapter {
     private void setupPhysixWorld() {
         physixSystem.setGravity(0, 0);
         
-        this.Player = createEntity("ball", 50, 50);
+        this.Player = entityBuilder.createEntity("ball", 50, 50);
         
       /*  PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
         Body body = physixSystem.getWorld().createBody(bodyDef);
@@ -183,9 +212,7 @@ public class Game extends InputAdapter {
 	@Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(button == 0)
-            createEntity("ball", screenX, screenY);
-        	entityBuilder.createEntity("ball", screenX, screenY);
-        	 this.Player = createEntity("ball", screenX, screenY);
+        	this.Player = entityBuilder.createEntity("ball", screenX, screenY);
         else
         	entityBuilder.createEntity("box", screenX, screenY);
         return true;
