@@ -30,8 +30,8 @@ public class TextureRenderer extends SubSystem {
             texture = textureComponent.texture;
             width = texture.getWidth();
             height = texture.getHeight();
-            x = position.x;
-            y = position.y;
+            x = position.x - width * 0.5f;
+            y = position.y - height * 0.5f;
             srcX = 0;
             srcY = 0;
         } else {
