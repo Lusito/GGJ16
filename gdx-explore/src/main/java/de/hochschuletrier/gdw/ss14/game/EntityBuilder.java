@@ -36,6 +36,10 @@ public class EntityBuilder {
         engine.addEntity(entity);
         return entity;
     }
+    
+    public void removeEntity(Entity entity) {
+        engine.removeEntity(entity);
+    }
 
     public void createEntitiesFromMap(TiledMap map) {
             for (Layer layer : map.getLayers()) {

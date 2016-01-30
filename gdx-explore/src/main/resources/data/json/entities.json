@@ -1,5 +1,5 @@
 {
-    "ball": {
+    "player": {
         "meta": { },
         "components": {
             "Player": { },
@@ -24,6 +24,10 @@
             },
             "AnimationState": { 
                 "template": "Player"
+            },
+            "RitualCaster": {
+                "resources": "phosphorus, phosphorus",
+                "rituals": "fireball"
             }
         }
     },
@@ -64,35 +68,14 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "mana"
             }
         }
     },
 
-
-    "player": {
-        "meta": {},
-        "components": {
-            "Position": {},
-            "ImpactSound" : {
-                "sound": "click",
-                "minImpulseStrength": 20,
-                "minSpeed": 20,
-                "minDelay": 100
-            },
-            "Animation": {
-                "animation": "ball"
-            },
-            "PhysixBody": {
-                "type": "circle",
-                "size": 30,
-                "density": 5,
-                "friction": 0.2,
-                "restitution": 0.4
-            },
-            "RitualCaster": {
-            }
-        }
-    },
     "fireball": {
         "meta": {},
         "components": {
