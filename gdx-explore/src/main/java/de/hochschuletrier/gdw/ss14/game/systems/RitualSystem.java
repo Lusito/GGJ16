@@ -9,20 +9,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
+import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
+import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
+import de.hochschuletrier.gdw.ss14.events.PickUpEvent.Listener;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.EntityBuilder;
-import de.hochschuletrier.gdw.ss14.game.Game;
+import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 
-public class RitualSystem extends EntitySystem {
+public class RitualSystem extends EntitySystem implements Listener, de.hochschuletrier.gdw.ss14.events.InputActionEvent.Listener {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RitualSystem.class);
+    
     private final EntityBuilder entityBuilder;
 
     private final float summonDistance;
@@ -49,6 +57,9 @@ public class RitualSystem extends EntitySystem {
         for (RitualDesc desc : conf.rituals) {
             rituals.put(desc.id, desc);
         }
+        
+        PickUpEvent.register(this);
+        InputActionEvent.register(this);
     }
 
     private static RitualSystemConfiguration loadConf() {
@@ -60,22 +71,25 @@ public class RitualSystem extends EntitySystem {
         }
     }
 
-    public void castRitual(Entity mage, String ritualName) {
+    public void castRitual(Entity mage, String ritualId) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
         if (comp == null) {
             return;
         }
 
-        if (!comp.availableRituals.contains(ritualName)) {
+        if (!comp.availableRituals.contains(ritualId)) {
+            LOGGER.info("Ritual \""+ritualId+"\n not available for player");
             return;
         }
 
-        RitualDesc desc = rituals.get(ritualName);
+        RitualDesc desc = rituals.get(ritualId);
         if (desc == null) {
+            LOGGER.info("Ritual \""+ritualId+"\n not found");
             return;
         }
 
         if (!isResourcesAvailable(comp, desc)) {
+            LOGGER.info("Ritual \""+ritualId+"\n not ready");
             return;
         }
 
@@ -114,6 +128,55 @@ public class RitualSystem extends EntitySystem {
         return true;
     }
 
+    @Override
+    public void onPickupEvent(Entity entityWhoPickup, Entity whatsPickedUp) {
+        RitualCasterComponent caster = ComponentMappers.ritualCaster.get(entityWhoPickup);
+        if(caster==null)
+            return;
+        
+        PickableComponent comp = ComponentMappers.pickable.get(whatsPickedUp);
+
+        if(comp.resourceId!=null && comp.resourceCount>=1) {
+            caster.addResources(comp.resourceId, comp.resourceCount);
+        }
+        
+        if(comp.ritualId!=null)
+            caster.addRitual(comp.ritualId);
+        
+        entityBuilder.removeEntity(whatsPickedUp);
+    }
+
+    @Override
+    public void onDoAction(Entity mage) {
+        RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
+        if (comp == null)
+            return;
+        
+        if(comp.availableRituals.isEmpty())
+            return;
+        
+        comp.ritualIndex = normalizeIndex(comp.ritualIndex, comp.availableRituals.size());
+        
+        String ritualId = comp.availableRituals.get(comp.ritualIndex);
+        castRitual(mage, ritualId);
+    }
+
+    private static final int normalizeIndex(int index, int count) {
+        if(index<0)
+            return count - index;
+        else
+            return index % count;
+    }
+    
+    @Override
+    public void onChangeAction(Entity mage, int diff) {
+        RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
+        if (comp == null || comp.availableRituals.isEmpty())
+            return;
+        
+        comp.ritualIndex = normalizeIndex(comp.ritualIndex + diff, comp.availableRituals.size());
+    }
+    
     public List<RitualDesc> listRituals(Entity mage) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
         if (comp == null) {
@@ -231,4 +294,5 @@ public class RitualSystem extends EntitySystem {
             this.count = count;
         }
     }
+    
 }

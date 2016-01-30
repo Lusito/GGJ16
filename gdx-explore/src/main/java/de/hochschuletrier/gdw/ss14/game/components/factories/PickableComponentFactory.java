@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity;
 
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
-import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 
 public class PickableComponentFactory extends ComponentFactory<EntityFactoryParam> {
@@ -17,6 +16,10 @@ public class PickableComponentFactory extends ComponentFactory<EntityFactoryPara
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
         PickableComponent component = engine.createComponent(PickableComponent.class);
+        component.resourceCount = properties.getInt("resourceCount", 0);
+        component.resourceId = properties.getString("resourceId", null);
+
+        component.ritualId = properties.getString("ritualId", null);
         entity.add(component);
     }
 }

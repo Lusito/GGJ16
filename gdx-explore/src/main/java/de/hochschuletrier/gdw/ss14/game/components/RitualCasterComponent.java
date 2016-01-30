@@ -1,21 +1,23 @@
 package de.hochschuletrier.gdw.ss14.game.components;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Pool;
 
 public class RitualCasterComponent extends Component implements Pool.Poolable {
 
-    public Set<String> availableRituals = new HashSet<>();
+    public List<String> availableRituals = new ArrayList<>();
 
     /**
      * name to count
      */
     public Map<String, Integer> availableResources = new HashMap<>();
+    
+    public int ritualIndex;
 
     public boolean hasResource(String name) {
         return availableResources.getOrDefault(name, 0) > 0;
@@ -36,17 +38,22 @@ public class RitualCasterComponent extends Component implements Pool.Poolable {
     }
 
     public void addResource(String name) {
+        addResources(name, 1);
+    }
+    public void addResources(String name, int incr) {
         Integer count = availableResources.getOrDefault(name, 0);
-        availableResources.put(name, count + 1);
+        availableResources.put(name, count + incr);
     }
 
     public void addRitual(String name) {
-        availableRituals.add(name);
+        if(!availableRituals.contains(name))
+            availableRituals.add(name);
     }
 
     @Override
     public void reset() {
         availableRituals.clear();
+        availableResources.clear();
     }
 
 }
