@@ -207,7 +207,11 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
         Entity e = entityBuilder.createEntity(ritual.entityName, summonPos.x,
                 summonPos.y);
-        ComponentMappers.position.get(e).rotation = magePos.rotation;
+        
+        PositionComponent posComp = ComponentMappers.position.get(e);
+        posComp.directionX = magePos.directionX;
+        posComp.directionY= magePos.directionY;
+        posComp.rotation = magePos.rotation;
         
         if(ritual.entityImpulse>0) {
             PhysixModifierComponent modifier = ComponentMappers.physixModifier.get(e);

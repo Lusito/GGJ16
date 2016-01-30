@@ -393,6 +393,9 @@
             "Animation": {
                 "animation": "box"
             },
+            "AnimationState": {
+                "template": "Fireball"
+            },
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
