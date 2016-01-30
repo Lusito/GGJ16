@@ -86,7 +86,7 @@ public class RenderSystem extends SortedSubIteratingSystem {
 
     public RayHandler rayHandler;
     private Matrix4 scaleMatrix = new Matrix4();
-    private final CVarFloat ambientLight = new CVarFloat("light_ambient", 0.5f, 0, 1, 0, "Ambient light value");
+    private final CVarFloat ambientLight = new CVarFloat("light_ambient", 0.2f, 0, 1, 0, "Ambient light value");
     private final CVarBool culling = new CVarBool("light_culling", true, 0, "Light Culling");
     private final CVarBool shadows = new CVarBool("light_shadows", true, 0, "Light Shadows");
     private final CVarInt blur = new CVarInt("light_blur", 2, 0, 3, 0, "Light blur value");
