@@ -29,6 +29,7 @@ import de.hochschuletrier.gdw.ss14.events.PlayerMessageEvent;
 import de.hochschuletrier.gdw.ss14.events.TeleportEvent;
 import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
+import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TeleportInComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
@@ -151,6 +152,12 @@ public class Game extends InputAdapter {
         physixSystem.setGravity(0, 0);
 
         player = entityBuilder.createEntity("player", 50, 50);
+        
+        // Quick hack for additional player light
+        PositionComponent playerPos = ComponentMappers.position.get(player);
+        Entity playerLight = entityBuilder.createEntity("playerLight", 0, 0);
+        playerLight.remove(PositionComponent.class);
+        playerLight.add(playerPos);
     }
 
     public void update(float delta) {

@@ -38,6 +38,18 @@
             }
         }
     },
+    "playerLight": {
+        "meta": { },
+        "components": {
+            "Position": { },
+            "PointLight": {
+                "color": "0.05, 0.05, 0",
+                "distance": 5,
+                "static": true,
+                "xRay": true
+            }
+        }
+    },
     "runeCircle": {
         "meta": { },
         "components": {
