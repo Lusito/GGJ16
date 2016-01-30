@@ -31,6 +31,7 @@ import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss14.game.systems.AnimationStateSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
@@ -58,7 +59,8 @@ public class Game extends InputAdapter {
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
     private final InputSystem inputSystem = new InputSystem();
     private final CameraSystem cameraSystem = new CameraSystem(0);
-
+    private final AnimationStateSystem animStateSystem = new AnimationStateSystem(1);
+    
     private Entity Player;
 
     private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
@@ -96,6 +98,7 @@ public class Game extends InputAdapter {
         engine.addSystem(inputSystem);
         engine.addSystem(basemapRenderSystem);
         engine.addSystem(cameraSystem);
+        engine.addSystem(animStateSystem);
     }
 
     private TiledMap loadMap(String filename) {

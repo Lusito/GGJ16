@@ -1,26 +1,90 @@
 {
     "walking": {
         "filename": "data/textures/walking.png",
-        "frames" : 7,
-        "frameDuration": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-        "playType" : "LOOP",
+        "frames": 7,
+        "frameDuration": [ 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15 ],
+        "playType": "LOOP",
         "columns": 7,
-        "rows" : 1
+        "rows": 1
     },
     "ball": {
         "filename": "data/textures/ball.png",
-        "frames" : 2,
-        "frameDuration": [0.5, 0.5],
-        "playType" : "LOOP",
+        "frames": 2,
+        "frameDuration": [ 0.5, 0.5 ],
+        "playType": "LOOP",
         "columns": 2,
-        "rows" : 1
+        "rows": 1
     },
     "box": {
         "filename": "data/textures/box.png",
-        "frames" : 2,
-        "frameDuration": [0.5, 0.5],
-        "playType" : "LOOP",
+        "frames": 2,
+        "frameDuration": [ 0.5, 0.5 ],
+        "playType": "LOOP",
         "columns": 2,
+        "rows": 1
+    },
+    "knightWhiteIdleUp": {
+        "filename": "bunnybrawl/animations/knightWhite_idleUp.png",
+        "frames" : 3,
+        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
+        "rows" : 1
+    },
+	"knightWhiteIdleDown": {
+        "filename": "bunnybrawl/animations/knightWhite_idleDown.png",
+        "frames" : 3,
+        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
+        "rows" : 1
+    },
+	"knightWhiteIdleRight": {
+        "filename": "bunnybrawl/animations/knightWhite_idleRight.png",
+        "frames" : 3,
+        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
+        "rows" : 1
+    },
+	"knightWhiteIdleLeft": {
+        "filename": "bunnybrawl/animations/knightWhite_idleLeft.png",
+        "frames" : 3,
+        "frameDuration": [ 2.0, 0.1, 0.5 ] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
+        "rows" : 1
+    },
+	"knightWhiteWalkUp": {
+        "filename": "bunnybrawl/animations/knightWhite_walkUp.png",
+        "frames" : 3,
+        "frameDuration": [ 0.1, 0.1, 0.1 ] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
+        "rows" : 1
+    },
+	"knightWhiteWalkDown": {
+        "filename": "bunnybrawl/animations/knightWhite_walkDown.png",
+        "frames" : 3,
+        "frameDuration": [ 0.1, 0.1, 0.1 ] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
+        "rows" : 1
+    },
+    "knightWhiteWalkRight": {
+        "filename": "bunnybrawl/animations/knightWhite_walkRight.png",
+        "frames" : 3,
+        "frameDuration": [ 0.1, 0.1, 0.1 ] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
+        "rows" : 1
+    },
+	"knightWhiteWalkLeft": {
+        "filename": "bunnybrawl/animations/knightWhite_walkLeft.png",
+        "frames" : 3,
+        "frameDuration": [ 0.1, 0.1, 0.1] ,
+        "playType" : "LOOP_PINGPONG",
+        "columns": 3,
         "rows" : 1
     }
 }
