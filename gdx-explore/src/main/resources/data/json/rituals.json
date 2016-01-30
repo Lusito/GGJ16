@@ -70,7 +70,7 @@
             "id": "bonfire",
             "name": "Bonfire",
             "description": "Summons a bonfire",
-            "resources": ["cole", "phosphor"],
+            "resources": ["coal", "phosphor"],
             "action": "SPAWN",
             "entityName": "bonfire"
         },
@@ -78,7 +78,7 @@
             "id": "bomb",
             "name": "Bomb",
             "description": "Summons a bomb",
-            "resources": ["cole", "phosphor"],
+            "resources": ["coal", "phosphor"],
             "action": "SPAWN",
             "entityName": "bomb",
             "entityImpulse": 10000.0
