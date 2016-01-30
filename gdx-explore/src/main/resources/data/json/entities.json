@@ -2,6 +2,8 @@
     "ball": {
         "meta": {},
         "components": {
+            "Player": {},
+            "Input": {},
             "Position": {},
             "ImpactSound" : {
                 "sound": "click",
@@ -17,13 +19,15 @@
                 "size": 30,
                 "density": 5,
                 "friction": 0.2,
-                "restitution": 0.4
+                "restitution": 0.4,
+                "isFixedRotation": true
             }
         }
     },
     "box": {
         "meta": {},
         "components": {
+            "Pickable": {},
             "Position": {},
             "ImpactSound" : {
                 "sound": "click",

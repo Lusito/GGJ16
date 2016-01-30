@@ -3,6 +3,8 @@ package de.hochschuletrier.gdw.ss14.game.components.factories;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.ashley.ComponentFactory;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
@@ -11,11 +13,15 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryParam> {
 
+	public final static short PICKABLE=  0x0001;
+
+	
     private static final Logger logger = LoggerFactory.getLogger(PhysixBodyComponentFactory.class); 
     private PhysixSystem physixSystem;
 
@@ -46,27 +52,27 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
     }
 
     private void addCircle(EntityFactoryParam param, Entity entity, SafeProperties properties) {
-        PhysixBodyComponent bodyComponent = getBodyComponent(param, entity);
+        PhysixBodyComponent bodyComponent = getBodyComponent(param, entity, properties);
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeCircle(properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
-        bodyComponent.applyImpulse(0, 50000);
         entity.add(bodyComponent);
     }
 
     private void addBox(EntityFactoryParam param, Entity entity, SafeProperties properties) {
-        PhysixBodyComponent bodyComponent = getBodyComponent(param, entity);
+        PhysixBodyComponent bodyComponent = getBodyComponent(param, entity, properties);
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeBox(properties.getFloat("size", 5), properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
-        bodyComponent.applyImpulse(0, 50000);
+        
         entity.add(bodyComponent);
     }
 
-    private PhysixBodyComponent getBodyComponent(EntityFactoryParam param, Entity entity) {
+    private PhysixBodyComponent getBodyComponent(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent bodyComponent = engine.createComponent(PhysixBodyComponent.class);
         PhysixBodyDef bodyDef = getBodyDef(param);
         bodyComponent.init(bodyDef, physixSystem, entity);
+        bodyComponent.setFixedRotation(properties.getBoolean("isFixedRotation", false));
         return bodyComponent;
     }
 
@@ -76,9 +82,15 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
     }
 
     private PhysixFixtureDef getFixtureDef(SafeProperties properties) {
-        return new PhysixFixtureDef(physixSystem)
-                .density(properties.getFloat("density", 5))
-                .friction(properties.getFloat("friction", 5))
-                .restitution(properties.getFloat("restitution", 0));
+    	PhysixFixtureDef pfd = new PhysixFixtureDef(physixSystem)
+        .density(properties.getFloat("density", 5))
+        .friction(properties.getFloat("friction", 5))
+        .restitution(properties.getFloat("restitution", 0));
+    	
+    	if(properties.getBoolean("isPickable")){
+    		pfd.category(PICKABLE);
+    	}
+    	
+        return pfd;
     }
 }
