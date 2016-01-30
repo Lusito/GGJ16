@@ -14,14 +14,11 @@ import java.util.HashMap;
 public class BasemapRenderSystem extends EntitySystem {
     private final HashMap<TileSet, Texture> tilesetImages = new HashMap();
     private TiledMapRendererGdx mapRenderer;
-    private final TiledMap map;
+    private TiledMap map;
 
-    public BasemapRenderSystem(TiledMap map) {
-        this(map, 0);
-    }
 
-    public BasemapRenderSystem(TiledMap map, int priority) {
-        super(priority);
+    public void initMap(TiledMap map) {
+        this.clearImages();
         this.map = map;
         
         for (TileSet tileset : map.getTileSets()) {
@@ -32,9 +29,15 @@ public class BasemapRenderSystem extends EntitySystem {
         mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
     }
 
+    
     @Override
     public void removedFromEngine(Engine engine) {
+        this.clearImages();
+    }
+    
+    private void clearImages() {
         tilesetImages.values().forEach(Texture::dispose);
+        tilesetImages.clear();
     }
 
     @Override

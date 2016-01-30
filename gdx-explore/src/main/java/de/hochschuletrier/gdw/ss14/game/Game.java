@@ -58,6 +58,7 @@ public class Game extends InputAdapter {
 
     private final EntityFactoryParam factoryParam = new EntityFactoryParam();
     private final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory("data/json/entities.json", Game.class);
+    private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem();
 
     public Game() {
         // If this is a build jar file, disable hotkeys
@@ -78,6 +79,9 @@ public class Game extends InputAdapter {
         addContactListeners();
         setupPhysixWorld();
         entityFactory.init(engine, assetManager);
+        
+        TiledMap map = loadMap("data/maps/tryanewone.tmx");
+        basemapRenderSystem.initMap(map);
     }
 
     private void addSystems() {
@@ -85,7 +89,7 @@ public class Game extends InputAdapter {
         engine.addSystem(physixDebugRenderSystem);
         engine.addSystem(animationRenderSystem);
         engine.addSystem(updatePositionSystem);
-        engine.addSystem(new BasemapRenderSystem(loadMap("data/maps/tryanewone.tmx")));
+        engine.addSystem(basemapRenderSystem);
     }
 
     private TiledMap loadMap(String filename) {
