@@ -1,4 +1,4 @@
-﻿package de.hochschuletrier.gdw.ss14.game;
+package de.hochschuletrier.gdw.ss14.game;
 
 import box2dLight.RayHandler;
 
