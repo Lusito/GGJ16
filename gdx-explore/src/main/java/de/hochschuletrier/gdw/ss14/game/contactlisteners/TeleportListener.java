@@ -4,11 +4,10 @@ import com.badlogic.ashley.core.Entity;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
+import de.hochschuletrier.gdw.ss14.events.TeleportEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
-import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 
-public class PickUpListener extends PhysixContactAdapter {
+public class TeleportListener extends PhysixContactAdapter {
 
     @Override
     public void beginContact(PhysixContact contact) {
@@ -17,8 +16,8 @@ public class PickUpListener extends PhysixContactAdapter {
         PhysixBodyComponent otherComponent = contact.getOtherComponent();
         if (otherComponent != null) {
             final Entity otherEntity = otherComponent.getEntity();
-            if(otherEntity != null && ComponentMappers.pickable.has(otherEntity)) {
-                PickUpEvent.emit(contact.getMyComponent().getEntity(), otherEntity);
+            if(otherEntity != null && ComponentMappers.player.has(otherEntity)) {
+                TeleportEvent.emit(contact.getMyComponent().getEntity(), otherEntity);
             }
         }
     }
