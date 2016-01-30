@@ -275,7 +275,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
     private static final int normalizeIndex(int index, int count) {
         if(index<0)
-            return count - index;
+            return count + index;
         else
             return index % count;
     }
@@ -285,6 +285,8 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
         if (comp == null || comp.availableRituals.isEmpty())
             return;
+        
+        diff = diff>0 ? 1 : -1;
         
         comp.ritualIndex = normalizeIndex(comp.ritualIndex + diff, comp.availableRituals.size());
     }
