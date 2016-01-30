@@ -16,6 +16,9 @@ public class BasemapRenderSystem extends EntitySystem {
     private TiledMapRendererGdx mapRenderer;
     private TiledMap map;
 
+    public BasemapRenderSystem(int priority) {
+        super(priority);
+    }
 
     public void initMap(TiledMap map) {
         this.clearImages();

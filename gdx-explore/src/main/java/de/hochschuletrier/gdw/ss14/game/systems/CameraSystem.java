@@ -41,6 +41,7 @@ public class CameraSystem extends EntitySystem implements EntityListener {
         }   
         
     	MainCamera.update(deltaTime);
+    	MainCamera.bind();
     }
     
     public void adjustToMap(TiledMap map) {

@@ -63,7 +63,7 @@ public class Game extends InputAdapter {
     
     private Entity Player;
 
-    private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem();
+    private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
     
     public Game() {
         // If this is a build jar file, disable hotkeys
