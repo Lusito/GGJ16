@@ -54,13 +54,13 @@
             }
         }
     },
-    "straw": {
+    "scroll": {
         "meta": {},
         "components": {
             "Pickable": {},
             "Position": {},
             "Texture": {
-                "animation": "straw"
+                "animation": "scroll"
             },
             "PhysixBody": {
                 "type": "box",
