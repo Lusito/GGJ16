@@ -34,7 +34,7 @@
                 "color": "0.3, 0, 0",
                 "distance": 7,
                 "static": true,
-                "xRay": true
+                "xRay": false
             }
         }
     },

@@ -30,12 +30,9 @@ public class ReactionListener extends PhysixContactAdapter {
             }
         } else {
             PositionComponent posComp = ComponentMappers.position.get(myEntity);
-            Vector2 otherPos = contact.getOtherFixture().getBody().getPosition();
-            float x = otherPos.x * GameConstants.BOX2D_SCALE;
-            float y = otherPos.y * GameConstants.BOX2D_SCALE;
-            float dx = x - posComp.x;
-            float dy = y - posComp.y;
-            Game.entityBuilder.createEntity("explosion", posComp.x + dx, posComp.y + dy);
+            float addX = posComp.directionX * 25.f;
+            float addY = posComp.directionY * 25.f;
+            Game.entityBuilder.createEntity("explosion", posComp.x + addX, posComp.y + addY);
             Game.engine.removeEntity(myEntity);
         }
     }
