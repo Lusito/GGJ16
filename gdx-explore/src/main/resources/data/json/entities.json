@@ -12,7 +12,7 @@
                 "minDelay": 100
             },
             "Animation": {
-                "animation": "player"
+                "animation": "ball"
             },
             "PhysixBody": {
                 "type": "circle",
@@ -158,9 +158,8 @@
                 "size": 10,
                 "sensor": true
             },
-            "Pickable": {
-                "resourceCount": 1,
-                "resourceId": "stone"
+            "Material": {
+                "type": "BOULDER"
             }
         }
     },
@@ -195,7 +194,7 @@
                 "static": true
             },
             "Material": {
-                "type": "ICE"
+                "type": "WOOD"
             }
         }
     },
@@ -210,6 +209,9 @@
                 "type": "box",
                 "size": 32,
                 "static": true
+            },
+            "Material": {
+                "type": "MONSTER"
             }
         }
     },
@@ -483,6 +485,9 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
+            },
+            "Material": {
+                "type": "ELEMENTAL"
             }
         }
     }
