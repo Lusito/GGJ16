@@ -1,5 +1,7 @@
 package de.hochschuletrier.gdw.ss14.game;
 
+import box2dLight.RayHandler;
+
 import java.util.function.Consumer;
 
 import com.badlogic.ashley.core.Entity;
@@ -7,8 +9,6 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
@@ -22,14 +22,20 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
+import de.hochschuletrier.gdw.commons.tiled.LayerObject;
+import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
+import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
-import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
-import de.hochschuletrier.gdw.ss14.game.utils.PhysixUtil;
+import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
 
 public class Game extends InputAdapter {
 
@@ -47,8 +53,15 @@ public class Game extends InputAdapter {
             GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX
     );
     private final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
-    private final AnimationRenderSystem animationRenderSystem = new AnimationRenderSystem(GameConstants.PRIORITY_ANIMATIONS);
+
+    private final RenderSystem renderSystem = new RenderSystem(new RayHandler(physixSystem.getWorld()), GameConstants.PRIORITY_RENDER);
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
+    private final InputSystem inputSystem = new InputSystem();
+    private final CameraSystem cameraSystem = new CameraSystem(0);
+
+    private Entity Player;
+
+    private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
 
     public Game() {
         // If this is a build jar file, disable hotkeys
@@ -64,19 +77,34 @@ public class Game extends InputAdapter {
     public void init(AssetManagerX assetManager) {
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
-
         addSystems();
         addContactListeners();
-        setupPhysixWorld();
-        
         entityBuilder.init(assetManager);
+        setupPhysixWorld();
+
+        TiledMap map = loadMap("data/maps/tryanewone.tmx");
+        basemapRenderSystem.initMap(map);
+        cameraSystem.adjustToMap(map);
+        entityBuilder.createEntitiesFromMap(map);
     }
 
     private void addSystems() {
         engine.addSystem(physixSystem);
         engine.addSystem(physixDebugRenderSystem);
-        engine.addSystem(animationRenderSystem);
+        engine.addSystem(renderSystem);
         engine.addSystem(updatePositionSystem);
+        engine.addSystem(inputSystem);
+        engine.addSystem(basemapRenderSystem);
+        engine.addSystem(cameraSystem);
+    }
+
+    private TiledMap loadMap(String filename) {
+        try {
+            return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(
+                    "Map konnte nicht geladen werden: " + filename);
+        }
     }
 
     private void addContactListeners() {
@@ -84,18 +112,22 @@ public class Game extends InputAdapter {
         physixSystem.getWorld().setContactListener(contactListener);
         contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
         contactListener.addListener(TriggerComponent.class, new TriggerListener());
+        contactListener.addListener(PlayerComponent.class, new PickUpListener());
     }
 
     private void setupPhysixWorld() {
-        physixSystem.setGravity(0, 24);
-        PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
+        physixSystem.setGravity(0, 0);
+
+        this.Player = entityBuilder.createEntity("ball", 50, 50);
+
+        /*  PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
         Body body = physixSystem.getWorld().createBody(bodyDef);
         body.createFixture(new PhysixFixtureDef(physixSystem).density(1).friction(0.5f).shapeBox(800, 20));
         PhysixUtil.createHollowCircle(physixSystem, 180, 180, 150, 30, 6);
 
         createTrigger(410, 600, 3200, 40, (Entity entity) -> {
             engine.removeEntity(entity);
-        });
+        });*/
     }
 
     public void update(float delta) {
@@ -122,13 +154,51 @@ public class Game extends InputAdapter {
         });
         engine.addEntity(entity);
     }
+
+    /*
+    @Override
+	public boolean keyDown(int keycode) {
+    	final int speed = 50;
+    	if (this.Player != null){
+    		PhysixBodyComponent body = Player.getComponent(PhysixBodyComponent.class);
+    		switch(keycode){
+	    	case Input.Keys.LEFT:
+	    		body.setLinearVelocityX(-speed);
+	    		break;
+	    	case Input.Keys.RIGHT:
+	    		body.setLinearVelocityX(speed);
+	    		break;
+	    	case Input.Keys.DOWN:
+	    		body.setLinearVelocityY(speed);
+	    		break;
+	    	case Input.Keys.UP:
+	    		body.setLinearVelocityY(-speed);
+	    		break;
+	    	case Input.Keys.SPACE:
+	    		
+	    		break;
+	    	}
+    	}
+		return super.keyDown(keycode);
+	}
     
+    
+
+	@Override
+	public boolean keyUp(int keycode) {
+		if (this.Player != null){
+			PhysixBodyComponent body = Player.getComponent(PhysixBodyComponent.class);
+			body.setLinearVelocity(new Vector2());
+		}
+		return super.keyUp(keycode);
+	}*/
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(button == 0)
-        	entityBuilder.createEntity("ball", screenX, screenY);
-        else
-        	entityBuilder.createEntity("box", screenX, screenY);
+        if (button == 0) {
+            this.Player = entityBuilder.createEntity("ball", screenX, screenY);
+        } else {
+            entityBuilder.createEntity("box", screenX, screenY);
+        }
         return true;
     }
 

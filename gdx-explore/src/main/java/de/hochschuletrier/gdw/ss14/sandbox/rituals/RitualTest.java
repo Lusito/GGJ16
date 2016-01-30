@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import box2dLight.RayHandler;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
@@ -32,7 +34,7 @@ import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
-import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.ResourceDescWithCount;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.RitualDesc;
@@ -67,8 +69,7 @@ public class RitualTest extends SandboxGame {
             GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX);
     private final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(
             GameConstants.PRIORITY_DEBUG_WORLD);
-    private final AnimationRenderSystem animationRenderSystem = new AnimationRenderSystem(
-            GameConstants.PRIORITY_ANIMATIONS);
+    private final RenderSystem renderSystem = new RenderSystem(new RayHandler(physixSystem.getWorld()), GameConstants.PRIORITY_RENDER);
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(
             GameConstants.PRIORITY_PHYSIX + 1);
     private final RitualSystem ritualSystem = new RitualSystem(entityBuilder);
@@ -99,7 +100,7 @@ public class RitualTest extends SandboxGame {
     private void addSystems() {
         engine.addSystem(physixSystem);
         engine.addSystem(physixDebugRenderSystem);
-        engine.addSystem(animationRenderSystem);
+        engine.addSystem(renderSystem);
         engine.addSystem(updatePositionSystem);
         engine.addSystem(ritualSystem);
     }
@@ -177,8 +178,9 @@ public class RitualTest extends SandboxGame {
 
             lastCreated.getComponent(RitualCasterComponent.class).addResource(
                     "phosphorus");
-        } else
+        } else {
             entityBuilder.createEntity("box", screenX, screenY);
+        }
         return true;
     }
 
@@ -192,16 +194,16 @@ public class RitualTest extends SandboxGame {
                     .listResources(lastCreated)) {
                 out.append(
                         "Res: " + res.count + " * " + res.desc.getId() + "; "
-                                + res.desc.getName() + "; "
-                                + res.desc.getDescription()).append('\n');
+                        + res.desc.getName() + "; "
+                        + res.desc.getDescription()).append('\n');
             }
             for (RitualDesc ritual : ritualSystem.listRituals(lastCreated)) {
                 out.append(
                         "Ritual: " + ritual.getId() + "; " + ritual.getName()
-                                + "; " + ritual.getDescription()).append('\n');
+                        + "; " + ritual.getDescription()).append('\n');
                 out.append(
                         ritualSystem.isReady(lastCreated, ritual) ? "  - ready"
-                                : "  - not ready").append('\n');
+                        : "  - not ready").append('\n');
             }
             logger.info(out.toString());
             ritualSystem.castRitual(lastCreated, "fireball");

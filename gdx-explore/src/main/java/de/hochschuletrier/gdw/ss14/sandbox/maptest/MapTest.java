@@ -70,7 +70,7 @@ public class MapTest extends SandboxGame {
 
     @Override
     public void init(AssetManagerX assetManager) {
-        map = loadMap("data/maps/demo.tmx");
+        map = loadMap("data/maps/tryanewone.tmx");
         for (TileSet tileset : map.getTileSets()) {
             TmxImage img = tileset.getImage();
             String filename = CurrentResourceLocator.combinePaths(tileset.getFilename(), img.getSource());
@@ -116,7 +116,6 @@ public class MapTest extends SandboxGame {
         float x = rect.x * tileWidth + width / 2;
         float y = rect.y * tileHeight + height / 2;
 
-        
         PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(x, y).fixedRotation(false);
         Body body = physixSystem.getWorld().createBody(bodyDef);
         body.createFixture(new PhysixFixtureDef(physixSystem).density(1).friction(0.5f).shapeBox(width, height));
@@ -144,11 +143,11 @@ public class MapTest extends SandboxGame {
             mapRenderer.render(0, 0, layer);
         }
         engine.update(delta);
-        
+
         mapRenderer.update(delta);
         camera.update(delta);
 
-        if(playerBody != null) {
+        if (playerBody != null) {
             float speed = 10000.0f;
             float velX = 0, velY = 0;
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
