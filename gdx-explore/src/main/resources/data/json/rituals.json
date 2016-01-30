@@ -1,0 +1,36 @@
+{
+    "summonDistance": 1.0,
+    "resources": [
+        {
+            "id": "mana",
+            "name": "Small mana potion",
+            "description": "..."
+        },
+        {
+            "id": "phosphorus",
+            "name": "Phosphorus",
+            "description": "Things that burn"
+        },
+        {
+            "id": "wood",
+            "name": "Wood",
+            "description": "..."
+        }
+    ],
+    "rituals": [
+        {
+            "id": "fireball",
+            "name": "Fireball",
+            "description": "Summons a fireball",
+            "resources": ["mana", "phosphorus"],
+            "entityName": "fireball"
+        },
+        {
+            "id": "test",
+            "name": "Mighty fireball of Testing",
+            "description": "Hopefully casts a fireball and throws it into the general direction the player is targeting.\nAlso a line-break for testing!",
+            "resources": ["mana", "phosphorus", "wood"],
+            "entityName": "fireball"
+        }
+    ]
+}

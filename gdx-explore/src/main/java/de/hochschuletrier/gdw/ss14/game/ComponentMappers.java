@@ -1,4 +1,4 @@
-package de.hochschuletrier.gdw.ss14.game;
+﻿package de.hochschuletrier.gdw.ss14.game;
 
 import com.badlogic.ashley.core.ComponentMapper;
 
@@ -26,4 +26,8 @@ public class ComponentMappers {
     public static final ComponentMapper<ChainLightComponent> chainLight = ComponentMapper.getFor(ChainLightComponent.class);
     public static final ComponentMapper<ConeLightComponent> coneLight = ComponentMapper.getFor(ConeLightComponent.class);
     public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
+    public static final ComponentMapper<RitualCasterComponent> ritualCaster = ComponentMapper.getFor(RitualCasterComponent.class);
+    public static final ComponentMapper<PlayerComponent> player = ComponentMapper.getFor(PlayerComponent.class);
+    public static final ComponentMapper<PickableComponent> pickable = ComponentMapper.getFor(PickableComponent.class);
+	public static final ComponentMapper<InputComponent> input  = ComponentMapper.getFor(InputComponent.class);
 }
