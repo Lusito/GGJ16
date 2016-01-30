@@ -22,6 +22,14 @@
     "medium_dragon": "data/textures/monsters/medium_dragon.png",
     "big_dragon": "data/textures/monsters/big_dragon.png",
     
+    "ball_1": "data/textures/items/balls/ball_1.png",
+    "ball_2": "data/textures/items/balls/ball_2.png",
+    "ball_3": "data/textures/items/balls/ball_3.png",
+    "ball_4": "data/textures/items/balls/ball_4.png",
+    "ball_5": "data/textures/items/balls/ball_5.png",
+    "ball_6": "data/textures/items/balls/ball_6.png",
+    "ball_7": "data/textures/items/balls/ball_7.png",
+    
     "menu_fg": "data/ui/menu/fg_border.png",
     "menu_bg": "data/ui/menu/bg_root.png",
     
