@@ -76,7 +76,7 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         if(mat1.type==MaterialType.FIRE || mat1.type==MaterialType.ELEMENTAL)
             engine.removeEntity(first);
         
-        if(mat2.type==MaterialType.FIRE || mat1.type==MaterialType.ELEMENTAL)
+        if(mat2.type==MaterialType.FIRE || mat2.type==MaterialType.ELEMENTAL)
             engine.removeEntity(second);
     }
     
@@ -97,6 +97,14 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         Vector2 exploPos = getExplosionPos(monster, elemental);
         Game.entityBuilder.createEntity("explosion", exploPos.x, exploPos.y);
         engine.removeEntity(monster);
+    }
+    
+    public static void explode(Entity entity) {
+        PositionComponent posComp = ComponentMappers.position.get(entity);
+        float addX = posComp.directionX * 25.f;
+        float addY = posComp.directionY * 25.f;
+        Game.entityBuilder.createEntity("explosion", posComp.x + addX, posComp.y + addY);
+        Game.engine.removeEntity(entity);
     }
     
     private Vector2 getExplosionPos(Entity first, Entity second) {

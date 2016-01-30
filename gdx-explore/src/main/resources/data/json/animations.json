@@ -172,61 +172,24 @@
     },
     "poisonElementarUp": {
         "filename": "data/textures/monsters/poison_elementar_atlas.png",
-        "frames" : 1,
+        "frames" : 4,
         "startRow": 3,
-        "frameDuration": [ 1.0 ] ,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
         "playType" : "LOOP_PINGPONG",
         "columns": 4,
         "rows" : 4
     },
     "poisonElementarDown": {
         "filename": "data/textures/monsters/poison_elementar_atlas.png",
-        "frames" : 1,
+        "frames" : 4,
         "startRow": 0,
-        "frameDuration": [ 1.0 ] ,
-        "playType" : "LOOP_PINGPONG",
-        "columns": 4,
-        "rows" : 4
-    },
-    "poisonElementarRight": {
-        "filename": "data/textures/monsters/poison_elementar_atlas.png",
-        "frames" : 1,
-        "startRow": 2,
-        "frameDuration": [ 1.0 ] ,
+        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
         "playType" : "LOOP_PINGPONG",
         "columns": 4,
         "rows" : 4
     },
     "poisonElementarLeft": {
         "filename": "data/textures/monsters/poison_elementar_atlas.png",
-        "frames" : 1,
-        "startRow": 1,
-        "frameDuration": [ 1.0 ] ,
-        "playType" : "LOOP_PINGPONG",
-        "columns": 4,
-        "rows" : 4
-    },
-    
-    "poisonElementarWalkUp": {
-        "filename": "data/textures/monsters/poison_elementar_atlas.png",
-        "frames" : 4,
-        "startRow": 3,
-        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
-        "playType" : "LOOP_PINGPONG",
-        "columns": 4,
-        "rows" : 4
-    },
-    "poisonElementarWalkDown": {
-        "filename": "data/textures/monsters/poison_elementar_atlas.png",
-        "frames" : 4,
-        "startRow": 0,
-        "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
-        "playType" : "LOOP_PINGPONG",
-        "columns": 4,
-        "rows" : 4
-    },
-    "poisonElementarWalkRight": {
-        "filename": "data/textures/monsters/poison_elementar_atlas.png",
         "frames" : 4,
         "startRow": 2,
         "frameDuration": [ 0.1, 0.1, 0.1, 0.1 ] ,
@@ -234,7 +197,7 @@
         "columns": 4,
         "rows" : 4
     },
-    "poisonElementarWalkLeft": {
+    "poisonElementarRight": {
         "filename": "data/textures/monsters/poison_elementar_atlas.png",
         "frames" : 4,
         "startRow": 1,

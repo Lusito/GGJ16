@@ -1,17 +1,16 @@
 package de.hochschuletrier.gdw.ss14.game.contactlisteners;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContact;
 import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ss14.events.ReactionEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.Game;
-import de.hochschuletrier.gdw.ss14.game.GameConstants;
-import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
+import de.hochschuletrier.gdw.ss14.game.gamelogic.MaterialType;
+import de.hochschuletrier.gdw.ss14.game.systems.ReactionSystem;
 
 public class ReactionListener extends PhysixContactAdapter {
 
@@ -29,11 +28,11 @@ public class ReactionListener extends PhysixContactAdapter {
                 ReactionEvent.emit(myEntity, otherEntity);
             }
         } else {
-            PositionComponent posComp = ComponentMappers.position.get(myEntity);
-            float addX = posComp.directionX * 25.f;
-            float addY = posComp.directionY * 25.f;
-            Game.entityBuilder.createEntity("explosion", posComp.x + addX, posComp.y + addY);
-            Game.engine.removeEntity(myEntity);
+            MaterialComponent myMat = ComponentMappers.mat.get(myEntity);
+            if(myMat.type != MaterialType.ELEMENTAL)
+                ReactionSystem.explode(myEntity);
+            else
+                Game.engine.removeEntity(myEntity);
         }
     }
 }
