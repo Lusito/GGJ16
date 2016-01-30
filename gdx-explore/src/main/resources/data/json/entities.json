@@ -198,6 +198,7 @@
     "teleport_in": {
         "meta": {},
         "components": {
+            "TeleportIn": {},
             "Position": {},
             "Texture": {
                 "animation": "teleport_in"
@@ -212,6 +213,7 @@
     "teleport_out": {
         "meta": {},
         "components": {
+            "TeleportOut": {},
             "Position": {},
             "Texture": {
                 "animation": "teleport_out"
