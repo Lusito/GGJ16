@@ -55,6 +55,18 @@ public class InputSystem extends IteratingSystem {
         InputComponent input = ComponentMappers.input.get(entity);
         PositionComponent posComponent = ComponentMappers.position.get(entity);
         
+        
+        if (Gdx.input.isKeyPressed(UP) || Gdx.input.isKeyPressed(UP2)) {
+            input.moveY = -1;
+            posComponent.directionY = -1;
+            posComponent.directionX = 0;
+        } else if (Gdx.input.isKeyPressed(DOWN) || Gdx.input.isKeyPressed(DOWN2)) {
+            input.moveY = 1;
+            posComponent.directionY = 1;
+            posComponent.directionX = 0;
+        } else {
+            input.moveY = 0;
+        }
 
         if (Gdx.input.isKeyPressed(LEFT) || Gdx.input.isKeyPressed(LEFT2)) {
             input.moveX = -1;
@@ -68,17 +80,7 @@ public class InputSystem extends IteratingSystem {
             input.moveX = 0;
         }
         
-        if (Gdx.input.isKeyPressed(UP) || Gdx.input.isKeyPressed(UP2)) {
-            input.moveY = -1;
-            posComponent.directionY = -1;
-            posComponent.directionX = 0;
-        } else if (Gdx.input.isKeyPressed(DOWN) || Gdx.input.isKeyPressed(DOWN2)) {
-            input.moveY = 1;
-            posComponent.directionY = 1;
-            posComponent.directionX = 0;
-        } else {
-            input.moveY = 0;
-        }
+
 
         boolean actionPressedNow = Gdx.input.isKeyPressed(ACTION);
         if(!actionPressedNow && input.isActionPressed) {
