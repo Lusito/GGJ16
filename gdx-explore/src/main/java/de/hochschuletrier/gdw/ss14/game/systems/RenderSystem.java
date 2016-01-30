@@ -104,6 +104,7 @@ public class RenderSystem extends SortedSubIteratingSystem {
         addSubSystem(new ParticleRenderer());
         addSubSystem(new LightRenderer());
 
+        LightRenderer.rayHandler = rayHandler;
         this.rayHandler = rayHandler;
 
         this.rayHandler.setAmbientLight(GameConstants.LIGHT_AMBIENT);

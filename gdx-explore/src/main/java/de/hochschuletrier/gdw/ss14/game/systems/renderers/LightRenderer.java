@@ -1,5 +1,7 @@
 package de.hochschuletrier.gdw.ss14.game.systems.renderers;
 
+import box2dLight.RayHandler;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 
@@ -12,7 +14,8 @@ import de.hochschuletrier.gdw.ss14.game.components.light.ConeLightComponent;
 import de.hochschuletrier.gdw.ss14.game.components.light.PointLightComponent;
 
 public class LightRenderer extends SubSystem {
-
+    public static RayHandler rayHandler;
+    
     @SuppressWarnings("unchecked")
     public LightRenderer() {
         super(Family.one(PointLightComponent.class, ChainLightComponent.class, ConeLightComponent.class).get());
