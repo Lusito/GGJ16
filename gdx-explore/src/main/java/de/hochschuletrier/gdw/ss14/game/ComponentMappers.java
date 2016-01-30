@@ -19,6 +19,7 @@ import de.hochschuletrier.gdw.ss14.game.components.render.ParticleComponent;
 import de.hochschuletrier.gdw.ss14.game.components.render.TextureComponent;
 
 public class ComponentMappers {
+
     public static final ComponentMapper<PositionComponent> position = ComponentMapper.getFor(PositionComponent.class);
     public static final ComponentMapper<TriggerComponent> trigger = ComponentMapper.getFor(TriggerComponent.class);
     public static final ComponentMapper<PhysixBodyComponent> physixBody = ComponentMapper.getFor(PhysixBodyComponent.class);
@@ -33,5 +34,5 @@ public class ComponentMappers {
     public static final ComponentMapper<RitualCasterComponent> ritualCaster = ComponentMapper.getFor(RitualCasterComponent.class);
     public static final ComponentMapper<PlayerComponent> player = ComponentMapper.getFor(PlayerComponent.class);
     public static final ComponentMapper<PickableComponent> pickable = ComponentMapper.getFor(PickableComponent.class);
-	public static final ComponentMapper<InputComponent> input  = ComponentMapper.getFor(InputComponent.class);
+    public static final ComponentMapper<InputComponent> input = ComponentMapper.getFor(InputComponent.class);
 }

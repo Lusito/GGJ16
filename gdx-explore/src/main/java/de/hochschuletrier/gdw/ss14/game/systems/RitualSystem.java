@@ -55,27 +55,29 @@ public class RitualSystem extends EntitySystem {
         try {
             return JacksonReader.read("data/json/rituals.json",
                     RitualSystemConfiguration.class);
-        } catch (NoSuchFieldException | IllegalArgumentException
-                | IllegalAccessException | InstantiationException | IOException
-                | ParseException e) {
+        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | InstantiationException | IOException | ParseException e) {
             throw new IllegalArgumentException("Couldn't load rituals.json", e);
         }
     }
 
     public void castRitual(Entity mage, String ritualName) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
-        if (comp == null)
+        if (comp == null) {
             return;
+        }
 
-        if (!comp.availableRituals.contains(ritualName))
+        if (!comp.availableRituals.contains(ritualName)) {
             return;
+        }
 
         RitualDesc desc = rituals.get(ritualName);
-        if (desc == null)
+        if (desc == null) {
             return;
+        }
 
-        if (!isResourcesAvailable(comp, desc))
+        if (!isResourcesAvailable(comp, desc)) {
             return;
+        }
 
         removeUsedResources(comp, desc);
         createSummonedEntity(mage, desc);
@@ -114,14 +116,16 @@ public class RitualSystem extends EntitySystem {
 
     public List<RitualDesc> listRituals(Entity mage) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
-        if (comp == null)
+        if (comp == null) {
             return Collections.emptyList();
+        }
 
         List<RitualDesc> ret = new ArrayList<>(comp.availableRituals.size());
         for (String ritualId : comp.availableRituals) {
             RitualDesc desc = rituals.get(ritualId);
-            if (desc != null)
+            if (desc != null) {
                 ret.add(desc);
+            }
         }
 
         return ret;
@@ -129,16 +133,18 @@ public class RitualSystem extends EntitySystem {
 
     public List<ResourceDescWithCount> listResources(Entity mage) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
-        if (comp == null)
+        if (comp == null) {
             return Collections.emptyList();
+        }
 
         List<ResourceDescWithCount> ret = new ArrayList<>(
                 comp.availableRituals.size());
         for (Entry<String, Integer> resource : comp.availableResources
                 .entrySet()) {
             ResourceDesc desc = resources.get(resource.getKey());
-            if (desc != null)
+            if (desc != null) {
                 ret.add(new ResourceDescWithCount(desc, resource.getValue()));
+            }
         }
 
         return ret;
@@ -146,16 +152,19 @@ public class RitualSystem extends EntitySystem {
 
     public boolean isReady(Entity mage, RitualDesc ritual) {
         RitualCasterComponent comp = ComponentMappers.ritualCaster.get(mage);
-        if (comp == null)
+        if (comp == null) {
             return false;
+        }
 
-        if (!comp.availableRituals.contains(ritual.getId()))
+        if (!comp.availableRituals.contains(ritual.getId())) {
             return false;
+        }
 
         return isResourcesAvailable(comp, ritual);
     }
 
     public static final class RitualSystemConfiguration {
+
         float summonDistance;
         @JacksonList(ResourceDesc.class)
         List<ResourceDesc> resources;
@@ -164,6 +173,7 @@ public class RitualSystem extends EntitySystem {
     }
 
     public static final class RitualDesc {
+
         private String id;
         private String name;
         private String description;
@@ -193,6 +203,7 @@ public class RitualSystem extends EntitySystem {
     }
 
     public static final class ResourceDesc {
+
         private String id;
         private String name;
         private String description;
@@ -211,6 +222,7 @@ public class RitualSystem extends EntitySystem {
     }
 
     public static final class ResourceDescWithCount {
+
         public ResourceDesc desc;
         public int count;
 

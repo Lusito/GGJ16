@@ -7,77 +7,78 @@ import com.badlogic.gdx.math.Vector3;
 import de.hochschuletrier.gdw.commons.gdx.cameras.orthogonal.LimitedSmoothCamera;
 
 public class MainCamera {
-	private static LimitedSmoothCamera camera = new LimitedSmoothCamera();
 
-	public static void update(float delta) {
-		camera.update(delta);
-	}
+    private static LimitedSmoothCamera camera = new LimitedSmoothCamera();
 
-	public static void setDestination(float x, float y) {
-		camera.setDestination(x, y);
-	}
+    public static void update(float delta) {
+        camera.update(delta);
+    }
 
-	public static void updateForced() {
-		camera.updateForced();
-	}
+    public static void setDestination(float x, float y) {
+        camera.setDestination(x, y);
+    }
 
-	public static final void resize(int width, int height) {
-		camera.resize(width, height);
-	}
+    public static void updateForced() {
+        camera.updateForced();
+    }
 
-	public static Vector3 getPosition() {
-		return camera.getPosition();
-	}
+    public static final void resize(int width, int height) {
+        camera.resize(width, height);
+    }
 
-	public static void setBounds(float xMin, float yMin, float xMax, float yMax) {
-		camera.setBounds(xMin, yMin, xMax, yMax);
-	}
+    public static Vector3 getPosition() {
+        return camera.getPosition();
+    }
 
-	public static void setCameraPosition(float x, float y) {
-		camera.setCameraPosition(x, y);
-	}
+    public static void setBounds(float xMin, float yMin, float xMax, float yMax) {
+        camera.setBounds(xMin, yMin, xMax, yMax);
+    }
 
-	public static final void setDestination(Vector2 p) {
-		camera.setDestination(p);
-	}
+    public static void setCameraPosition(float x, float y) {
+        camera.setCameraPosition(x, y);
+    }
 
-	public static float getFactor() {
-		return camera.getFactor();
-	}
+    public static final void setDestination(Vector2 p) {
+        camera.setDestination(p);
+    }
 
-	public static void setFactor(float factor) {
-		camera.setFactor(factor);
-	}
+    public static float getFactor() {
+        return camera.getFactor();
+    }
 
-	public static void resetBounds() {
-		camera.resetBounds();
-	}
+    public static void setFactor(float factor) {
+        camera.setFactor(factor);
+    }
 
-	public static OrthographicCamera getOrthographicCamera() {
-		return camera.getOrthographicCamera();
-	}
+    public static void resetBounds() {
+        camera.resetBounds();
+    }
 
-	public static void setCameraPosition(Vector3 pos) {
-		camera.setCameraPosition(pos);
-	}
+    public static OrthographicCamera getOrthographicCamera() {
+        return camera.getOrthographicCamera();
+    }
 
-	public static void setZoom(float newZoom) {
-		camera.setZoom(newZoom);
-	}
+    public static void setCameraPosition(Vector3 pos) {
+        camera.setCameraPosition(pos);
+    }
 
-	public static float getZoom() {
-		return camera.getZoom();
-	}
+    public static void setZoom(float newZoom) {
+        camera.setZoom(newZoom);
+    }
 
-	public static float getLeftOffset() {
-		return camera.getLeftOffset();
-	}
+    public static float getZoom() {
+        return camera.getZoom();
+    }
 
-	public static float getTopOffset() {
-		return camera.getTopOffset();
-	}
+    public static float getLeftOffset() {
+        return camera.getLeftOffset();
+    }
 
-	public static final void bind() {
-		camera.bind();
-	}
+    public static float getTopOffset() {
+        return camera.getTopOffset();
+    }
+
+    public static final void bind() {
+        camera.bind();
+    }
 }

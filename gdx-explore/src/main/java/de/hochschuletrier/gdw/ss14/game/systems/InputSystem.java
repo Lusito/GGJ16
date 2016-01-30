@@ -13,13 +13,12 @@ import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
 
 public class InputSystem extends IteratingSystem {
-	
-	public static int 	UP = Input.Keys.UP, 
-						DOWN = Input.Keys.DOWN, 
-						LEFT = Input.Keys.LEFT, 
-						RIGHT = Input.Keys.RIGHT,
-						ACTION = Input.Keys.SPACE;
-	
+
+    public static int UP = Input.Keys.UP,
+            DOWN = Input.Keys.DOWN,
+            LEFT = Input.Keys.LEFT,
+            RIGHT = Input.Keys.RIGHT,
+            ACTION = Input.Keys.SPACE;
 
     public InputSystem() {
         this(0);
@@ -31,41 +30,41 @@ public class InputSystem extends IteratingSystem {
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-    	
-    	adjustInputs(entity, deltaTime);
-    	adjustMovements(entity, deltaTime);
+
+        adjustInputs(entity, deltaTime);
+        adjustMovements(entity, deltaTime);
     }
-    
-    private void adjustInputs(Entity entity, float deltaTime){
-    	InputComponent input = ComponentMappers.input.get(entity);
-    	
-    	final float speed = 50f;
-    	
-    	if(Gdx.input.isKeyPressed(UP)){
-    		input.moveY = -speed;
-    	} else if(Gdx.input.isKeyPressed(DOWN)){
-    		input.moveY = speed;
-    	} else {
-    		input.moveY = 0;
-    	}
-    	
-    	if(Gdx.input.isKeyPressed(LEFT)){
-    		input.moveX = -speed;
-    	} else if(Gdx.input.isKeyPressed(RIGHT)){
-    		input.moveX = speed;
-    	}else {
-    		input.moveX = 0;
-    	}
-    	
-    	input.isActionPressed = Gdx.input.isKeyPressed(ACTION);
+
+    private void adjustInputs(Entity entity, float deltaTime) {
+        InputComponent input = ComponentMappers.input.get(entity);
+
+        final float speed = 50f;
+
+        if (Gdx.input.isKeyPressed(UP)) {
+            input.moveY = -speed;
+        } else if (Gdx.input.isKeyPressed(DOWN)) {
+            input.moveY = speed;
+        } else {
+            input.moveY = 0;
+        }
+
+        if (Gdx.input.isKeyPressed(LEFT)) {
+            input.moveX = -speed;
+        } else if (Gdx.input.isKeyPressed(RIGHT)) {
+            input.moveX = speed;
+        } else {
+            input.moveX = 0;
+        }
+
+        input.isActionPressed = Gdx.input.isKeyPressed(ACTION);
     }
-    
-    private void adjustMovements(Entity entity, float deltaTime){
-    	PhysixBodyComponent body = ComponentMappers.physixBody.get(entity);
-    	InputComponent input = ComponentMappers.input.get(entity);
-    	
-    	body.setLinearVelocityX(input.moveX);
-    	body.setLinearVelocityY(input.moveY);
+
+    private void adjustMovements(Entity entity, float deltaTime) {
+        PhysixBodyComponent body = ComponentMappers.physixBody.get(entity);
+        InputComponent input = ComponentMappers.input.get(entity);
+
+        body.setLinearVelocityX(input.moveX);
+        body.setLinearVelocityY(input.moveY);
     }
 
 }

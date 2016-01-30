@@ -11,7 +11,7 @@ public class EntityBuilder {
 
     private final PooledEngine engine;
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private final EntityFactory<EntityFactoryParam> entityFactory = new EntityFactory(
             "data/json/entities.json", Game.class);
 

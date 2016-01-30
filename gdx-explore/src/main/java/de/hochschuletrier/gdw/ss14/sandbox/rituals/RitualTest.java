@@ -177,8 +177,9 @@ public class RitualTest extends SandboxGame {
 
             lastCreated.getComponent(RitualCasterComponent.class).addResource(
                     "phosphorus");
-        } else
+        } else {
             entityBuilder.createEntity("box", screenX, screenY);
+        }
         return true;
     }
 
@@ -192,16 +193,16 @@ public class RitualTest extends SandboxGame {
                     .listResources(lastCreated)) {
                 out.append(
                         "Res: " + res.count + " * " + res.desc.getId() + "; "
-                                + res.desc.getName() + "; "
-                                + res.desc.getDescription()).append('\n');
+                        + res.desc.getName() + "; "
+                        + res.desc.getDescription()).append('\n');
             }
             for (RitualDesc ritual : ritualSystem.listRituals(lastCreated)) {
                 out.append(
                         "Ritual: " + ritual.getId() + "; " + ritual.getName()
-                                + "; " + ritual.getDescription()).append('\n');
+                        + "; " + ritual.getDescription()).append('\n');
                 out.append(
                         ritualSystem.isReady(lastCreated, ritual) ? "  - ready"
-                                : "  - not ready").append('\n');
+                        : "  - not ready").append('\n');
             }
             logger.info(out.toString());
             ritualSystem.castRitual(lastCreated, "fireball");

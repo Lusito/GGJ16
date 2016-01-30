@@ -18,20 +18,20 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class TextureComponent extends Component implements Pool.Poolable {
 
-	public Texture texture;
-	public TextureRegion region;
-	public boolean flipX;
-	public boolean flipY = true;
+    public Texture texture;
+    public TextureRegion region;
+    public boolean flipX;
+    public boolean flipY = true;
     public float offsetX = 0.0f;
     public float offsetY = 0.0f;
-    
-	@Override
-	public void reset() {
-		texture = null;
-		region = null;
-		flipX = false;
-		flipY = true;
-		offsetX = offsetY = 0.0f;
-	}
+
+    @Override
+    public void reset() {
+        texture = null;
+        region = null;
+        flipX = false;
+        flipY = true;
+        offsetX = offsetY = 0.0f;
+    }
 
 }

@@ -12,6 +12,7 @@ import de.hochschuletrier.gdw.commons.tiled.tmx.TmxImage;
 import java.util.HashMap;
 
 public class BasemapRenderSystem extends EntitySystem {
+
     private final HashMap<TileSet, Texture> tilesetImages = new HashMap();
     private TiledMapRendererGdx mapRenderer;
     private TiledMap map;
@@ -23,7 +24,7 @@ public class BasemapRenderSystem extends EntitySystem {
     public void initMap(TiledMap map) {
         this.clearImages();
         this.map = map;
-        
+
         for (TileSet tileset : map.getTileSets()) {
             TmxImage img = tileset.getImage();
             String filename = CurrentResourceLocator.combinePaths(tileset.getFilename(), img.getSource());
@@ -32,12 +33,11 @@ public class BasemapRenderSystem extends EntitySystem {
         mapRenderer = new TiledMapRendererGdx(map, tilesetImages);
     }
 
-    
     @Override
     public void removedFromEngine(Engine engine) {
         this.clearImages();
     }
-    
+
     private void clearImages() {
         tilesetImages.values().forEach(Texture::dispose);
         tilesetImages.clear();
@@ -46,8 +46,9 @@ public class BasemapRenderSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         for (Layer layer : map.getLayers()) {
-            if(layer.isTileLayer())
+            if (layer.isTileLayer()) {
                 mapRenderer.render(0, 0, layer);
+            }
         }
         mapRenderer.update(deltaTime);
     }

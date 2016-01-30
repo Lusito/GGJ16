@@ -27,17 +27,17 @@ public class AnimationComponent extends Component implements Pool.Poolable {
     public boolean animationFinished;
     public float offsetX = 0.0f;
     public float offsetY = 0.0f;
-    
+
     /**
      * Starting counting at 1.
      */
     public void setFrame(int frameNumber) {
-    	assert(animation != null && frameNumber > 0);
-    	
-    	stateTime = animation.animationDuration / animation.getFrameCount() * (frameNumber - 1);
-    	permanentStateTime = animation.animationDuration / animation.getFrameCount() * (frameNumber - 1);
+        assert (animation != null && frameNumber > 0);
+
+        stateTime = animation.animationDuration / animation.getFrameCount() * (frameNumber - 1);
+        permanentStateTime = animation.animationDuration / animation.getFrameCount() * (frameNumber - 1);
     }
-    
+
     @Override
     public void reset() {
         flipY = false;

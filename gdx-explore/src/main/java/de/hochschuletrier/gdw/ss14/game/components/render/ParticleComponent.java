@@ -11,16 +11,15 @@ import com.badlogic.gdx.utils.Pool;
  * @author Dennis
  *
  */
-public class ParticleComponent extends Component implements Pool.Poolable
-{ 
+public class ParticleComponent extends Component implements Pool.Poolable {
+
     public ParticleEffect particleEffect;
-    public boolean loop = false; 
+    public boolean loop = false;
     public float offsetX = 0;
     public float offsetY = 0;
-    
+
     @Override
-    public void reset()
-    {
+    public void reset() {
         this.particleEffect = null;
         this.loop = false;
         offsetX = 0;

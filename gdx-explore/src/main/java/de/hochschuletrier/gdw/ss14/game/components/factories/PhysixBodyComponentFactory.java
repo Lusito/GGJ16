@@ -19,10 +19,9 @@ import org.slf4j.LoggerFactory;
 
 public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryParam> {
 
-	public final static short PICKABLE=  0x0001;
+    public final static short PICKABLE = 0x0001;
 
-	
-    private static final Logger logger = LoggerFactory.getLogger(PhysixBodyComponentFactory.class); 
+    private static final Logger logger = LoggerFactory.getLogger(PhysixBodyComponentFactory.class);
     private PhysixSystem physixSystem;
 
     @Override
@@ -42,10 +41,16 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         final PhysixModifierComponent modifyComponent = engine.createComponent(PhysixModifierComponent.class);
         modifyComponent.schedule(() -> {
             String type = properties.getString("type", "");
-            switch(type) {
-                case "circle": addCircle(param, entity, properties); break;
-                case "box": addBox(param, entity, properties); break;
-                default: logger.error("Unknown type: {}", type); break;
+            switch (type) {
+                case "circle":
+                    addCircle(param, entity, properties);
+                    break;
+                case "box":
+                    addBox(param, entity, properties);
+                    break;
+                default:
+                    logger.error("Unknown type: {}", type);
+                    break;
             }
         });
         entity.add(modifyComponent);
@@ -64,7 +69,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
                 .shapeBox(properties.getFloat("size", 5), properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
-        
+
         entity.add(bodyComponent);
     }
 
@@ -82,15 +87,15 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
     }
 
     private PhysixFixtureDef getFixtureDef(SafeProperties properties) {
-    	PhysixFixtureDef pfd = new PhysixFixtureDef(physixSystem)
-        .density(properties.getFloat("density", 5))
-        .friction(properties.getFloat("friction", 5))
-        .restitution(properties.getFloat("restitution", 0));
-    	
-    	if(properties.getBoolean("isPickable")){
-    		pfd.category(PICKABLE);
-    	}
-    	
+        PhysixFixtureDef pfd = new PhysixFixtureDef(physixSystem)
+                .density(properties.getFloat("density", 5))
+                .friction(properties.getFloat("friction", 5))
+                .restitution(properties.getFloat("restitution", 0));
+
+        if (properties.getBoolean("isPickable")) {
+            pfd.category(PICKABLE);
+        }
+
         return pfd;
     }
 }

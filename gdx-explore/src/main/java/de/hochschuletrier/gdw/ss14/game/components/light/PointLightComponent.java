@@ -17,21 +17,19 @@ import com.badlogic.gdx.utils.Pool;
  * @author Dennis
  *
  */
+public class PointLightComponent extends Component implements Pool.Poolable {
 
-public class PointLightComponent extends Component implements Pool.Poolable
-{ 
     public PointLight pointLight;
     public float offsetX = 0;
     public float offsetY = 0;
 
     @Override
-    public void reset()
-    {
-    	if(pointLight != null) {
+    public void reset() {
+        if (pointLight != null) {
             pointLight.remove();
             pointLight.dispose();
             pointLight = null;
-    	}
+        }
 
         offsetX = 0;
         offsetY = 0;

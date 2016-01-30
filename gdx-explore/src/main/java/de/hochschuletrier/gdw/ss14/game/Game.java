@@ -38,7 +38,6 @@ import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
 
-
 public class Game extends InputAdapter {
 
     private final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
@@ -55,16 +54,16 @@ public class Game extends InputAdapter {
             GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX
     );
     private final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
-    
+
     private final RenderSystem renderSystem = new RenderSystem(new RayHandler(physixSystem.getWorld()), GameConstants.PRIORITY_RENDER);
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
-    private final InputSystem inputSystem = new InputSystem();  
+    private final InputSystem inputSystem = new InputSystem();
     private final CameraSystem cameraSystem = new CameraSystem(0);
-    
+
     private Entity Player;
 
     private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
-    
+
     public Game() {
         // If this is a build jar file, disable hotkeys
         if (!Main.IS_RELEASE) {
@@ -83,7 +82,7 @@ public class Game extends InputAdapter {
         addContactListeners();
         entityBuilder.init(assetManager);
         setupPhysixWorld();
-        
+
         TiledMap map = loadMap("data/maps/tryanewone.tmx");
         basemapRenderSystem.initMap(map);
         cameraSystem.adjustToMap(map);
@@ -130,10 +129,10 @@ public class Game extends InputAdapter {
 
     private void setupPhysixWorld() {
         physixSystem.setGravity(0, 0);
-        
+
         this.Player = entityBuilder.createEntity("ball", 50, 50);
-        
-      /*  PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
+
+        /*  PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem).position(410, 500).fixedRotation(false);
         Body body = physixSystem.getWorld().createBody(bodyDef);
         body.createFixture(new PhysixFixtureDef(physixSystem).density(1).friction(0.5f).shapeBox(800, 20));
         PhysixUtil.createHollowCircle(physixSystem, 180, 180, 150, 30, 6);
@@ -167,9 +166,8 @@ public class Game extends InputAdapter {
         });
         engine.addEntity(entity);
     }
-    
-    
-/*
+
+    /*
     @Override
 	public boolean keyDown(int keycode) {
     	final int speed = 50;
@@ -206,12 +204,13 @@ public class Game extends InputAdapter {
 		}
 		return super.keyUp(keycode);
 	}*/
-	@Override
+    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(button == 0)
-        	this.Player = entityBuilder.createEntity("ball", screenX, screenY);
-        else
-        	entityBuilder.createEntity("box", screenX, screenY);
+        if (button == 0) {
+            this.Player = entityBuilder.createEntity("ball", screenX, screenY);
+        } else {
+            entityBuilder.createEntity("box", screenX, screenY);
+        }
         return true;
     }
 

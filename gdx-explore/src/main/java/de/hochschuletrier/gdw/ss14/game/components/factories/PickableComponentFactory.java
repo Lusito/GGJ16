@@ -16,7 +16,7 @@ public class PickableComponentFactory extends ComponentFactory<EntityFactoryPara
 
     @Override
     public void run(Entity entity, SafeProperties meta, SafeProperties properties, EntityFactoryParam param) {
-    	PickableComponent component = engine.createComponent(PickableComponent.class);
-    	entity.add(component);
+        PickableComponent component = engine.createComponent(PickableComponent.class);
+        entity.add(component);
     }
 }

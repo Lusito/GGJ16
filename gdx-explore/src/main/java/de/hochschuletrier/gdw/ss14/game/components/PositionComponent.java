@@ -12,14 +12,14 @@ public class PositionComponent extends Component implements Pool.Poolable {
     public float scaleX = 1.0f;
     public float scaleY = 1.0f;
     public int layer = 0;
-    
+
     @Override
     public void reset() {
         rotation = x = y = layer = 0;
         scaleX = scaleY = 1.0f;
     }
-    
+
     public Vector2 getDirectionVector() {
-    	return new Vector2(1, 0).rotate(rotation);
+        return new Vector2(1, 0).rotate(rotation);
     }
 }

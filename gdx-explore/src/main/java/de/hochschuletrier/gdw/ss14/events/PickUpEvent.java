@@ -4,7 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.SnapshotArray;
 
 public class PickUpEvent {
+
     public static interface Listener {
+
         void onPickupEvent(Entity entityWhoPickup, Entity whatsPickedUp);
     }
 
