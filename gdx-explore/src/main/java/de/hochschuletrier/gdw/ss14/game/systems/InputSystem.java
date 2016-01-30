@@ -38,7 +38,7 @@ public class InputSystem extends IteratingSystem {
     private void adjustInputs(Entity entity, float deltaTime) {
         InputComponent input = ComponentMappers.input.get(entity);
 
-        final float speed = 50f;
+        final float speed = 150f;
 
         if (Gdx.input.isKeyPressed(UP)) {
             input.moveY = -speed;
