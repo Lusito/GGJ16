@@ -22,14 +22,13 @@ import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
-import de.hochschuletrier.gdw.ss14.events.PickUpEvent.Listener;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.EntityBuilder;
 import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 
-public class RitualSystem extends EntitySystem implements Listener, de.hochschuletrier.gdw.ss14.events.InputActionEvent.Listener {
+public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, InputActionEvent.Listener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RitualSystem.class);
     
