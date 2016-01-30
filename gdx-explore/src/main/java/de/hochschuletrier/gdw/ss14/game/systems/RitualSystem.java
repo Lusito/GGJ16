@@ -107,6 +107,13 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
         InputComponent inputComp = ComponentMappers.input.get(mage);
         if(inputComp!=null)
             inputComp.blockInputTime = SUMMONING_TIME * 1.5f;
+        
+        PositionComponent magePos = ComponentMappers.position.get(mage);
+        Vector2 mageDir = magePos.getDirectionVector();
+        mageDir.scl(summonDistance);
+
+        Vector2 summonPos = mageDir.add(magePos.x, magePos.y);
+        entityBuilder.createEntity("runeCircle", summonPos.x, summonPos.y);
     }
     
     @Override

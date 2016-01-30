@@ -10,6 +10,7 @@ import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
+import de.hochschuletrier.gdw.ss14.game.components.SelfDestructComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.light.ChainLightComponent;
 import de.hochschuletrier.gdw.ss14.game.components.light.ConeLightComponent;
@@ -37,4 +38,5 @@ public class ComponentMappers {
     public static final ComponentMapper<PickableComponent> pickable = ComponentMapper.getFor(PickableComponent.class);
     public static final ComponentMapper<InputComponent> input = ComponentMapper.getFor(InputComponent.class);
     public static final ComponentMapper<AnimationStateComponent> animState = ComponentMapper.getFor(AnimationStateComponent.class);
+    public static final ComponentMapper<SelfDestructComponent> selfDestruct = ComponentMapper.getFor(SelfDestructComponent.class);
 }

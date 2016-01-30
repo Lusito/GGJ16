@@ -38,6 +38,7 @@ import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.SelfDestructSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
@@ -68,6 +69,7 @@ public class Game extends InputAdapter {
     private final AnimationStateSystem animStateSystem = new AnimationStateSystem(GameConstants.PRIORITY_ANIMATION_STATE);
     private final SoundSystem soundSystem = new SoundSystem(GameConstants.PRIORITY_SOUND);
     private final RitualSystem ritualSystem = new RitualSystem(entityBuilder);
+    private final SelfDestructSystem selfDestructSystem = new SelfDestructSystem(entityBuilder);
 
     private Entity player;
     
@@ -115,6 +117,7 @@ public class Game extends InputAdapter {
         engine.addSystem(ritualSystem);
         engine.addSystem(soundSystem);
         engine.addSystem(new TeleportSystem(0));
+        engine.addSystem(selfDestructSystem);
     }
 
     private TiledMap loadMap(String filename) {

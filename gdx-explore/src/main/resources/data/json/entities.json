@@ -37,6 +37,21 @@
             }
         }
     },
+    "runeCircle": {
+        "meta": { },
+        "components": {
+            "Position": { },
+            "Animation": {
+                "animation": "runeCircle"
+            },
+            "PointLight": {
+                "color": "0.1, 0.4, 0.1",
+                "distance": 5,
+                "static": true,
+                "xRay": true
+            }
+        }
+    },
     
     "mana": {
         "meta": {},
