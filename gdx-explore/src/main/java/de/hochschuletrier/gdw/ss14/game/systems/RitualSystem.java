@@ -28,6 +28,7 @@ import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss14.events.GameWonEvent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
+import de.hochschuletrier.gdw.ss14.events.PlayerMessageEvent;
 import de.hochschuletrier.gdw.ss14.events.RitualCastedEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.EntityBuilder;
@@ -105,20 +106,25 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
         if (!isResourcesAvailable(comp, desc)) {
             LOGGER.info("Ritual \""+ritualId+"\n not ready");
+            PlayerMessageEvent.emit("I'm missing something");
             return;
         }
+        
+        float summonDistance = desc.minDistance!=null ? desc.minDistance : this.summonDistance;
 
         PositionComponent magePos = ComponentMappers.position.get(mage);
         Vector2 mageDir = magePos.getDirectionVector();
-        mageDir.scl(summonDistance*2);
+        mageDir.scl(summonDistance);
 
         Vector2 summonPos = mageDir.add(magePos.x, magePos.y);
         
-        if(!isAreaFree(magePos.x,magePos.y, summonPos.x,summonPos.y)) {
+        if(summonDistance>0.01 && !isAreaFree(magePos.x,magePos.y, summonPos.x,summonPos.y)) {
             LOGGER.info("Ritual \""+ritualId+"\n doesn't has enough space");
+            PlayerMessageEvent.emit("I may need more space");
             return;
         }
         
+        PlayerMessageEvent.emit("!");
         RitualCastedEvent.emit(mage);
         comp.remainingTime = SUMMONING_TIME;
         InputComponent inputComp = ComponentMappers.input.get(mage);
@@ -168,6 +174,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
                         break;
                         
                     case WIN:
+                        PlayerMessageEvent.emit("I've won. Where is my money?!");
                         GameWonEvent.emit(entity);
                         break;
                 }
@@ -177,6 +184,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
         }
     }
     
+    @SuppressWarnings("unchecked")
     private void createBridge(Entity entity) {
         PositionComponent position = ComponentMappers.position.get(entity);
 
@@ -254,10 +262,16 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
         if(comp.resourceId!=null && comp.resourceCount>=1) {
             caster.addResources(comp.resourceId, comp.resourceCount);
+            ResourceDesc desc = resources.get(comp.resourceId);
+            if(desc!=null)
+                PlayerMessageEvent.emit("Oh, "+desc.getName()+"");
         }
         
-        if(comp.ritualId!=null)
-            caster.addRitual(comp.ritualId);
+        if(comp.ritualId!=null&& caster.addRitual(comp.ritualId)) {
+             RitualDesc desc = rituals.get(comp.ritualId);
+             if(desc!=null)
+                 PlayerMessageEvent.emit("Oh, '"+desc.getName()+"'");
+        }
         
         entityBuilder.removeEntity(whatsPickedUp);
     }
@@ -385,6 +399,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
         float entityImpulse;
         @JacksonList(String.class)
         List<String> resources;
+        Float minDistance = null;
 
         public String getId() {
             return id;

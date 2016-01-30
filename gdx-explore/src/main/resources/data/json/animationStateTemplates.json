@@ -22,5 +22,15 @@
         "WALK_UP": "fireBallUp",
         "WALK_LEFT": "fireBallLeft",
         "WALK_RIGHT": "fireBallRight"
+    },
+        "PoisonElemental": {
+        "IDLE_DOWN": "poisonElementarDown",
+        "IDLE_UP": "poisonElementarUp",
+        "IDLE_LEFT": "poisonElementarLeft",
+        "IDLE_RIGHT": "poisonElementarRight",
+        "WALK_DOWN": "poisonElementarWalkDown",
+        "WALK_UP": "poisonElementarWalkUp",
+        "WALK_LEFT": "poisonElementarWalkLeft",
+        "WALK_RIGHT": "poisonElementarWalkRight"
     }
 }
