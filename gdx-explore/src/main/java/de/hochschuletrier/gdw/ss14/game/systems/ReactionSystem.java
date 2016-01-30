@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.ss14.events.ReactionEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
@@ -14,6 +15,7 @@ import de.hochschuletrier.gdw.ss14.game.gamelogic.MaterialType;
 
 public class ReactionSystem extends EntitySystem implements ReactionEvent.Listener {
     private PooledEngine engine;
+    private Vector2 vec2 = new Vector2();
     
     @Override
     public void addedToEngine(Engine engine) {
@@ -79,20 +81,29 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
     }
     
     private void onBoulderExplosionReaction(Entity boulder, Entity expl) {
-        PositionComponent posComp = ComponentMappers.position.get(boulder);
-        Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
+        PositionComponent exploPos = ComponentMappers.position.get(expl);
+        Game.entityBuilder.createEntity("explosion", exploPos.x, exploPos.y);
         engine.removeEntity(boulder);
     }
 
     private void onFireIceReaction(Entity fire, Entity ice) {
-        PositionComponent posComp = ComponentMappers.position.get(ice);
-        Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
+        Vector2 exploPos = getExplosionPos(fire, ice);
+        Game.entityBuilder.createEntity("explosion", exploPos.x, exploPos.y);
+        engine.removeEntity(fire);
         engine.removeEntity(ice);
     }
 
     private void onMonsterElementalReaction(Entity monster, Entity elemental) {
-        PositionComponent posComp = ComponentMappers.position.get(monster);
-        Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
+        Vector2 exploPos = getExplosionPos(monster, elemental);
+        Game.entityBuilder.createEntity("explosion", exploPos.x, exploPos.y);
         engine.removeEntity(monster);
+    }
+    
+    private Vector2 getExplosionPos(Entity first, Entity second) {
+        PositionComponent posComp = ComponentMappers.position.get(first);
+        float dx = ComponentMappers.position.get(second).x - posComp.x;
+        float dy = ComponentMappers.position.get(second).y - posComp.y;
+        vec2.set(posComp.x + dx, posComp.y + dy);
+        return vec2;
     }
 }
