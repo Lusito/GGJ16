@@ -12,7 +12,8 @@
                 "minDelay": 100
             },
             "Animation": {
-                "animation": "player"
+                "animation": "player",
+                "offsetY": 10
             },
             "PhysixBody": {
                 "type": "circle",
