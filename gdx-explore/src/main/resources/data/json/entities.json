@@ -417,7 +417,7 @@
                 "loop": false
             },
             "Death": {
-                "time": 0.1
+                "time": 1
             }
         }
     },

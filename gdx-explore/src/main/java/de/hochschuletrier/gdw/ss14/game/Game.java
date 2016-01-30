@@ -151,7 +151,6 @@ public class Game extends InputAdapter {
         physixSystem.setGravity(0, 0);
 
         player = entityBuilder.createEntity("player", 50, 50);
-        entityBuilder.createEntity("ice", 500, 100);
     }
 
     public void update(float delta) {
