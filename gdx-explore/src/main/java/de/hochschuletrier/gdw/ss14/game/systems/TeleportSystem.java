@@ -43,7 +43,6 @@ public class TeleportSystem extends IteratingSystem implements TeleportEvent.Lis
 
     @Override
     public void onTeleportEvent(Entity teleporterEntity, Entity playerEntity) {
-        PositionComponent source = ComponentMappers.position.get(teleporterEntity);
         PositionComponent destination = ComponentMappers.position.get(getEntities().first());
         PhysixModifierComponent modifier = ComponentMappers.physixModifier.get(playerEntity);
         if(modifier == null) {

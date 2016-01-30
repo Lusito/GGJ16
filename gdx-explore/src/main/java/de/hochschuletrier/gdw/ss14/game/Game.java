@@ -25,6 +25,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
+import de.hochschuletrier.gdw.ss14.events.TeleportEvent;
 import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TeleportInComponent;
@@ -104,6 +105,8 @@ public class Game extends InputAdapter {
         entityBuilder.createEntitiesFromMap(map, physixSystem);
         
         hud = new Hud(assetManager, ritualSystem, player);
+        
+        TeleportEvent.emit(null, player);
     }
 
     private void addSystems() {
