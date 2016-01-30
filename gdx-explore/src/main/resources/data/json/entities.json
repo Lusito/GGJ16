@@ -207,6 +207,9 @@
                 "type": "box",
                 "size": 32,
                 "static": true
+            },
+            "Material": {
+                "type": "ICE"
             }
         }
     },
