@@ -147,24 +147,6 @@
             }
         }
     },
-    "stone": {
-        "meta": { },
-        "components": {
-            "Position": { },
-            "Texture": {
-                "animation": "stone"
-            },
-            "PhysixBody": {
-                "type": "circle",
-                "size": 10,
-                "sensor": true
-            },
-            "Pickable": {
-                "resourceCount": 1,
-                "resourceId": "stone"
-            }
-        }
-    },
     "wood": {
         "meta": { },
         "components": {
