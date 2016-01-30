@@ -94,7 +94,7 @@ public class Game extends InputAdapter {
         TiledMap map = loadMap("data/maps/newworld.tmx");
         basemapRenderSystem.initMap(map);
         cameraSystem.adjustToMap(map);
-        entityBuilder.createEntitiesFromMap(map);
+        entityBuilder.createEntitiesFromMap(map, physixSystem);
         
         hud = new Hud(assetManager, ritualSystem, player);
     }

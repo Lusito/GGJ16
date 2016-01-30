@@ -16,7 +16,7 @@
             },
             "PhysixBody": {
                 "type": "circle",
-                "size": 30,
+                "size": 15,
                 "density": 5,
                 "friction": 0.2,
                 "restitution": 0.4,
@@ -68,8 +68,8 @@
                 "animation": "mana_potion"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -88,8 +88,8 @@
                 "animation": "coal"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -108,8 +108,8 @@
                 "animation": "mushroom"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -128,8 +128,8 @@
                 "animation": "phosphor"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -148,8 +148,8 @@
                 "animation": "rope"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -168,8 +168,8 @@
                 "animation": "stone"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -188,8 +188,8 @@
                 "animation": "wood"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -217,8 +217,8 @@
                 "animation": "scroll"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
@@ -240,8 +240,8 @@
                 "animation": "box"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 60,
+                "type": "circle",
+                "size": 10,
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
