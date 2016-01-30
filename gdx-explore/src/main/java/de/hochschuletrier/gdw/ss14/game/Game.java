@@ -109,7 +109,7 @@ public class Game extends InputAdapter {
         hud = new Hud(assetManager, ritualSystem, player);
         
         TeleportEvent.emit(null, player);
-//        PlayerMessageEvent.emit("!");
+        PlayerMessageEvent.emit("!");
     }
 
     private void addSystems() {

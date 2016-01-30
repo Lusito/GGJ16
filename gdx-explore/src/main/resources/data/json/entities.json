@@ -12,7 +12,7 @@
                 "minDelay": 100
             },
             "Animation": {
-                "animation": "player",
+                "animation": "ball",
                 "offsetY": 10
             },
             "PhysixBody": {
@@ -27,8 +27,8 @@
                 "template": "Player"
             },
             "RitualCaster": {
-                "resources": "phosphor, coal",
-                "rituals": "bomb"
+                "resources": "",
+                "rituals": "winRitual"
             },
             "PointLight": {
                 "color": "0.3, 0, 0",
@@ -147,24 +147,6 @@
             }
         }
     },
-    "stone": {
-        "meta": { },
-        "components": {
-            "Position": { },
-            "Texture": {
-                "animation": "stone"
-            },
-            "PhysixBody": {
-                "type": "circle",
-                "size": 10,
-                "sensor": true
-            },
-            "Pickable": {
-                "resourceCount": 1,
-                "resourceId": "stone"
-            }
-        }
-    },
     "wood": {
         "meta": { },
         "components": {
@@ -192,8 +174,11 @@
             },
             "PhysixBody": {
                 "type": "circle",
-                "size": 10,
-                "sensor": true
+                "size": 8,
+                "static": true
+            },
+            "Material": {
+                "type": "ICE"
             }
         }
     },
@@ -205,12 +190,29 @@
                 "animation": "tree"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 32,
+                "type": "circle",
+                "size": 16,
                 "static": true
             },
             "Material": {
-                "type": "ICE"
+                "type": "WOOD"
+            }
+        }
+    },
+    "boulder": {
+        "meta": { },
+        "components": {
+            "Position": { },
+            "Texture": {
+                "animation": "boulder"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "static": true
+            },
+            "Material": {
+                "type": "BOULDER"
             }
         }
     },
@@ -222,9 +224,12 @@
                 "animation": "small_dragon"
             },
             "PhysixBody": {
-                "type": "box",
-                "size": 32,
+                "type": "circle",
+                "size": 16,
                 "static": true
+            },
+            "Material": {
+                "type": "MONSTER"
             }
         }
     },
@@ -388,6 +393,9 @@
             "Animation": {
                 "animation": "box"
             },
+            "AnimationState": {
+                "template": "Fireball"
+            },
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
@@ -397,26 +405,6 @@
             },
             "Material": {
                 "type": "FIRE"
-            }
-        }
-    },
-    "ice": {
-        "meta": { },
-        "components": {
-            "Position": { },
-            "Animation": {
-                "animation": "ball"
-            },
-            "PhysixBody": {
-                "type": "circle",
-                "size": 15,
-                "density": 5,
-                "friction": 0.2,
-                "restitution": 0.4,
-                "isFixedRotation": true
-            },
-            "Material": {
-                "type": "ICE"
             }
         }
     },
@@ -504,6 +492,135 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
+            },
+            "Material": {
+                "type": "ELEMENTAL"
+            }
+        }
+    },
+    "ball_1": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_1"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_2": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_2"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_3": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_3"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_4": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_4"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_5": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_5"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_6": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_6"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_7": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_7"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
             }
         }
     }

@@ -83,8 +83,8 @@ public class Hud implements PlayerMessageEvent.Listener {
         
         
         if(messageTimout>0.f) {
-            int msgX = 200; // TODO
-            int msgY = 400;
+            float msgX = Gdx.graphics.getWidth()/2.f - messageBubble.getWidth() + 30; // TODO
+            float msgY = Gdx.graphics.getHeight()/2.f - messageBubble.getHeight() - 30;
             int msgDir = -1;
             
             DrawUtil.batch.draw(messageBubble, msgX, msgY + (msgDir<0 ? messageBubble.getHeight() : 0), messageBubble.getWidth(), msgDir*messageBubble.getHeight());

@@ -30,9 +30,51 @@
             "id": "wood",
             "name": "wood",
             "description": ""
+        },
+        {
+            "id": "orb1",
+            "name": "orb",
+            "description": ""
+        },
+        {
+            "id": "orb2",
+            "name": "orb",
+            "description": ""
+        },
+        {
+            "id": "orb3",
+            "name": "orb",
+            "description": ""
+        },
+        {
+            "id": "orb4",
+            "name": "orb",
+            "description": ""
+        },
+        {
+            "id": "orb5",
+            "name": "orb",
+            "description": ""
+        },
+        {
+            "id": "orb6",
+            "name": "orb",
+            "description": ""
+        },
+        {
+            "id": "orb7",
+            "name": "orb",
+            "description": ""
         }
     ],
     "rituals": [
+        {
+            "id": "winRitual",
+            "name": "Win",
+            "description": "TODO",
+            "resources": ["orb1", "orb2", "orb3", "orb4", "orb5", "orb6", "orb7"],
+            "action": "WIN"
+        },
         {
             "id": "fireball",
             "name": "Fireball",
