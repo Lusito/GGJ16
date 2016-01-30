@@ -191,9 +191,12 @@
                 "animation": "ice"
             },
             "PhysixBody": {
-                "type": "circle",
-                "size": 10,
-                "sensor": true
+                "type": "box",
+                "size": 32,
+                "static": true
+            },
+            "Material": {
+                "type": "ICE"
             }
         }
     },
@@ -203,6 +206,23 @@
             "Position": { },
             "Texture": {
                 "animation": "tree"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 32,
+                "static": true
+            },
+            "Material": {
+                "type": "ICE"
+            }
+        }
+    },
+    "boulder": {
+        "meta": { },
+        "components": {
+            "Position": { },
+            "Texture": {
+                "animation": "boulder"
             },
             "PhysixBody": {
                 "type": "box",

@@ -41,6 +41,11 @@
    <property name="EntityType" value="stone"/>
   </properties>
  </tile>
+ <tile id="8">
+  <properties>
+   <property name="EntityType" value="boulder"/>
+  </properties>
+ </tile>
  <tile id="9">
   <properties>
    <property name="EntityType" value="tree"/>
