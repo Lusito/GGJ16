@@ -19,7 +19,7 @@ import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.RitualDesc;
 
 public class Hud implements PlayerMessageEvent.Listener {
 
-    private static final float MESSAGE_DURATION = 2.f;
+    private static final float MESSAGE_DURATION = 3.f;
     
     private static final Color COLOR_READY = Color.WHITE;
     private static final Color COLOR_NOT_READY = new Color(0.4f, 0.4f, 0.4f, 1);
@@ -90,7 +90,7 @@ public class Hud implements PlayerMessageEvent.Listener {
             DrawUtil.batch.draw(messageBubble, msgX, msgY + (msgDir<0 ? messageBubble.getHeight() : 0), messageBubble.getWidth(), msgDir*messageBubble.getHeight());
             
             font.setColor(Color.WHITE);
-            font.setScale(1.2f);
+            font.setScale(message.length()<6 ? 1.2f :0.8f);
             font.drawWrapped(DrawUtil.batch, message, msgX+20, msgY+20, messageBubble.getWidth()-40);
         }
 
@@ -126,9 +126,14 @@ public class Hud implements PlayerMessageEvent.Listener {
     }
 
     @Override
-    public void onPlayerMessageEvent(String message) {
-        if(messageTimout>0.5f && message!=null) {
+    public void onPlayerMessageEvent(String message, boolean clear) {
+        if(message!=null && (messageTimout>1.0f || message.length()<3) && !clear) {
             this.message+="\n"+message;
+            
+            String[] lines = this.message.split("\n");
+            if(lines.length>2) {
+                this.message = lines[lines.length-2] + "\n" + lines[lines.length-1];
+            }
             
         } else {
             this.message=message;

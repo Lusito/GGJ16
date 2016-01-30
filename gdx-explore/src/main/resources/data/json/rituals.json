@@ -1,9 +1,9 @@
 {
-    "summonDistance": 50.0,
+    "summonDistance": 40.0,
     "resources": [
         {
             "id": "mana",
-            "name": "Mana potion",
+            "name": "mana",
             "description": ""
         },
         {
@@ -73,7 +73,8 @@
             "name": "Win",
             "description": "TODO",
             "resources": ["orb1", "orb2", "orb3", "orb4", "orb5", "orb6", "orb7"],
-            "action": "WIN"
+            "action": "WIN",
+            "minDistance": 0.0
         },
         {
             "id": "fireball",
@@ -97,7 +98,8 @@
             "name": "Bridge",
             "description": "Repairs a broken bridge",
             "resources": ["wood", "rope"],
-            "action": "REPAIR_BRIDGE"
+            "action": "REPAIR_BRIDGE",
+            "minDistance": 0.0
         },
         {
             "id": "poisonElemental",
