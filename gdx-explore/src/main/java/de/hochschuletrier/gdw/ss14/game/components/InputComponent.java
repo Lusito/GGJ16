@@ -10,6 +10,7 @@ public class InputComponent extends Component implements Pool.Poolable {
     public boolean isActionPressed = false;
     public boolean isActionUpPressed = false;
     public boolean isActionDownPressed = false;
+    public float blockInputTime = 0.f;
 
     @Override
     public void reset() {
@@ -18,5 +19,6 @@ public class InputComponent extends Component implements Pool.Poolable {
         isActionPressed = false;
         isActionUpPressed = false;
         isActionDownPressed = false;
+        blockInputTime = 0.f;
     }
 }

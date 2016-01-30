@@ -1,12 +1,16 @@
 {
     "Player": {
-        "IDLE_DOWN": "knightWhiteIdleDown",
-        "IDLE_UP": "knightWhiteIdleUp",
-        "IDLE_LEFT": "knightWhiteIdleLeft",
-        "IDLE_RIGHT": "knightWhiteIdleRight",
-        "WALK_DOWN": "knightWhiteWalkDown",
-        "WALK_UP": "knightWhiteWalkUp",
-        "WALK_LEFT": "knightWhiteWalkLeft",
-        "WALK_RIGHT": "knightWhiteWalkRight"
+        "IDLE_DOWN": "playerIdleDown",
+        "IDLE_UP": "playerIdleUp",
+        "IDLE_LEFT": "playerIdleLeft",
+        "IDLE_RIGHT": "playerIdleRight",
+        "WALK_DOWN": "playerWalkDown",
+        "WALK_UP": "playerWalkUp",
+        "WALK_LEFT": "playerWalkLeft",
+        "WALK_RIGHT": "playerWalkRight",
+        "SUMMON_DOWN": "playerSummonDown",
+        "SUMMON_UP": "playerSummonUp",
+        "SUMMON_LEFT": "playerSummonLeft",
+        "SUMMON_RIGHT": "playerSummonRight"
     }
 }

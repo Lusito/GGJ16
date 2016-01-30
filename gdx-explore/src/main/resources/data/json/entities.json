@@ -12,7 +12,7 @@
                 "minDelay": 100
             },
             "Animation": {
-                "animation": "ball"
+                "animation": "player"
             },
             "PhysixBody": {
                 "type": "circle",

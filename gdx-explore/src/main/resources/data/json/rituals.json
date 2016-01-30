@@ -80,8 +80,7 @@
             "description": "Summons a bomb",
             "resources": ["cole", "phosphor"],
             "action": "SPAWN",
-            "entityName": "bomb",
-            "entityImpulse": 10000.0
+            "entityName": "bomb"
         },
         {
             "id": "bridge",

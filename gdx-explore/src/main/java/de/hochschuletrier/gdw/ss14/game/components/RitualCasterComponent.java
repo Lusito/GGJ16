@@ -19,6 +19,8 @@ public class RitualCasterComponent extends Component implements Pool.Poolable {
     
     public int ritualIndex;
 
+    public float remainingTime = 0.f;
+    
     public boolean hasResource(String name) {
         return availableResources.getOrDefault(name, 0) > 0;
     }
@@ -62,6 +64,7 @@ public class RitualCasterComponent extends Component implements Pool.Poolable {
         availableRituals.clear();
         availableResources.clear();
         ritualIndex = 0;
+        remainingTime = 0.f;
     }
 
 }
