@@ -32,35 +32,50 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         MaterialComponent mat2 = ComponentMappers.mat.get(second);
         
         switch(mat1.type) {
-        case FIRE:
-            if(mat2.type == MaterialType.ICE)
-                onFireIceReaction(first, second);
-            break;
-        case ICE:
-            if(mat2.type == MaterialType.FIRE)
-                onFireIceReaction(second, first);
-            else if(mat2.type == MaterialType.EXPLOSION)
-                onStoneExplosionReaction(second, first);
-            break;
-        case STONE:
-            if(mat2.type == MaterialType.EXPLOSION)
-                onStoneExplosionReaction(first, second);
-            break;
-        case EXPLOSION:
-            if(mat2.type == MaterialType.ICE || mat2.type == MaterialType.STONE)
-                onStoneExplosionReaction(second,first);
-            break;
-        case NONE:
-            break;
-        default:
-            break;
+            case ICE:
+                if(mat2.type==MaterialType.FIRE)
+                    onFireIceReaction(second,first);
+                break;
+                
+            case FIRE:
+                if(mat2.type == MaterialType.ICE || mat2.type == MaterialType.WOOD)
+                    onFireIceReaction(first, second);
+                break;
+                
+            case EXPLOSION:
+                if(mat2.type==MaterialType.BOULDER)
+                    onBoulderExplosionReaction(second,first);
+                break;
+                
+            case BOULDER:
+                if(mat2.type==MaterialType.EXPLOSION)
+                    onBoulderExplosionReaction(first,second);
+                break;
+                
+            case WOOD:
+                if(mat2.type==MaterialType.FIRE)
+                    onFireIceReaction(second,first);
+                break;
+                
+            case ELEMENTAL:
+                if(mat2.type==MaterialType.MONSTER)
+                    onMonsterElementalReaction(second,first);
+                break;
+                
+            case MONSTER:
+                if(mat2.type==MaterialType.ELEMENTAL)
+                    onMonsterElementalReaction(first,second);
+                break;
+        
+            default:
+                break;
         }
     }
     
-    private void onStoneExplosionReaction(Entity stone, Entity expl) {
-        PositionComponent posComp = ComponentMappers.position.get(stone);
+    private void onBoulderExplosionReaction(Entity boulder, Entity expl) {
+        PositionComponent posComp = ComponentMappers.position.get(boulder);
         Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
-        engine.removeEntity(stone);
+        engine.removeEntity(boulder);
     }
 
     private void onFireIceReaction(Entity fire, Entity ice) {
@@ -68,5 +83,12 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
         engine.removeEntity(fire);
         engine.removeEntity(ice);
+    }
+
+    private void onMonsterElementalReaction(Entity monster, Entity elemental) {
+        PositionComponent posComp = ComponentMappers.position.get(monster);
+        Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
+        engine.removeEntity(monster);
+        engine.removeEntity(elemental);
     }
 }

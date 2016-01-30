@@ -12,7 +12,7 @@
                 "minDelay": 100
             },
             "Animation": {
-                "animation": "player",
+                "animation": "ball",
                 "offsetY": 10
             },
             "PhysixBody": {
@@ -212,7 +212,7 @@
                 "static": true
             },
             "Material": {
-                "type": "ICE"
+                "type": "BOULDER"
             }
         }
     },
@@ -227,6 +227,9 @@
                 "type": "circle",
                 "size": 16,
                 "static": true
+            },
+            "Material": {
+                "type": "MONSTER"
             }
         }
     },
@@ -506,6 +509,9 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1
+            },
+            "Material": {
+                "type": "ELEMENTAL"
             }
         }
     }

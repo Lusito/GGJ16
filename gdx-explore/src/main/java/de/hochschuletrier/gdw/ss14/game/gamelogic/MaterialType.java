@@ -5,5 +5,8 @@ public enum MaterialType {
     ICE,
     FIRE,
     EXPLOSION,
-    STONE
+    BOULDER,
+    WOOD,
+    ELEMENTAL,
+    MONSTER
 }
