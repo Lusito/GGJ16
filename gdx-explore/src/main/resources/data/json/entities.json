@@ -55,7 +55,7 @@
             }
         }
     },
-    
+
     "mana": {
         "meta": { },
         "components": {
@@ -183,9 +183,9 @@
         }
     },
     "ice": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "ice"
             },
@@ -197,9 +197,9 @@
         }
     },
     "tree": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "tree"
             },
@@ -211,9 +211,9 @@
         }
     },
     "small_dragon": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "small_dragon"
             },
@@ -225,9 +225,9 @@
         }
     },
     "bridge_vertical": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Position": {},
+            "Position": { },
             "Texture": {
                 "animation": "bridge_vertical"
             },
@@ -235,6 +235,9 @@
                 "type": "box",
                 "size": 32,
                 "static": true
+            },
+            "BrokenBridge": { 
+                "vertical": true
             }
         }
     },
@@ -258,6 +261,9 @@
                 "type": "box",
                 "size": 32,
                 "static": true
+            },
+            "BrokenBridge": { 
+                "vertical": false
             }
         }
     },

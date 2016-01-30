@@ -158,8 +158,15 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
             PositionComponent bridgePos = ComponentMappers.position.get(brokenBridge);
             float maxRadius2 = bridgeComp.repairRadius * bridgeComp.repairRadius;
             float dist2 = Vector2.len2(position.x-bridgePos.x, position.y-bridgePos.y);
+            
             if(dist2<maxRadius2) {
-//                Game.entityBuilder.createEntity("bridge", bridgePos.x, bridgePos.y);
+                Game.engine.removeEntity(brokenBridge);
+                if(bridgeComp.vertical) {
+                    Game.entityBuilder.createEntity("bridge_vertical_fixed", bridgePos.x, bridgePos.y);
+                } else {
+                    Game.entityBuilder.createEntity("bridge_horizontal_fixed", bridgePos.x, bridgePos.y);
+                }
+                break;
             }
         }
     }

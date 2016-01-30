@@ -14,7 +14,9 @@
     
     "bridge_horizontal": "data/maps/tiles/bridge_horizontal.png",
     "bridge_vertical": "data/maps/tiles/bridge_vertical.png",
-    
+    "bridge_horizontal_fixed": "data/maps/tiles/bridge_horizontal_fixed.png",
+    "bridge_vertical_fixed": "data/maps/tiles/bridge_vertical_fixed.png",
+
     "knight": "data/textures/monsters/knight.png",
     "small_dragon": "data/textures/monsters/small_dragon.png",
     "medium_dragon": "data/textures/monsters/medium_dragon.png",
