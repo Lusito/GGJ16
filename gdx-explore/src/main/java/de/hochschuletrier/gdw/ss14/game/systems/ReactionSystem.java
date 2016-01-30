@@ -59,13 +59,17 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
     
     private void onStoneExplosionReaction(Entity stone, Entity expl) {
         PositionComponent posComp = ComponentMappers.position.get(stone);
-        Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
+        float dx = ComponentMappers.position.get(expl).x - posComp.x;
+        float dy = ComponentMappers.position.get(expl).y - posComp.y;
+        Game.entityBuilder.createEntity("explosion", posComp.x + dx, posComp.y + dy);
         engine.removeEntity(stone);
     }
 
     private void onFireIceReaction(Entity fire, Entity ice) {
         PositionComponent posComp = ComponentMappers.position.get(fire);
-        Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
+        float dx = ComponentMappers.position.get(ice).x - posComp.x;
+        float dy = ComponentMappers.position.get(ice).y - posComp.y;
+        Game.entityBuilder.createEntity("explosion", posComp.x + dx, posComp.y + dy);
         engine.removeEntity(fire);
         engine.removeEntity(ice);
     }

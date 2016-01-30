@@ -16,8 +16,7 @@ public class AnimationStateSystem extends IteratingSystem {
 
     @SuppressWarnings("unchecked")
     public AnimationStateSystem(int priority) {
-        super(Family.all(AnimationComponent.class, AnimationStateComponent.class,
-                InputComponent.class, PositionComponent.class).get(), priority);
+        super(Family.all(AnimationComponent.class, AnimationStateComponent.class, PositionComponent.class).get(), priority);
     }
 
     @Override
@@ -41,15 +40,25 @@ public class AnimationStateSystem extends IteratingSystem {
             return;
         }
         
-        if(inputComp.moveY > 0.0f) {
-            animComp.animation = animState.changeTo(AnimationState.WALK_DOWN);
-        } else if(inputComp.moveY < 0.0f) {
-            animComp.animation = animState.changeTo(AnimationState.WALK_UP);
-        } else if(inputComp.moveX < 0.0f) {
-            animComp.animation = animState.changeTo(AnimationState.WALK_LEFT);
-        } else if(inputComp.moveX > 0.0f) {
-            animComp.animation = animState.changeTo(AnimationState.WALK_RIGHT);
+        boolean idle = false;
+        
+        if(inputComp != null) {
+            if(inputComp.moveY > 0.0f) {
+                animComp.animation = animState.changeTo(AnimationState.WALK_DOWN);
+            } else if(inputComp.moveY < 0.0f) {
+                animComp.animation = animState.changeTo(AnimationState.WALK_UP);
+            } else if(inputComp.moveX < 0.0f) {
+                animComp.animation = animState.changeTo(AnimationState.WALK_LEFT);
+            } else if(inputComp.moveX > 0.0f) {
+                animComp.animation = animState.changeTo(AnimationState.WALK_RIGHT);
+            } else {
+                idle = true;
+            }
         } else {
+            idle = true;
+        }
+        
+        if(idle) {
             if(posComp.directionY > 0.0f) {
                 animComp.animation = animState.changeTo(AnimationState.IDLE_DOWN);
             } else if(posComp.directionY < 0.0f) {
