@@ -47,6 +47,23 @@
             }
         }
     },
+    "straw": {
+        "meta": {},
+        "components": {
+            "Pickable": {},
+            "Position": {},
+            "Texture": {
+                "animation": "straw"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            }
+        }
+    },
 
 
     "player": {

@@ -38,11 +38,7 @@
   <object id="248" gid="257" x="128" y="1536"/>
   <object id="249" gid="257" x="448" y="736"/>
   <object id="250" gid="257" x="288" y="1056"/>
-  <object id="251" gid="257" x="640" y="384">
-   <properties>
-    <property name="EntityType" value="box"/>
-   </properties>
-  </object>
+  <object id="251" gid="257" x="640" y="384"/>
   <object id="252" gid="273" x="608" y="192"/>
   <object id="253" gid="273" x="544" y="320"/>
   <object id="254" gid="273" x="576" y="448"/>
