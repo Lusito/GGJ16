@@ -19,8 +19,6 @@ import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 public class CameraSystem extends EntitySystem implements EntityListener {
     private Entity toFollow;
     
-    private final ArrayList<Entity> entities = new ArrayList<>();
-    
     public CameraSystem(int priority) {
         super(priority);
         MainCamera.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -29,7 +27,7 @@ public class CameraSystem extends EntitySystem implements EntityListener {
     @Override
     public void addedToEngine(Engine engine) {
         @SuppressWarnings("unchecked")
-        Family family = Family.all(PlayerComponent.class).get();
+        Family family = Family.all(PlayerComponent.class, PositionComponent.class).get();
         engine.addEntityListener(family, this);
     }
    
@@ -55,25 +53,17 @@ public class CameraSystem extends EntitySystem implements EntityListener {
 
     @Override
     public void entityAdded(Entity entity) {
-        entities.add(entity);
-
         if(toFollow == null)
             follow(entity);
     }
 
     @Override
     public void entityRemoved(Entity entity) {
-        entities.remove(entity);
-        
         if(entity == toFollow)
-            if(entities.size() > 0)
-                follow(entities.get(0));
-            else
-                toFollow = null;
+            toFollow = null;
     }
     
     private void follow(Entity entity) {
         toFollow = entity;
-        assert(ComponentMappers.position.get(entity) != null);
     }
 }

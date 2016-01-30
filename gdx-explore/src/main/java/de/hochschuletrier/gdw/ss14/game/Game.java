@@ -1,6 +1,7 @@
 ﻿package de.hochschuletrier.gdw.ss14.game;
 
 import box2dLight.RayHandler;
+
 import java.util.function.Consumer;
 
 import com.badlogic.ashley.core.Entity;
@@ -8,15 +9,9 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
-import de.hochschuletrier.gdw.commons.gdx.ashley.EntityFactory;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
@@ -27,29 +22,21 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
-import de.hochschuletrier.gdw.commons.gdx.tiled.TiledMapRendererGdx;
-import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
-import de.hochschuletrier.gdw.commons.tiled.TileSet;
 import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
-import de.hochschuletrier.gdw.commons.tiled.tmx.TmxImage;
 import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
-import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
-import de.hochschuletrier.gdw.ss14.game.components.factories.EntityFactoryParam;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
-import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
-import de.hochschuletrier.gdw.ss14.game.systems.AnimationRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
-import de.hochschuletrier.gdw.ss14.game.utils.PhysixUtil;
 
 
 public class Game extends InputAdapter {
@@ -72,7 +59,7 @@ public class Game extends InputAdapter {
     private final RenderSystem renderSystem = new RenderSystem(new RayHandler(physixSystem.getWorld()), GameConstants.PRIORITY_RENDER);
     private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
     private final InputSystem inputSystem = new InputSystem();  
-    
+    private final CameraSystem cameraSystem = new CameraSystem(0);
     
     private Entity Player;
 
@@ -99,7 +86,7 @@ public class Game extends InputAdapter {
         
         TiledMap map = loadMap("data/maps/tryanewone.tmx");
         basemapRenderSystem.initMap(map);
-        
+        cameraSystem.adjustToMap(map);
     }
 
     private void addSystems() {
@@ -109,6 +96,7 @@ public class Game extends InputAdapter {
         engine.addSystem(updatePositionSystem);
         engine.addSystem(inputSystem);
         engine.addSystem(basemapRenderSystem);
+        engine.addSystem(cameraSystem);
     }
 
     private TiledMap loadMap(String filename) {
