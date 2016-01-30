@@ -54,13 +54,12 @@
             }
         }
     },
-    "scroll": {
+    "mana": {
         "meta": {},
         "components": {
-            "Pickable": {},
             "Position": {},
             "Texture": {
-                "animation": "scroll"
+                "animation": "mana_potion"
             },
             "PhysixBody": {
                 "type": "box",
@@ -72,6 +71,151 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "mana"
+            }
+        }
+    },
+    "coal": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "coal"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "coal"
+            }
+        }
+    },
+    "mushroom": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "mushroom"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "mushroom"
+            }
+        }
+    },
+    "phosphor": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "phosphor"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "phosphor"
+            }
+        }
+    },
+    "rope": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "rope"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "rope"
+            }
+        }
+    },
+    "stone": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "stone"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "stone"
+            }
+        }
+    },
+    "wood": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "wood"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "wood"
+            }
+        }
+    },
+    "teleport": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "teleport"
+            }
+        }
+    },
+    "scroll": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "scroll"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 60,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
             }
         }
     },
