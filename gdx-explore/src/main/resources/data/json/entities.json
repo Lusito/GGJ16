@@ -497,5 +497,131 @@
                 "type": "ELEMENTAL"
             }
         }
+    },
+    "ball_1": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_1"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_2": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_2"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_3": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_3"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_4": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_4"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_5": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_5"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_6": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_6"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
+    },
+    "ball_7": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "ball_7"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ball"
+            }
+        }
     }
 }
