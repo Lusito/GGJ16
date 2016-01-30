@@ -51,8 +51,10 @@ public class RitualCasterComponent extends Component implements Pool.Poolable {
 
     public void addRitual(String name) {
         name = name.trim();
-        if(!availableRituals.contains(name) && !name.isEmpty())
+        if(!availableRituals.contains(name) && !name.isEmpty()) {
             availableRituals.add(name);
+            ritualIndex = availableRituals.size()-1;
+        }
     }
 
     @Override

@@ -99,6 +99,15 @@ public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, 
         switch(desc.action) {
             case SPAWN:
                 createSummonedEntity(mage, desc);
+                break;
+                
+            case REPAIR_BRIDGE:
+                // TODO:
+                break;
+                
+            case WIN:
+                // TODO
+                break;
         }
     }
 
@@ -271,7 +280,7 @@ public class RitualSystem extends EntitySystem implements PickUpEvent.Listener, 
     }
 
     public static enum RitualAction {
-        SPAWN
+        SPAWN, REPAIR_BRIDGE, WIN
     }
     public static final class RitualDesc {
 

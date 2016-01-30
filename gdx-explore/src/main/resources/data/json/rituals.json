@@ -19,7 +19,7 @@
         {
             "id": "phosphor",
             "name": "phosphor",
-            "description": "Things that burn"
+            "description": ""
         },
         {
             "id": "rope",
@@ -33,11 +33,30 @@
         },
         {
             "id": "wood",
-            "name": "Wood",
+            "name": "wood",
+            "description": ""
+        },
+        {
+            "id": "water",
+            "name": "water",
+            "description": ""
+        },
+        {
+            "id": "fire",
+            "name": "fire",
             "description": ""
         }
     ],
     "rituals": [
+        {
+            "id": "test",
+            "name": "Mighty fireball of Testing",
+            "description": "Hopefully casts a fireball",
+            "resources": ["mana", "phosphor", "wood"],
+            "action": "SPAWN",
+            "entityName": "fireball",
+            "entityImpulse": 20000.0
+        },
         {
             "id": "fireball",
             "name": "Fireball",
@@ -48,13 +67,52 @@
             "entityImpulse": 10000.0
         },
         {
-            "id": "test",
-            "name": "Mighty fireball of Testing",
-            "description": "Hopefully casts a fireball",
-            "resources": ["mana", "phosphor", "wood"],
+            "id": "bonfire",
+            "name": "Bonfire",
+            "description": "Summons a bonfire",
+            "resources": ["cole", "phosphor"],
             "action": "SPAWN",
-            "entityName": "fireball",
-            "entityImpulse": 20000.0
+            "entityName": "bonfire"
+        },
+        {
+            "id": "bomb",
+            "name": "Bomb",
+            "description": "Summons a bomb",
+            "resources": ["cole", "phosphor"],
+            "action": "SPAWN",
+            "entityName": "bomb",
+            "entityImpulse": 10000.0
+        },
+        {
+            "id": "bridge",
+            "name": "Bridge",
+            "description": "Repairs a broken bridge",
+            "resources": ["wood", "rope"],
+            "action": "REPAIR_BRIDGE"
+        },
+        {
+            "id": "fogElemental",
+            "name": "Fog Elemental",
+            "description": "Summons a fog elemental",
+            "resources": ["mana", "water", "fire"],
+            "action": "SPAWN",
+            "entityName": "fog_elemental"
+        },
+        {
+            "id": "poisonElemental",
+            "name": "Poison Elemental",
+            "description": "Summons a poison elemental",
+            "resources": ["mana", "mushroom"],
+            "action": "SPAWN",
+            "entityName": "poison_elemental"
+        },
+        {
+            "id": "fireElemental",
+            "name": "Fire Elemental",
+            "description": "Summons a fore elemental",
+            "resources": ["mana", "fire"],
+            "action": "SPAWN",
+            "entityName": "fire_elemental"
         }
     ]
 }
