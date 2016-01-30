@@ -174,7 +174,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
                         break;
                         
                     case WIN:
-                        PlayerMessageEvent.emit("I've won. Where is my money?!");
+                        PlayerMessageEvent.emit("I've won. Where is my money?!", true);
                         GameWonEvent.emit(entity);
                         break;
                 }
