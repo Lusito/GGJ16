@@ -36,6 +36,7 @@ import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.BasemapRenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
 
@@ -61,8 +62,8 @@ public class Game extends InputAdapter {
     private final InputSystem inputSystem = new InputSystem();
     private final CameraSystem cameraSystem = new CameraSystem(0);
 
-    private final AnimationStateSystem animStateSystem = new AnimationStateSystem(1);
-    
+    private final AnimationStateSystem animStateSystem = new AnimationStateSystem(GameConstants.PRIORITY_ANIMATION_STATE);
+    private final SoundSystem soundSystem = new SoundSystem(GameConstants.PRIORITY_SOUND);
     private final RitualSystem ritualSystem = new RitualSystem(entityBuilder);
 
     private Entity player;
@@ -109,6 +110,7 @@ public class Game extends InputAdapter {
         engine.addSystem(cameraSystem);
         engine.addSystem(animStateSystem);
         engine.addSystem(ritualSystem);
+        engine.addSystem(soundSystem);
     }
 
     private TiledMap loadMap(String filename) {
@@ -123,7 +125,7 @@ public class Game extends InputAdapter {
     private void addContactListeners() {
         PhysixComponentAwareContactListener contactListener = new PhysixComponentAwareContactListener();
         physixSystem.getWorld().setContactListener(contactListener);
-        contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
+//        contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
         contactListener.addListener(TriggerComponent.class, new TriggerListener());
         contactListener.addListener(PlayerComponent.class, new PickUpListener());
     }
