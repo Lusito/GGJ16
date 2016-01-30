@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
@@ -36,6 +37,8 @@ public class InputSystem extends IteratingSystem {
 
         InputComponent input = ComponentMappers.input.get(entity);
         if(input.blockInputTime>0.f) {
+        	PhysixBodyComponent body = ComponentMappers.physixBody.get(entity);
+        	body.setLinearVelocity(new Vector2());
             input.blockInputTime -= deltaTime;
             return;
         }
