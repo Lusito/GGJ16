@@ -49,7 +49,7 @@ import de.hochschuletrier.gdw.ss14.game.systems.TeleportSystem;
 
 public class Game extends InputAdapter {
 
-    private final CVarBool physixDebug = new CVarBool("physix_debug", true, 0, "Draw physix debug");
+    private final CVarBool physixDebug = new CVarBool("physix_debug", false, 0, "Draw physix debug");
     private final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
 
     public static final PooledEngine engine = new PooledEngine(
@@ -95,6 +95,7 @@ public class Game extends InputAdapter {
     public void init(AssetManagerX assetManager) {
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
+        physixDebugRenderSystem.setProcessing(physixDebug.get());
         addSystems();
         addContactListeners();
         entityBuilder.init(assetManager);
