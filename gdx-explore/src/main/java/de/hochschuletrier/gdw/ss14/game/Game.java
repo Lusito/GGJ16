@@ -22,7 +22,6 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
-import de.hochschuletrier.gdw.commons.tiled.Layer;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
@@ -86,6 +85,7 @@ public class Game extends InputAdapter {
         TiledMap map = loadMap("data/maps/tryanewone.tmx");
         basemapRenderSystem.initMap(map);
         cameraSystem.adjustToMap(map);
+        entityBuilder.createEntitiesFromMap(map);
     }
 
     private void addSystems() {
@@ -100,19 +100,7 @@ public class Game extends InputAdapter {
 
     private TiledMap loadMap(String filename) {
         try {
-            TiledMap map = new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
-            for (Layer layer : map.getLayers()) {
-                if (layer.isObjectLayer()) {
-                    for (LayerObject obj : layer.getObjects()) {
-                        String type = obj.getProperty("EntityType", null);
-                        if (type != null) {
-                            entityBuilder.createEntity(type, obj.getX() + obj.getWidth() / 2.0f,
-                                    obj.getY() - obj.getHeight() / 2.0f);
-                        }
-                    }
-                }
-            }
-            return map;
+            return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
         } catch (Exception ex) {
             throw new IllegalArgumentException(
                     "Map konnte nicht geladen werden: " + filename);
