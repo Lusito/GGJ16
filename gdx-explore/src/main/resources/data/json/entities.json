@@ -186,12 +186,61 @@
             }
         }
     },
-    "teleport": {
+    "ice": {
         "meta": {},
         "components": {
             "Position": {},
             "Texture": {
-                "animation": "teleport"
+                "animation": "ice"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 10,
+                "sensor": true
+            },
+            "Pickable": {
+                "resourceCount": 1,
+                "resourceId": "ice"
+            }
+        }
+    },
+    "tree": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "tree"
+            },
+            "PhysixBody": {
+                "type": "box",
+                "size": 32,
+                "static": true,
+                "density": 10,
+                "friction": 0.5,
+                "restitution": 0.1
+            }
+        }
+    },
+    "teleport_in": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "teleport_in"
+            },
+            "PhysixBody": {
+                "type": "circle",
+                "size": 15,
+                "sensor": true
+            }
+        }
+    },
+    "teleport_out": {
+        "meta": {},
+        "components": {
+            "Position": {},
+            "Texture": {
+                "animation": "teleport_out"
             }
         }
     },
