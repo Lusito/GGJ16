@@ -24,10 +24,14 @@ import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss14.events.GameWonEvent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
+import de.hochschuletrier.gdw.ss14.events.ReactionEvent;
 import de.hochschuletrier.gdw.ss14.events.RitualCastedEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.EntityBuilder;
+import de.hochschuletrier.gdw.ss14.game.Game;
+import de.hochschuletrier.gdw.ss14.game.components.BrokenBridgeComponent;
 import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
+import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
@@ -133,7 +137,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
                         break;
                         
                     case REPAIR_BRIDGE:
-                        // TODO:
+                        createBridge(entity);
                         break;
                         
                     case WIN:
@@ -142,6 +146,20 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
                 }
 
                 removeUsedResources(comp, desc);
+            }
+        }
+    }
+    
+    private void createBridge(Entity entity) {
+        PositionComponent position = ComponentMappers.position.get(entity);
+
+        for(Entity brokenBridge : Game.engine.getEntitiesFor(Family.all(PositionComponent.class, BrokenBridgeComponent.class).get())) {
+            BrokenBridgeComponent bridgeComp = ComponentMappers.brokenBridge.get(brokenBridge);
+            PositionComponent bridgePos = ComponentMappers.position.get(brokenBridge);
+            float maxRadius2 = bridgeComp.repairRadius * bridgeComp.repairRadius;
+            float dist2 = Vector2.len2(position.x-bridgePos.x, position.y-bridgePos.y);
+            if(dist2<maxRadius2) {
+//                Game.entityBuilder.createEntity("bridge", bridgePos.x, bridgePos.y);
             }
         }
     }
