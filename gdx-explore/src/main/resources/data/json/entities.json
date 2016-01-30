@@ -175,10 +175,6 @@
                 "type": "circle",
                 "size": 10,
                 "sensor": true
-            },
-            "Pickable": {
-                "resourceCount": 1,
-                "resourceId": "ice"
             }
         }
     },
