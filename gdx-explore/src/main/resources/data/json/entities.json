@@ -70,9 +70,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -90,9 +88,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -110,9 +106,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -130,9 +124,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -150,9 +142,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -170,9 +160,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -190,9 +178,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -219,9 +205,7 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "density": 10,
-                "friction": 0.5,
-                "restitution": 0.1
+                "sensor": true
             }
         }
     },

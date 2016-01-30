@@ -58,7 +58,7 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private void addCircle(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent bodyComponent = getBodyComponent(param, entity, properties);
-        PhysixFixtureDef fixtureDef = getFixtureDef(properties)
+        PhysixFixtureDef fixtureDef = getFixtureDef(properties).sensor(properties.getBoolean("sensor"))
                 .shapeCircle(properties.getFloat("size", 5));
         bodyComponent.createFixture(fixtureDef);
         entity.add(bodyComponent);
