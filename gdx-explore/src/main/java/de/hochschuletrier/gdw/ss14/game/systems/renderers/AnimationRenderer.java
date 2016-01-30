@@ -35,7 +35,7 @@ public class AnimationRenderer extends SubSystem {
         int w = keyFrame.getRegionWidth();
         int h = keyFrame.getRegionHeight();
 
-        keyFrame.flip(keyFrame.isFlipX() != animation.flipX, keyFrame.isFlipY() != !animation.flipY);
+        keyFrame.flip(keyFrame.isFlipX() != animation.flipX, keyFrame.isFlipY() != animation.flipY);
 
         float x = position.x - w * 0.5f + (keyFrame.isFlipX() ? -animation.offsetX : animation.offsetX);
         float y = position.y - h * 0.5f + (keyFrame.isFlipY() ? -animation.offsetY : animation.offsetY);

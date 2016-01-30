@@ -10,6 +10,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
+import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 
 public class InputSystem extends IteratingSystem {
 
@@ -27,7 +28,7 @@ public class InputSystem extends IteratingSystem {
 
     @SuppressWarnings("unchecked")
     public InputSystem(int priority) {
-        super(Family.all(InputComponent.class, PhysixBodyComponent.class).get(), priority);
+        super(Family.all(InputComponent.class, PhysixBodyComponent.class, PositionComponent.class).get(), priority);
     }
 
     @Override
@@ -39,23 +40,32 @@ public class InputSystem extends IteratingSystem {
 
     private void adjustInputs(Entity entity, float deltaTime) {
         InputComponent input = ComponentMappers.input.get(entity);
-
+        PositionComponent posComponent = ComponentMappers.position.get(entity);
+        
         final float speed = 150f;
-
-        if (Gdx.input.isKeyPressed(UP)) {
-            input.moveY = -speed;
-        } else if (Gdx.input.isKeyPressed(DOWN)) {
-            input.moveY = speed;
-        } else {
-            input.moveY = 0;
-        }
 
         if (Gdx.input.isKeyPressed(LEFT)) {
             input.moveX = -speed;
+            posComponent.directionX = -1;
+            posComponent.directionY = 0;
         } else if (Gdx.input.isKeyPressed(RIGHT)) {
             input.moveX = speed;
+            posComponent.directionX = 1;
+            posComponent.directionY = 0;
         } else {
             input.moveX = 0;
+        }
+        
+        if (Gdx.input.isKeyPressed(UP)) {
+            input.moveY = -speed;
+            posComponent.directionY = -1;
+            posComponent.directionX = 0;
+        } else if (Gdx.input.isKeyPressed(DOWN)) {
+            input.moveY = speed;
+            posComponent.directionY = 1;
+            posComponent.directionX = 0;
+        } else {
+            input.moveY = 0;
         }
 
         boolean actionPressedNow = Gdx.input.isKeyPressed(ACTION);

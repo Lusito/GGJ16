@@ -1,5 +1,18 @@
 {
-    "straw": "data/textures/items/straw.png",
+    "coal": "data/textures/items/coal.png",
+    "mana_potion": "data/textures/items/mana_potion.png",
+    "mushroom": "data/textures/items/mushroom.png",
+    "phosphor": "data/textures/items/phosphor.png",
+    "rope": "data/textures/items/rope.png",
+    "scroll": "data/textures/items/scroll.png",
+    "stone": "data/textures/items/stone.png",
+    "teleport": "data/textures/items/teleport.png",
+    "wood": "data/textures/items/wood.png",
+    
+    "knight": "data/textures/monsters/knight.png",
+    "small_dragon": "data/textures/monsters/small_dragon.png",
+    "medium_dragon": "data/textures/monsters/medium_dragon.png",
+    "big_dragon": "data/textures/monsters/big_dragon.png",
     
     "menu_fg": "data/ui/menu/fg_border.png",
     "menu_bg": "data/ui/menu/bg_root.png",

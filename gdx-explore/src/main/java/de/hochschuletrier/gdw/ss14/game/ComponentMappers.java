@@ -15,6 +15,7 @@ import de.hochschuletrier.gdw.ss14.game.components.light.ChainLightComponent;
 import de.hochschuletrier.gdw.ss14.game.components.light.ConeLightComponent;
 import de.hochschuletrier.gdw.ss14.game.components.light.PointLightComponent;
 import de.hochschuletrier.gdw.ss14.game.components.render.AnimationComponent;
+import de.hochschuletrier.gdw.ss14.game.components.render.AnimationStateComponent;
 import de.hochschuletrier.gdw.ss14.game.components.render.ParticleComponent;
 import de.hochschuletrier.gdw.ss14.game.components.render.TextureComponent;
 
@@ -35,4 +36,5 @@ public class ComponentMappers {
     public static final ComponentMapper<PlayerComponent> player = ComponentMapper.getFor(PlayerComponent.class);
     public static final ComponentMapper<PickableComponent> pickable = ComponentMapper.getFor(PickableComponent.class);
     public static final ComponentMapper<InputComponent> input = ComponentMapper.getFor(InputComponent.class);
+    public static final ComponentMapper<AnimationStateComponent> animState = ComponentMapper.getFor(AnimationStateComponent.class);
 }

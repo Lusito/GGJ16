@@ -1,6 +1,12 @@
 package de.hochschuletrier.gdw.ss14.game.components.render;
 
 public enum AnimationState {
-    ENTITY_IDLE,
-    ENTITY_TEST_STATE
+    IDLE_DOWN,
+    IDLE_UP,
+    IDLE_LEFT,
+    IDLE_RIGHT,
+    WALK_DOWN,
+    WALK_UP,
+    WALK_LEFT,
+    WALK_RIGHT
 }

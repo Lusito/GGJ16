@@ -1,11 +1,11 @@
 {
     "player": {
-        "meta": {},
+        "meta": { },
         "components": {
-            "Player": {},
-            "Input": {},
-            "Position": {},
-            "ImpactSound" : {
+            "Player": { },
+            "Input": { },
+            "Position": { },
+            "ImpactSound": {
                 "sound": "click",
                 "minImpulseStrength": 20,
                 "minSpeed": 20,
@@ -21,6 +21,9 @@
                 "friction": 0.2,
                 "restitution": 0.4,
                 "isFixedRotation": true
+            },
+            "AnimationState": { 
+                "template": "Player"
             },
             "RitualCaster": {
                 "resources": "phosphorus, phosphorus",
@@ -51,13 +54,13 @@
             }
         }
     },
-    "straw": {
+    "scroll": {
         "meta": {},
         "components": {
             "Pickable": {},
             "Position": {},
             "Texture": {
-                "animation": "straw"
+                "animation": "scroll"
             },
             "PhysixBody": {
                 "type": "box",

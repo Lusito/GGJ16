@@ -20,6 +20,11 @@ public class AnimationStateComponent extends Component implements Pool.Poolable 
     public AnimationExtended get() {
         return states.get(currentState);
     }
+    
+    public AnimationExtended changeTo(AnimationState state) {
+        currentState = state;
+        return states.get(currentState);
+    }
 
     public void put(AnimationState state, AnimationExtended animation) {
         states.put(state, animation);
