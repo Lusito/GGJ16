@@ -101,6 +101,7 @@ public class RitualTest extends SandboxGame {
         engine.addSystem(physixDebugRenderSystem);
         engine.addSystem(animationRenderSystem);
         engine.addSystem(updatePositionSystem);
+        engine.addSystem(ritualSystem);
     }
 
     private void addContactListeners() {

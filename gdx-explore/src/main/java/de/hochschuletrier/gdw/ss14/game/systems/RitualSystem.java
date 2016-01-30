@@ -17,7 +17,6 @@ import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
 import de.hochschuletrier.gdw.ss14.game.EntityBuilder;
-import de.hochschuletrier.gdw.ss14.game.Game;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 
