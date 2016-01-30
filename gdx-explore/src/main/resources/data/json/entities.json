@@ -486,6 +486,9 @@
             "Animation": {
                 "animation": "box"
             },
+            "AnimationState": {
+                "template": "PoisonElemental"
+            },
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
