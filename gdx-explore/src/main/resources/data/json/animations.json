@@ -1,12 +1,4 @@
 {
-    "walking": {
-        "filename": "data/textures/walking.png",
-        "frames": 7,
-        "frameDuration": [ 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15 ],
-        "playType": "LOOP",
-        "columns": 7,
-        "rows": 1
-    },
     "ball": {
         "filename": "data/textures/ball.png",
         "frames": 2,
