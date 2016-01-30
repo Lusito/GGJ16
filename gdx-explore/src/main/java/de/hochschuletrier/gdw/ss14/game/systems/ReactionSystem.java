@@ -70,6 +70,12 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
             default:
                 break;
         }
+        
+        if(mat1.type==MaterialType.FIRE || mat1.type==MaterialType.ELEMENTAL)
+            engine.removeEntity(first);
+        
+        if(mat2.type==MaterialType.FIRE || mat1.type==MaterialType.ELEMENTAL)
+            engine.removeEntity(second);
     }
     
     private void onBoulderExplosionReaction(Entity boulder, Entity expl) {
@@ -79,9 +85,8 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
     }
 
     private void onFireIceReaction(Entity fire, Entity ice) {
-        PositionComponent posComp = ComponentMappers.position.get(fire);
+        PositionComponent posComp = ComponentMappers.position.get(ice);
         Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
-        engine.removeEntity(fire);
         engine.removeEntity(ice);
     }
 
@@ -89,6 +94,5 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         PositionComponent posComp = ComponentMappers.position.get(monster);
         Game.entityBuilder.createEntity("explosion", posComp.x, posComp.y);
         engine.removeEntity(monster);
-        engine.removeEntity(elemental);
     }
 }
