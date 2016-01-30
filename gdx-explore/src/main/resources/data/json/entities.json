@@ -26,8 +26,8 @@
                 "template": "Player"
             },
             "RitualCaster": {
-                "resources": "",
-                "rituals": ""
+                "resources": "phosphor, mana,phosphor, mana,phosphor, mana",
+                "rituals": "fireball"
             },
             "PointLight": {
                 "color": "0, 1, 0",
