@@ -41,7 +41,9 @@
     "runeCircle": {
         "meta": { },
         "components": {
-            "Position": { },
+            "Position": {
+                "layer": -1
+            },
             "Animation": {
                 "animation": "runeCircle"
             },
