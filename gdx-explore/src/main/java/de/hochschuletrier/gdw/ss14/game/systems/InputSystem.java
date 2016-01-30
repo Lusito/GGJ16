@@ -19,6 +19,10 @@ public class InputSystem extends IteratingSystem {
             DOWN = Input.Keys.DOWN,
             LEFT = Input.Keys.LEFT,
             RIGHT = Input.Keys.RIGHT,
+            UP2 = Input.Keys.W,
+            DOWN2 = Input.Keys.S,
+            LEFT2 = Input.Keys.A,
+            RIGHT2 = Input.Keys.D,
             ACTION = Input.Keys.SPACE,
             ACTION_UP = Input.Keys.E,
             ACTION_DOWN = Input.Keys.Q;
@@ -51,26 +55,25 @@ public class InputSystem extends IteratingSystem {
         InputComponent input = ComponentMappers.input.get(entity);
         PositionComponent posComponent = ComponentMappers.position.get(entity);
         
-        final float speed = 150f;
 
-        if (Gdx.input.isKeyPressed(LEFT)) {
-            input.moveX = -speed;
+        if (Gdx.input.isKeyPressed(LEFT) || Gdx.input.isKeyPressed(LEFT2)) {
+            input.moveX = -1;
             posComponent.directionX = -1;
             posComponent.directionY = 0;
-        } else if (Gdx.input.isKeyPressed(RIGHT)) {
-            input.moveX = speed;
+        } else if (Gdx.input.isKeyPressed(RIGHT) || Gdx.input.isKeyPressed(RIGHT2)) {
+            input.moveX = 1;
             posComponent.directionX = 1;
             posComponent.directionY = 0;
         } else {
             input.moveX = 0;
         }
         
-        if (Gdx.input.isKeyPressed(UP)) {
-            input.moveY = -speed;
+        if (Gdx.input.isKeyPressed(UP) || Gdx.input.isKeyPressed(UP2)) {
+            input.moveY = -1;
             posComponent.directionY = -1;
             posComponent.directionX = 0;
-        } else if (Gdx.input.isKeyPressed(DOWN)) {
-            input.moveY = speed;
+        } else if (Gdx.input.isKeyPressed(DOWN) || Gdx.input.isKeyPressed(DOWN2)) {
+            input.moveY = 1;
             posComponent.directionY = 1;
             posComponent.directionX = 0;
         } else {
@@ -99,9 +102,19 @@ public class InputSystem extends IteratingSystem {
     private void adjustMovements(Entity entity, float deltaTime) {
         PhysixBodyComponent body = ComponentMappers.physixBody.get(entity);
         InputComponent input = ComponentMappers.input.get(entity);
+
+        final float speed = 150f;
+        float moveLen = Vector2.len(input.moveX, input.moveY);
         
-        body.setLinearVelocityX(input.moveX);
-        body.setLinearVelocityY(input.moveY);
+        float velX=0.f, velY=0.f;
+        
+        if(moveLen>0.f) {
+            velX = input.moveX / moveLen * speed;
+            velY = input.moveY / moveLen * speed;
+        }
+
+        body.setLinearVelocityX(velX);
+        body.setLinearVelocityY(velY);
     }
 
 }
