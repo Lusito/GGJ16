@@ -146,7 +146,7 @@ public class Game extends InputAdapter {
         entityBuilder.init(assetManager);
         setupPhysixWorld();
 
-        TiledMap map = loadMap("data/maps/bigworld_grassd.tmx");
+        TiledMap map = loadMap("data/maps/bigworld.tmx");
         basemapRenderSystem.initMap(map);
         cameraSystem.adjustToMap(map);
         entityBuilder.createEntitiesFromMap(map, physixSystem);
