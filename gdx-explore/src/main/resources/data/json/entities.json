@@ -419,7 +419,8 @@
                 "density": 10,
                 "friction": 0.5,
                 "restitution": 0.1,
-                "mask": 16777207
+                "mask": 16777207,
+                "sensor": true
             },
             "Material": {
                 "type": "FIRE"
