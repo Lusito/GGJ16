@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
+import de.hochschuletrier.gdw.ss14.events.ExplosionEvent;
 
 import de.hochschuletrier.gdw.ss14.events.ReactionEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
@@ -40,6 +41,7 @@ public class DeathSystem extends IteratingSystem {
             return;
 
         Game.entityBuilder.createEntity("explosion", position.x, position.y);
+        ExplosionEvent.emit(position.x, position.y);
         
         
         float maxRadius2 = deathComponent.explosionRadius * deathComponent.explosionRadius;

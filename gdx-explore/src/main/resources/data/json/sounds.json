@@ -25,7 +25,6 @@
 	"footsteps_grass/8": "data/sounds/footsteps/footsteps_grass_8.wav",
 	"footsteps_grass/9": "data/sounds/footsteps/footsteps_grass_9.wav",
 	
-	
-	"click": "data/sounds/click.wav",
-	"helicopter": "data/sounds/helicopter.wav"
+	"pickup": "data/sounds/click.wav",
+	"ritual_cast": "data/sounds/helicopter.wav"
 }

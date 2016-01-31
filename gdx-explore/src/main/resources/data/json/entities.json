@@ -5,12 +5,6 @@
             "Player": { },
             "Input": { },
             "Position": { },
-            "ImpactSound": {
-                "sound": "click",
-                "minImpulseStrength": 20,
-                "minSpeed": 20,
-                "minDelay": 100
-            },
             "Animation": {
                 "animation": "ball",
                 "offsetY": 10
@@ -401,12 +395,6 @@
         "meta": { },
         "components": {
             "Position": { },
-            "ImpactSound": {
-                "sound": "click",
-                "minImpulseStrength": 20,
-                "minSpeed": 20,
-                "minDelay": 100
-            },
             "Animation": {
                 "animation": "box"
             },
@@ -456,12 +444,6 @@
         "meta": {},
         "components": {
             "Position": {},
-            "ImpactSound" : {
-                "sound": "click",
-                "minImpulseStrength": 20,
-                "minSpeed": 20,
-                "minDelay": 100
-            },
             "Animation": {
                 "animation": "bomb"
             },
@@ -485,12 +467,6 @@
         "meta": {},
         "components": {
             "Position": {},
-            "ImpactSound" : {
-                "sound": "click",
-                "minImpulseStrength": 20,
-                "minSpeed": 20,
-                "minDelay": 100
-            },
             "Animation": {
                 "animation": "box"
             },
@@ -508,12 +484,6 @@
         "meta": {},
         "components": {
             "Position": {},
-            "ImpactSound" : {
-                "sound": "click",
-                "minImpulseStrength": 20,
-                "minSpeed": 20,
-                "minDelay": 100
-            },
             "Animation": {
                 "animation": "box"
             },
