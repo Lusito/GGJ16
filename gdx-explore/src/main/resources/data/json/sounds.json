@@ -26,5 +26,6 @@
 	"footsteps_grass/9": "data/sounds/footsteps/footsteps_grass_9.wav",
 	
 	"pickup": "data/sounds/pickup.wav",
-    "ritual_cast": "data/sounds/ritual.wav"
+	"poof": "data/sounds/poof.wav",
+        "ritual_cast": "data/sounds/ritual.wav"
 }
