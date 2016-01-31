@@ -46,6 +46,7 @@ public class Hud implements PlayerMessageEvent.Listener {
         overlay = assetManager.getTexture("hud_bg");
         messageBubble = assetManager.getTexture("hud_msg_bg");
         font = assetManager.getFont("verdana_16");
+        font.setUseIntegerPositions(true);
         this.ritualSystem = ritualSystem;
         this.player = player;
         
