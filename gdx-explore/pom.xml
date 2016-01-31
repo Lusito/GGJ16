@@ -14,7 +14,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Ritual Explorer</name>
+    <name>The Last Summoner</name>
     
     <dependencies>
         <dependency>

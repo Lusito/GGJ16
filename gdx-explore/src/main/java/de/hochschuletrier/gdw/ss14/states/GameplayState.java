@@ -90,7 +90,7 @@ public class GameplayState extends BaseGameState {
         }
         Main.getInstance().screenCamera.bind();
         font.setColor(Color.WHITE);
-        font.draw(DrawUtil.batch, String.format("%.2f FPS", fpsCalc.getFps()), 0, 0);
+//        font.draw(DrawUtil.batch, String.format("%.2f FPS", fpsCalc.getFps()), 0, 0);
     }
 
     @Override
