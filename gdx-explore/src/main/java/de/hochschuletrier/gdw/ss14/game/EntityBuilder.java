@@ -67,12 +67,15 @@ public class EntityBuilder {
         int tileHeight = map.getTileHeight();
         RectangleGenerator generator = new RectangleGenerator();
         generator.generate(map,
-                (Layer layer, TileInfo info) -> info.getBooleanProperty("blocked", false),
-                (Rectangle rect) -> addSolid(physixSystem, rect, tileWidth, tileHeight));
+                (Layer layer, TileInfo info) -> info.getBooleanProperty("water", false),
+                (Rectangle rect) -> addSolid(physixSystem, rect, tileWidth, tileHeight, true));
+        generator.generate(map,
+                (Layer layer, TileInfo info) -> info.getBooleanProperty("wall", false),
+                (Rectangle rect) -> addSolid(physixSystem, rect, tileWidth, tileHeight, false));
 
     }
 
-    private void addSolid(PhysixSystem physixSystem, Rectangle rect, int tileWidth, int tileHeight) {
+    private void addSolid(PhysixSystem physixSystem, Rectangle rect, int tileWidth, int tileHeight, boolean isWater) {
         float width = rect.width * tileWidth;
         float height = rect.height * tileHeight;
         float x = rect.x * tileWidth + width / 2;
