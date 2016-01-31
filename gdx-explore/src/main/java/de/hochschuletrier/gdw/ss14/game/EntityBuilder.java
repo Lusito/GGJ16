@@ -84,8 +84,16 @@ public class EntityBuilder {
         PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem)
                     .position(x, y).fixedRotation(false);
         Body body = physixSystem.getWorld().createBody(bodyDef);
-        body.createFixture(new PhysixFixtureDef(physixSystem)
-        .density(1).friction(0.5f).shapeBox(width, height)
-        .mask(GameConstants.MASK_EVERYTHING).category(GameConstants.CATEGORY_WATER));
+        
+        
+        if(isWater) {
+            body.createFixture(new PhysixFixtureDef(physixSystem)
+            .density(1).friction(0.5f).shapeBox(width, height)
+            .mask(GameConstants.MASK_EVERYTHING).category(GameConstants.CATEGORY_WATER));
+        } else {
+            body.createFixture(new PhysixFixtureDef(physixSystem)
+            .density(1).friction(0.5f).shapeBox(width, height));
+        }
+
     }
 }

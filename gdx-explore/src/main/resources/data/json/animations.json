@@ -205,5 +205,14 @@
         "playType" : "LOOP_PINGPONG",
         "columns": 4,
         "rows" : 4
+    },
+    "bomb": {
+        "filename": "data/textures/items/bombe_atlas.png",
+        "frames": 2,
+        "startRow": 1,
+        "frameDuration": [ 0.1 ],
+        "playType": "LOOP_PINGPONG",
+        "columns": 2,
+        "rows": 2
     }
 }
