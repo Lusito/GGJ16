@@ -1,4 +1,30 @@
 {
-	"click": "data/sounds/click.wav",
-	"helicopter": "data/sounds/helicopter.wav"
+	"ambient_nature": "data/sounds/ambient/nature.wav",
+	"ambient_water": "data/sounds/ambient/water.wav",
+	
+	"fireball/0": "data/sounds/fireball/fireball_0.wav",
+	"fireball/1": "data/sounds/fireball/fireball_1.wav",
+	
+	"footsteps_wood/0": "data/sounds/footsteps/footsteps_wood_0.wav",
+	"footsteps_wood/1": "data/sounds/footsteps/footsteps_wood_1.wav",
+	"footsteps_wood/2": "data/sounds/footsteps/footsteps_wood_2.wav",
+	"footsteps_wood/3": "data/sounds/footsteps/footsteps_wood_3.wav",
+	"footsteps_wood/4": "data/sounds/footsteps/footsteps_wood_4.wav",
+	"footsteps_wood/5": "data/sounds/footsteps/footsteps_wood_5.wav",
+	"footsteps_wood/6": "data/sounds/footsteps/footsteps_wood_6.wav",
+	"footsteps_wood/7": "data/sounds/footsteps/footsteps_wood_7.wav",
+	
+	"footsteps_grass/0": "data/sounds/footsteps/footsteps_grass_0.wav",
+	"footsteps_grass/1": "data/sounds/footsteps/footsteps_grass_1.wav",
+	"footsteps_grass/2": "data/sounds/footsteps/footsteps_grass_2.wav",
+	"footsteps_grass/3": "data/sounds/footsteps/footsteps_grass_3.wav",
+	"footsteps_grass/4": "data/sounds/footsteps/footsteps_grass_4.wav",
+	"footsteps_grass/5": "data/sounds/footsteps/footsteps_grass_5.wav",
+	"footsteps_grass/6": "data/sounds/footsteps/footsteps_grass_6.wav",
+	"footsteps_grass/7": "data/sounds/footsteps/footsteps_grass_7.wav",
+	"footsteps_grass/8": "data/sounds/footsteps/footsteps_grass_8.wav",
+	"footsteps_grass/9": "data/sounds/footsteps/footsteps_grass_9.wav",
+	
+	"pickup": "data/sounds/click.wav",
+	"ritual_cast": "data/sounds/helicopter.wav"
 }

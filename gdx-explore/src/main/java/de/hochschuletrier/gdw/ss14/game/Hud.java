@@ -22,7 +22,7 @@ import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.RitualDesc;
 
 public class Hud implements PlayerMessageEvent.Listener {
 
-    private static final float MESSAGE_DURATION = 5.f;
+    private static final float MESSAGE_DURATION = 4.f;
     
     private static final Color COLOR_READY = Color.WHITE;
     private static final Color COLOR_NOT_READY = new Color(0.6f, 0.6f, 0.6f, 1);

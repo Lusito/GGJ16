@@ -111,6 +111,7 @@ public class RenderSystem extends SortedSubIteratingSystem {
         LightRenderer.rayHandler = rayHandler;
         this.rayHandler = rayHandler;
 
+        ambientLight.set(GameConstants.LIGHT_AMBIENT, true);
         this.rayHandler.setAmbientLight(GameConstants.LIGHT_AMBIENT);
         this.rayHandler.setBlur(GameConstants.LIGHT_BLUR);
         this.rayHandler.setBlurNum(GameConstants.LIGHT_BLURNUM);

@@ -25,6 +25,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
+import de.hochschuletrier.gdw.ss14.events.ExplosionEvent;
 import de.hochschuletrier.gdw.ss14.events.GameWonEvent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
@@ -41,6 +42,7 @@ import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ReactionListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TeleportListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.WaterListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationStateSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.DeathSystem;
@@ -94,11 +96,34 @@ public class Game extends InputAdapter {
     public void dispose() {
         togglePhysixDebug.unregister();
         hud.dispose();
+        
+        ExplosionEvent.unregisterAll();
+        GameWonEvent.unregisterAll();
+        InputActionEvent.unregisterAll();
+        PickUpEvent.unregisterAll();
+        PlayerMessageEvent.unregisterAll();
+        ReactionEvent.unregisterAll();
+        RitualCastedEvent.unregisterAll();
+        TeleportEvent.unregisterAll();
+        
+        engine.removeSystem(physixSystem);
+        engine.removeSystem(physixDebugRenderSystem);
+        engine.removeSystem(renderSystem);
+        engine.removeSystem(updatePositionSystem);
+        engine.removeSystem(inputSystem);
+        engine.removeSystem(basemapRenderSystem);
+        engine.removeSystem(cameraSystem);
+        engine.removeSystem(animStateSystem);
+        engine.removeSystem(ritualSystem);
+        engine.removeSystem(soundSystem);
+        engine.removeSystem(reactionSystem);
+        engine.removeSystem(teleportSystem);
+        engine.removeSystem(deathSystem);
+        
+        engine.removeAllEntities();
     }
 
     public void init(AssetManagerX assetManager) {
-        if(engine != null)
-            reset();
         if(physixDebug != null)
             Main.getInstance().console.unregister(physixDebug);
         if(LightRenderer.rayHandler != null)
@@ -121,7 +146,7 @@ public class Game extends InputAdapter {
         entityBuilder.init(assetManager);
         setupPhysixWorld();
 
-        TiledMap map = loadMap("data/maps/newworld.tmx");
+        TiledMap map = loadMap("data/maps/bigworld_grassd.tmx");
         basemapRenderSystem.initMap(map);
         cameraSystem.adjustToMap(map);
         entityBuilder.createEntitiesFromMap(map, physixSystem);
@@ -165,32 +190,6 @@ public class Game extends InputAdapter {
         engine.addSystem(deathSystem);
     }
     
-    private void reset() {
-        GameWonEvent.unregisterAll();
-        InputActionEvent.unregisterAll();
-        PickUpEvent.unregisterAll();
-        PlayerMessageEvent.unregisterAll();
-        ReactionEvent.unregisterAll();
-        RitualCastedEvent.unregisterAll();
-        TeleportEvent.unregisterAll();
-        
-        engine.removeSystem(physixSystem);
-        engine.removeSystem(physixDebugRenderSystem);
-        engine.removeSystem(renderSystem);
-        engine.removeSystem(updatePositionSystem);
-        engine.removeSystem(inputSystem);
-        engine.removeSystem(basemapRenderSystem);
-        engine.removeSystem(cameraSystem);
-        engine.removeSystem(animStateSystem);
-        engine.removeSystem(ritualSystem);
-        engine.removeSystem(soundSystem);
-        engine.removeSystem(reactionSystem);
-        engine.removeSystem(teleportSystem);
-        engine.removeSystem(deathSystem);
-        
-        engine.removeAllEntities();
-    }
-
     private TiledMap loadMap(String filename) { 
         try {
             return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
@@ -205,8 +204,9 @@ public class Game extends InputAdapter {
         physixSystem.getWorld().setContactListener(contactListener);
 //        contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
         contactListener.addListener(MaterialComponent.class, new ReactionListener());
-        contactListener.addListener(TriggerComponent.class, new TriggerListener());
+//        contactListener.addListener(TriggerComponent.class, new TriggerListener());
         contactListener.addListener(PlayerComponent.class, new PickUpListener());
+        contactListener.addListener(PlayerComponent.class, new WaterListener());
         contactListener.addListener(TeleportInComponent.class, new TeleportListener());
     }
 
