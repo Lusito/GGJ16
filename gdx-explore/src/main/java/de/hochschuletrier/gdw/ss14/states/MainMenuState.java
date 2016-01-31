@@ -35,7 +35,7 @@ public class MainMenuState extends BaseGameState {
         final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager, MenuPageRoot.Type.MAINMENU);
         menuManager.addLayer(menuPageRoot);
 
-        menuManager.addLayer(new DecoImage(assetManager.getTexture("menu_fg")));
+       // menuManager.addLayer(new DecoImage(assetManager.getTexture("menu_fg")));
         menuManager.pushPage(menuPageRoot);
 //        menuManager.getStage().setDebugAll(true);
 

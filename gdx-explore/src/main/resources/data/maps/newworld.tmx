@@ -13,6 +13,11 @@
    eJztlEEKgzAQRScKjdpWJYdyUV14/9N0BhL6DRHRJN2YxQMx8p8jzh+JaCyQYqoAdYb8gTEB+gROZfM15LbMC+jgvIn0GJvlHG/vuSd4/bOznj1HKh52Fh3xXc662ozz+K7cMwkfZmaWP7hkrph/+IpLdjRVJxy5jnzYKVffSfbT9YGmXwcJE207K7Yz0Ie9J7kzXDtPit3A/nGsgXu5d7BQKNyTL5ylLD8=
   </data>
  </layer>
+ <layer name="stone" width="27" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApoC1iGsX0sWPAoGAWjYBQAAIL0AB0=
+  </data>
+ </layer>
  <objectgroup name="destructibles">
   <object id="55" gid="30" x="64" y="64"/>
   <object id="56" gid="30" x="96" y="64"/>
