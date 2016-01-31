@@ -14,7 +14,7 @@ public class TeleportListener extends PhysixContactAdapter {
         super.beginContact(contact);
 
         PhysixBodyComponent otherComponent = contact.getOtherComponent();
-        if (otherComponent != null) {
+        if (otherComponent != null && !contact.getOtherFixture().isSensor()) {
             final Entity otherEntity = otherComponent.getEntity();
             if(otherEntity != null && ComponentMappers.player.has(otherEntity)) {
                 TeleportEvent.emit(contact.getMyComponent().getEntity(), otherEntity);

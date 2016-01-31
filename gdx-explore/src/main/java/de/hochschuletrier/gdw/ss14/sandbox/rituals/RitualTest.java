@@ -32,7 +32,6 @@ import de.hochschuletrier.gdw.ss14.game.GameConstants;
 import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TriggerComponent;
-import de.hochschuletrier.gdw.ss14.game.contactlisteners.ImpactSoundListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
 import de.hochschuletrier.gdw.ss14.game.systems.RenderSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
@@ -108,8 +107,6 @@ public class RitualTest extends SandboxGame {
     private void addContactListeners() {
         PhysixComponentAwareContactListener contactListener = new PhysixComponentAwareContactListener();
         physixSystem.getWorld().setContactListener(contactListener);
-        contactListener.addListener(ImpactSoundComponent.class,
-                new ImpactSoundListener());
         contactListener.addListener(TriggerComponent.class,
                 new TriggerListener());
     }

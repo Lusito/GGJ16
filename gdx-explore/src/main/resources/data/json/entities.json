@@ -16,7 +16,7 @@
                 "offsetY": 10
             },
             "PhysixBody": {
-                "type": "circle",
+                "type": "player",
                 "size": 15,
                 "density": 5,
                 "friction": 0.2,
