@@ -13,6 +13,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.ss14.events.PlayerMessageEvent;
 import de.hochschuletrier.gdw.ss14.events.TeleportEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
+import de.hochschuletrier.gdw.ss14.game.MainCamera;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.TeleportOutComponent;
 
@@ -61,6 +62,8 @@ public class TeleportSystem extends IteratingSystem implements TeleportEvent.Lis
         
         if(teleporterEntity!=null) {
             PlayerMessageEvent.emit(TELPORT_MESSAGES[RAND.nextInt(TELPORT_MESSAGES.length)], true);
+        } else {
+            MainCamera.updateForced();
         }
     }
 
