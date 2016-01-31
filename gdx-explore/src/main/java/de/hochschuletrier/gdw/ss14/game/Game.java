@@ -25,6 +25,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
+import de.hochschuletrier.gdw.ss14.events.ExplosionEvent;
 import de.hochschuletrier.gdw.ss14.events.GameWonEvent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
@@ -95,11 +96,34 @@ public class Game extends InputAdapter {
     public void dispose() {
         togglePhysixDebug.unregister();
         hud.dispose();
+        
+        ExplosionEvent.unregisterAll();
+        GameWonEvent.unregisterAll();
+        InputActionEvent.unregisterAll();
+        PickUpEvent.unregisterAll();
+        PlayerMessageEvent.unregisterAll();
+        ReactionEvent.unregisterAll();
+        RitualCastedEvent.unregisterAll();
+        TeleportEvent.unregisterAll();
+        
+        engine.removeSystem(physixSystem);
+        engine.removeSystem(physixDebugRenderSystem);
+        engine.removeSystem(renderSystem);
+        engine.removeSystem(updatePositionSystem);
+        engine.removeSystem(inputSystem);
+        engine.removeSystem(basemapRenderSystem);
+        engine.removeSystem(cameraSystem);
+        engine.removeSystem(animStateSystem);
+        engine.removeSystem(ritualSystem);
+        engine.removeSystem(soundSystem);
+        engine.removeSystem(reactionSystem);
+        engine.removeSystem(teleportSystem);
+        engine.removeSystem(deathSystem);
+        
+        engine.removeAllEntities();
     }
 
     public void init(AssetManagerX assetManager) {
-        if(engine != null)
-            reset();
         if(physixDebug != null)
             Main.getInstance().console.unregister(physixDebug);
         if(LightRenderer.rayHandler != null)
@@ -166,32 +190,6 @@ public class Game extends InputAdapter {
         engine.addSystem(deathSystem);
     }
     
-    private void reset() {
-        GameWonEvent.unregisterAll();
-        InputActionEvent.unregisterAll();
-        PickUpEvent.unregisterAll();
-        PlayerMessageEvent.unregisterAll();
-        ReactionEvent.unregisterAll();
-        RitualCastedEvent.unregisterAll();
-        TeleportEvent.unregisterAll();
-        
-        engine.removeSystem(physixSystem);
-        engine.removeSystem(physixDebugRenderSystem);
-        engine.removeSystem(renderSystem);
-        engine.removeSystem(updatePositionSystem);
-        engine.removeSystem(inputSystem);
-        engine.removeSystem(basemapRenderSystem);
-        engine.removeSystem(cameraSystem);
-        engine.removeSystem(animStateSystem);
-        engine.removeSystem(ritualSystem);
-        engine.removeSystem(soundSystem);
-        engine.removeSystem(reactionSystem);
-        engine.removeSystem(teleportSystem);
-        engine.removeSystem(deathSystem);
-        
-        engine.removeAllEntities();
-    }
-
     private TiledMap loadMap(String filename) { 
         try {
             return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);

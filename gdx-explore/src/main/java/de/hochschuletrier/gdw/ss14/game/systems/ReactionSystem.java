@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.math.Vector2;
+import de.hochschuletrier.gdw.ss14.events.ExplosionEvent;
 
 import de.hochschuletrier.gdw.ss14.events.ReactionEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
@@ -83,12 +84,14 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
     private void onBoulderExplosionReaction(Entity boulder, Entity expl) {
         PositionComponent exploPos = ComponentMappers.position.get(expl);
         Game.entityBuilder.createEntity("explosion", exploPos.x, exploPos.y);
+        ExplosionEvent.emit(exploPos.x, exploPos.y);
         engine.removeEntity(boulder);
     }
 
     private void onFireIceReaction(Entity fire, Entity ice) {
         Vector2 exploPos = getExplosionPos(fire, ice);
         Game.entityBuilder.createEntity("explosion", exploPos.x, exploPos.y);
+        ExplosionEvent.emit(exploPos.x, exploPos.y);
         engine.removeEntity(fire);
         engine.removeEntity(ice);
     }
@@ -96,6 +99,7 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
     private void onMonsterElementalReaction(Entity monster, Entity elemental) {
         Vector2 exploPos = getExplosionPos(monster, elemental);
         Game.entityBuilder.createEntity("explosion", exploPos.x, exploPos.y);
+        ExplosionEvent.emit(exploPos.x, exploPos.y);
         engine.removeEntity(monster);
     }
     
@@ -105,6 +109,7 @@ public class ReactionSystem extends EntitySystem implements ReactionEvent.Listen
         float addY = posComp.directionY * 25.f;
         Game.entityBuilder.createEntity("explosion", posComp.x + addX, posComp.y + addY);
         Game.engine.removeEntity(entity);
+        ExplosionEvent.emit(posComp.x + addX, posComp.y + addY);
     }
     
     private Vector2 getExplosionPos(Entity first, Entity second) {

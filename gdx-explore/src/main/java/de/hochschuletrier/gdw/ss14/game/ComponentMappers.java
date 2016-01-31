@@ -6,7 +6,6 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.ss14.game.components.BrokenBridgeComponent;
 import de.hochschuletrier.gdw.ss14.game.components.DeathComponent;
-import de.hochschuletrier.gdw.ss14.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ss14.game.components.InputComponent;
 import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
@@ -28,7 +27,6 @@ public class ComponentMappers {
     public static final ComponentMapper<TriggerComponent> trigger = ComponentMapper.getFor(TriggerComponent.class);
     public static final ComponentMapper<PhysixBodyComponent> physixBody = ComponentMapper.getFor(PhysixBodyComponent.class);
     public static final ComponentMapper<PhysixModifierComponent> physixModifier = ComponentMapper.getFor(PhysixModifierComponent.class);
-    public static final ComponentMapper<ImpactSoundComponent> impactSound = ComponentMapper.getFor(ImpactSoundComponent.class);
     public static final ComponentMapper<AnimationComponent> animation = ComponentMapper.getFor(AnimationComponent.class);
     public static final ComponentMapper<TextureComponent> texture = ComponentMapper.getFor(TextureComponent.class);
     public static final ComponentMapper<PointLightComponent> pointLight = ComponentMapper.getFor(PointLightComponent.class);
