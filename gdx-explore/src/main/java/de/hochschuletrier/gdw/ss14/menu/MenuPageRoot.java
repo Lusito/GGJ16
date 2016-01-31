@@ -2,7 +2,6 @@ package de.hochschuletrier.gdw.ss14.menu;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
-import de.hochschuletrier.gdw.commons.gdx.state.transition.SplitHorizontalTransition;
 import de.hochschuletrier.gdw.ss14.game.Game;
 import de.hochschuletrier.gdw.ss14.states.GameplayState;
 import de.hochschuletrier.gdw.ss14.states.MainMenuState;
@@ -36,7 +35,7 @@ public class MenuPageRoot extends MenuPage {
         if (!main.isTransitioning()) {
             Game game = new Game();
             game.init(assetManager);
-            main.changeState(new GameplayState(assetManager, game), new SplitHorizontalTransition(500), null);
+            main.changeState(new GameplayState(assetManager, game), null, null);
         }
     }
 
