@@ -2,6 +2,9 @@ package de.hochschuletrier.gdw.ss14.game.systems;
 
 import java.util.Comparator;
 
+import box2dLight.ChainLight;
+import box2dLight.ConeLight;
+import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
 import com.badlogic.ashley.core.Engine;
@@ -9,6 +12,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.physics.box2d.Filter;
 
 import de.hochschuletrier.gdw.commons.devcon.DevConsole;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
@@ -113,6 +117,13 @@ public class RenderSystem extends SortedSubIteratingSystem {
         this.rayHandler.setShadows(GameConstants.LIGHT_SHADOW);
         RayHandler.useDiffuseLight(GameConstants.LIGHT_DIFFUSE);
 
+        Filter lightfilter = new Filter();
+        lightfilter.categoryBits = GameConstants.CATEGORY_NON_LIT;
+        lightfilter.maskBits = (short) (GameConstants.MASK_EVERYTHING & ~GameConstants.CATEGORY_NON_LIT);
+        PointLight.setContactFilter(lightfilter);
+        ChainLight.setContactFilter(lightfilter);
+        ConeLight.setContactFilter(lightfilter);
+        
         console = Main.getInstance().console;
     }
 

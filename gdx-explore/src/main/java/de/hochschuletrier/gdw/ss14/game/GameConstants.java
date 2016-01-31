@@ -23,7 +23,10 @@ public class GameConstants {
     public static final int POSITION_ITERATIONS = 3;
     public static final int VELOCITY_ITERATIONS = 8;
     public static final int BOX2D_SCALE = 40;
-
+    public static final short MASK_EVERYTHING  = 0xFFF;
+    public static final short CATEGORY_LIT = 0x002;
+    public static final short CATEGORY_NON_LIT = 0x004;
+    
     public static float MUSIC_FADE_TIME = 2;
 
     // Light parameters

@@ -13,6 +13,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.utils.SafeProperties;
+import de.hochschuletrier.gdw.ss14.game.GameConstants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,16 +59,21 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
 
     private void addCircle(EntityFactoryParam param, Entity entity, SafeProperties properties) {
         PhysixBodyComponent bodyComponent = getBodyComponent(param, entity, properties);
+        short mask = (short) properties.getInt("mask", GameConstants.MASK_EVERYTHING);
+        short category = (short) properties.getInt("category", GameConstants.CATEGORY_LIT);
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
-                .shapeCircle(properties.getFloat("size", 5));
+                .shapeCircle(properties.getFloat("size", 5)).mask(mask).category(category);
         bodyComponent.createFixture(fixtureDef);
         entity.add(bodyComponent);
     }
 
     private void addBox(EntityFactoryParam param, Entity entity, SafeProperties properties) {
+        short mask = (short) properties.getInt("mask", GameConstants.MASK_EVERYTHING);
+        short category = (short) properties.getInt("category", GameConstants.CATEGORY_LIT);
         PhysixBodyComponent bodyComponent = getBodyComponent(param, entity, properties);
         PhysixFixtureDef fixtureDef = getFixtureDef(properties)
-                .shapeBox(properties.getFloat("size", 5), properties.getFloat("size", 5));
+                .shapeBox(properties.getFloat("size", 5), properties.getFloat("size", 5))
+                .mask(mask).category(category);;
         bodyComponent.createFixture(fixtureDef);
 
         entity.add(bodyComponent);
