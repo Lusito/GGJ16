@@ -450,7 +450,7 @@
                 "minDelay": 100
             },
             "Animation": {
-                "animation": "box"
+                "animation": "bomb"
             },
             "PhysixBody": {
                 "type": "circle",
