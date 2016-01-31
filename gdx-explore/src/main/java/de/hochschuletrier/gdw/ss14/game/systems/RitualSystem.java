@@ -275,11 +275,11 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
             ResourceDesc desc = resources.get(comp.resourceId);
             if(desc!=null) {
                 if(RAND.nextDouble()<0.05)
-                    PlayerMessageEvent.emit("Oh shit, "+desc.pickupName+"");
+                    PlayerMessageEvent.emit("Oh shit, "+desc.pickupName);
                 else if(RAND.nextDouble()<0.25)
-                    PlayerMessageEvent.emit("Cool, "+desc.pickupName+"");
+                    PlayerMessageEvent.emit("Cool, "+desc.pickupName);
                 else
-                    PlayerMessageEvent.emit("Oh, "+desc.pickupName+"");
+                    PlayerMessageEvent.emit("Oh, "+desc.pickupName);
             }
         }
         
@@ -287,11 +287,11 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
              RitualDesc desc = rituals.get(comp.ritualId);
              if(desc!=null)
                  if(RAND.nextDouble()<0.05)
-                     PlayerMessageEvent.emit("Holy shit, "+desc.pickupName+"");
+                     PlayerMessageEvent.emit("Holy shit, "+desc.pickupName);
                  else if(RAND.nextDouble()<0.25)
-                     PlayerMessageEvent.emit("Interesting, "+desc.pickupName+"");
+                     PlayerMessageEvent.emit("Interesting, "+desc.pickupName);
                  else
-                     PlayerMessageEvent.emit("Oh, '"+desc.pickupName+"'");
+                     PlayerMessageEvent.emit("Oh, "+desc.pickupName);
         }
         
         entityBuilder.removeEntity(whatsPickedUp);

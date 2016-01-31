@@ -4,7 +4,7 @@
         {
             "id": "mana",
             "name": "mana",
-            "pickupName": "a mana poton"
+            "pickupName": "a mana potion"
         },
         {
             "id": "coal",
@@ -70,7 +70,7 @@
     "rituals": [
         {
             "id": "winRitual",
-            "name": "Sacrefice orbs",
+            "name": "Sacrifice orbs",
             "description": "Summons a mighty spirit to end this madness",
             "pickupName": "a mysterious scroll",
             "resources": ["orb1", "orb2", "orb3", "orb4", "orb5", "orb6", "orb7"],
