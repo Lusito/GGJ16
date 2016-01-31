@@ -17,6 +17,7 @@ import de.hochschuletrier.gdw.ss14.events.PlayerMessageEvent;
 import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.ResourceDesc;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.RitualDesc;
 
 public class Hud implements PlayerMessageEvent.Listener {
@@ -80,6 +81,9 @@ public class Hud implements PlayerMessageEvent.Listener {
         offset += font.drawWrapped(DrawUtil.batch, ritualDesc.getDescription(), 50, (int)offset, textBoxWidth).height;
 
         offset += 15;
+        offset += font.drawWrapped(DrawUtil.batch, "Uses: "+ buildIngredientStr(ritualDesc.getResources()), 50, (int)offset, textBoxWidth).height;
+        
+        offset += 15;
         font.drawWrapped(DrawUtil.batch, ready ? "Press SPACE to cast" : ("Missing: "+missingResourceList), 50, (int)offset, textBoxWidth);
         
         
@@ -95,6 +99,41 @@ public class Hud implements PlayerMessageEvent.Listener {
             font.setColor(Color.WHITE);
             font.drawWrapped(DrawUtil.batch, message, (int) msgX+25, (int) msgY+25, (int) messageBubble.getWidth()-50);
         }
+    }
+
+    private String buildIngredientStr(List<String> resources) {
+        RitualCasterComponent comp = ComponentMappers.ritualCaster.get(player);
+        if(comp==null)
+            return "";
+        
+        StringBuilder str = new StringBuilder();
+        int sameResCount = 0;
+        int ownedRes = 0;
+        String lastName = null;
+        boolean first = true;
+        for(String resId : resources) {
+            if(first) first = false;
+            else str.append(", ");
+            
+            ResourceDesc desc = ritualSystem.getResource(resId);
+            int count = comp.getResourceCount(resId);
+            
+            str.append(desc.getName()).append("(").append(count).append(")");
+
+            if(count>0)
+                ownedRes++;
+            
+            if(lastName==null)
+                lastName = desc.getName();
+                
+            if(lastName.equals(desc.getName()))
+                sameResCount++;
+        }
+
+        if(sameResCount==resources.size() && sameResCount>1)
+            return sameResCount+" "+lastName+"s ("+ownedRes+")";
+        
+        return str.toString();
     }
 
     private String buildMissingResourceList(RitualDesc ritualDesc) {

@@ -24,6 +24,9 @@ public class RitualCasterComponent extends Component implements Pool.Poolable {
     public boolean hasResource(String name) {
         return availableResources.getOrDefault(name, 0) > 0;
     }
+    public int getResourceCount(String name) {
+        return availableResources.getOrDefault(name, 0);
+    }
 
     public void removeResource(String name) {
         Integer count = availableResources.get(name);
