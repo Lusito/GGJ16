@@ -69,6 +69,7 @@ public class MainMenuState extends BaseGameState {
 
     @Override
     public void onEnterComplete() {
+        MusicManager.setGlobalVolume(GameConstants.MUSIC_VOLUME_MENU);
         MusicManager.play(music, GameConstants.MUSIC_FADE_TIME);
         inputForwarder.set(menuManager.getInputProcessor());
     }

@@ -41,6 +41,7 @@ import de.hochschuletrier.gdw.ss14.game.contactlisteners.PickUpListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.ReactionListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TeleportListener;
 import de.hochschuletrier.gdw.ss14.game.contactlisteners.TriggerListener;
+import de.hochschuletrier.gdw.ss14.game.contactlisteners.WaterListener;
 import de.hochschuletrier.gdw.ss14.game.systems.AnimationStateSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.CameraSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.DeathSystem;
@@ -121,7 +122,7 @@ public class Game extends InputAdapter {
         entityBuilder.init(assetManager);
         setupPhysixWorld();
 
-        TiledMap map = loadMap("data/maps/newworld.tmx");
+        TiledMap map = loadMap("data/maps/bigworld_grassd.tmx");
         basemapRenderSystem.initMap(map);
         cameraSystem.adjustToMap(map);
         entityBuilder.createEntitiesFromMap(map, physixSystem);
@@ -205,8 +206,9 @@ public class Game extends InputAdapter {
         physixSystem.getWorld().setContactListener(contactListener);
 //        contactListener.addListener(ImpactSoundComponent.class, new ImpactSoundListener());
         contactListener.addListener(MaterialComponent.class, new ReactionListener());
-        contactListener.addListener(TriggerComponent.class, new TriggerListener());
+//        contactListener.addListener(TriggerComponent.class, new TriggerListener());
         contactListener.addListener(PlayerComponent.class, new PickUpListener());
+        contactListener.addListener(PlayerComponent.class, new WaterListener());
         contactListener.addListener(TeleportInComponent.class, new TeleportListener());
     }
 

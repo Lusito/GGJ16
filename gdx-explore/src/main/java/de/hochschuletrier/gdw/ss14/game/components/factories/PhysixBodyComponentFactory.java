@@ -43,6 +43,9 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
         modifyComponent.schedule(() -> {
             String type = properties.getString("type", "");
             switch (type) {
+                case "player":
+                    addPlayer(param, entity, properties);
+                    break;
                 case "circle":
                     addCircle(param, entity, properties);
                     break;
@@ -55,6 +58,22 @@ public class PhysixBodyComponentFactory extends ComponentFactory<EntityFactoryPa
             }
         });
         entity.add(modifyComponent);
+    }
+
+    private void addPlayer(EntityFactoryParam param, Entity entity, SafeProperties properties) {
+        PhysixBodyComponent bodyComponent = getBodyComponent(param, entity, properties);
+        short mask = (short) properties.getInt("mask", GameConstants.MASK_EVERYTHING);
+        short category = (short) properties.getInt("category", GameConstants.CATEGORY_LIT);
+        PhysixFixtureDef fixtureDef = getFixtureDef(properties)
+                .shapeCircle(properties.getFloat("size", 5)).mask(mask).category(category);
+        bodyComponent.createFixture(fixtureDef);
+        
+        float waterRadius = GameConstants.WATER_LISTEN_MAX_DISTANCE + GameConstants.WATER_LISTEN_MIN_DISTANCE; // watch a little further
+        fixtureDef = getFixtureDef(properties).sensor(true)
+                .shapeCircle(waterRadius).mask(GameConstants.CATEGORY_WATER).category(category);
+        bodyComponent.createFixture(fixtureDef);
+        
+        entity.add(bodyComponent);
     }
 
     private void addCircle(EntityFactoryParam param, Entity entity, SafeProperties properties) {
