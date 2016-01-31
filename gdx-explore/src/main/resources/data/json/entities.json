@@ -546,6 +546,13 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "orb1"
+            },
+            "PointLight": {
+                "color": "1, 0.5, 0",
+                "distance": 2,
+                "static": true,
+                "xRay": false,
+                "isBlinking": true
             }
         }
     },
@@ -564,6 +571,13 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "orb2"
+            },
+            "PointLight": {
+                "color": "1, 0.5, 0",
+                "distance": 2,
+                "static": true,
+                "xRay": false,
+                "isBlinking": true
             }
         }
     },
@@ -582,6 +596,13 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "orb3"
+            },
+            "PointLight": {
+                "color": "1, 0.5, 0",
+                "distance": 2,
+                "static": true,
+                "xRay": false,
+                "isBlinking": true
             }
         }
     },
@@ -600,6 +621,13 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "orb4"
+            },
+            "PointLight": {
+                "color": "1, 0.5, 0",
+                "distance": 2,
+                "static": true,
+                "xRay": false,
+                "isBlinking": true
             }
         }
     },
@@ -618,6 +646,13 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "orb5"
+            },
+            "PointLight": {
+                "color": "1, 0.5, 0",
+                "distance": 2,
+                "static": true,
+                "xRay": false,
+                "isBlinking": true
             }
         }
     },
@@ -636,6 +671,13 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "orb6"
+            },
+            "PointLight": {
+                "color": "1, 0.5, 0",
+                "distance": 2,
+                "static": true,
+                "xRay": false,
+                "isBlinking": true
             }
         }
     },
@@ -654,6 +696,13 @@
             "Pickable": {
                 "resourceCount": 1,
                 "resourceId": "orb7"
+            },
+            "PointLight": {
+                "color": "1, 0.5, 0",
+                "distance": 2,
+                "static": true,
+                "xRay": false,
+                "isBlinking": true
             }
         }
     }

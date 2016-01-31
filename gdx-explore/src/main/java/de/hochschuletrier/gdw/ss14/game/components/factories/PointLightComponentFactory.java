@@ -52,6 +52,7 @@ public class PointLightComponentFactory extends ComponentFactory<EntityFactoryPa
         light.setStaticLight(properties.getBoolean("static", false));
         light.setSoft(properties.getBoolean("soft", true));
         light.setDistance(properties.getFloat("distance", 5.f));
+        component.blink = properties.getBoolean("isBlinking");
         
         entity.add(component);
     }
