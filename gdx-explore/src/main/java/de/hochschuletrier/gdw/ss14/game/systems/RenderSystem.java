@@ -119,7 +119,7 @@ public class RenderSystem extends SortedSubIteratingSystem {
 
         Filter lightfilter = new Filter();
         lightfilter.categoryBits = GameConstants.CATEGORY_NON_LIT;
-        lightfilter.maskBits = (short) (GameConstants.MASK_EVERYTHING & ~GameConstants.CATEGORY_NON_LIT);
+        lightfilter.maskBits = (short) (GameConstants.MASK_EVERYTHING & ~(GameConstants.CATEGORY_NON_LIT | GameConstants.CATEGORY_WATER));
         PointLight.setContactFilter(lightfilter);
         ChainLight.setContactFilter(lightfilter);
         ConeLight.setContactFilter(lightfilter);
