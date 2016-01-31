@@ -26,6 +26,7 @@ public class GameConstants {
     public static final short MASK_EVERYTHING  = 0xFFF;
     public static final short CATEGORY_LIT = 0x002;
     public static final short CATEGORY_NON_LIT = 0x004;
+    public static final short CATEGORY_WATER = 0x008;
     
     public static float MUSIC_FADE_TIME = 2;
 
