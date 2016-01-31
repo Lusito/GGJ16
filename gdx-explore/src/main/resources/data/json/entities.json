@@ -4,7 +4,9 @@
         "components": {
             "Player": { },
             "Input": { },
-            "Position": { },
+            "Position": { 
+                "layer": -1
+            },
             "Animation": {
                 "animation": "ball",
                 "offsetY": 10
@@ -680,6 +682,19 @@
                 "static": true,
                 "xRay": false,
                 "isBlinking": true
+            }
+        }
+    },
+    "puff": {
+        "meta": { },
+        "components": {
+            "Position": { },
+            "ParticleEffect": {
+                "effect": "puff",
+                "loop": false
+            },
+            "Death": {
+                "time": 1
             }
         }
     }

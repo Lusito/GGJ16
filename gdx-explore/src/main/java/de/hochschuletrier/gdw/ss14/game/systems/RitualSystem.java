@@ -204,6 +204,8 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
                 } else {
                     Game.entityBuilder.createEntity("bridge_horizontal_fixed", bridgePos.x, bridgePos.y);
                 }
+                
+                entityBuilder.createEntity("puff", bridgePos.x, bridgePos.y);
                 return;
             }
         }
