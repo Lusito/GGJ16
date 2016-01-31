@@ -33,7 +33,7 @@
                 { "type": "text", "path" : "text", "style" : "text_left", "text": "Dennis Grass  ", "delay": "1350" },
                 { "type": "text", "path" : "text", "style" : "text_right", "text": " Florian Oetke", "delay": "0" },
                 
-                { "type": "text", "path" : "text", "group" : "title", "style" : "title_center", "text": "Design ", "delay": "3300" },
+                { "type": "text", "path" : "text", "group" : "title", "style" : "title_center", "text": "Design & Assets", "delay": "3300" },
                 { "type": "text", "path" : "text", "style" : "text_center", "text": "Dennis Grass  ", "delay": "1350" },
                 
                 { "type": "text", "path" : "text", "group" : "title", "style" : "title_center", "text": "Used Assets ", "delay": "3300" },
