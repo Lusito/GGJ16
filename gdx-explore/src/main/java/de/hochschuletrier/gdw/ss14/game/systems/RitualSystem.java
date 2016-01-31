@@ -26,6 +26,7 @@ import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierCompon
 import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.jackson.JacksonList;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
+import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.events.GameWonEvent;
 import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
@@ -199,13 +200,15 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
             
             if(dist2<maxRadius2) {
                 Game.engine.removeEntity(brokenBridge);
+                Entity bridge;
                 if(bridgeComp.vertical) {
-                    Game.entityBuilder.createEntity("bridge_vertical_fixed", bridgePos.x, bridgePos.y);
+                    bridge = Game.entityBuilder.createEntity("bridge_vertical_fixed", bridgePos.x, bridgePos.y);
                 } else {
-                    Game.entityBuilder.createEntity("bridge_horizontal_fixed", bridgePos.x, bridgePos.y);
+                    bridge = Game.entityBuilder.createEntity("bridge_horizontal_fixed", bridgePos.x, bridgePos.y);
                 }
                 
                 entityBuilder.createEntity("puff", bridgePos.x, bridgePos.y);
+//                SoundSystem.playSound(bridge, Main.getInstance().getAssetManager().getSound("puff"));
                 return;
             }
         }

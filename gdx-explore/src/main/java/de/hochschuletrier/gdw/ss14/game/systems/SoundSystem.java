@@ -67,7 +67,7 @@ public class SoundSystem extends IteratingSystem implements PickUpEvent.Listener
         natureSound.stop();
     }
 
-    private SoundInstance playSound(Entity entity, Sound sound, float volume, float referenceDistance) {
+    public static SoundInstance playSound(Entity entity, Sound sound, float volume, float referenceDistance) {
         assert(sound != null);
         PositionComponent posComponent = ComponentMappers.position.get(entity);
         SoundInstance soundInstance = null;
@@ -85,12 +85,11 @@ public class SoundSystem extends IteratingSystem implements PickUpEvent.Listener
         return soundInstance;
     }
     
-    private SoundInstance playSound(Entity entity, Sound sound) {
+    public static SoundInstance playSound(Entity entity, Sound sound) {
         return playSound(entity, sound, 3.f, 50.f);
     }
     
-    @SuppressWarnings("unused")
-    private SoundInstance playSound(Entity entity, Sound sound, float volume) {
+    public static SoundInstance playSound(Entity entity, Sound sound, float volume) {
         return playSound(entity, sound, volume, 50.f);
     }
 
