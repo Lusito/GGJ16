@@ -22,7 +22,7 @@ public class Hud implements PlayerMessageEvent.Listener {
     private static final float MESSAGE_DURATION = 3.f;
     
     private static final Color COLOR_READY = Color.WHITE;
-    private static final Color COLOR_NOT_READY = new Color(0.4f, 0.4f, 0.4f, 1);
+    private static final Color COLOR_NOT_READY = new Color(0.6f, 0.6f, 0.6f, 1);
     
     private Texture overlay;
     
@@ -41,7 +41,7 @@ public class Hud implements PlayerMessageEvent.Listener {
     public Hud(AssetManagerX assetManager, RitualSystem ritualSystem, Entity player) {
         overlay = assetManager.getTexture("hud_bg");
         messageBubble = assetManager.getTexture("hud_msg_bg");
-        font = assetManager.getFont("verdana_24");
+        font = assetManager.getFont("verdana_16");
         this.ritualSystem = ritualSystem;
         this.player = player;
         
@@ -54,9 +54,6 @@ public class Hud implements PlayerMessageEvent.Listener {
         RitualDesc ritualDesc = ritualSystem.getCurrentRitual(player);
         if(ritualDesc==null)
             return;
-
-        float fontScaleX = font.getScaleX();
-        float fontScaleY = font.getScaleY();
         
         boolean ready = ritualSystem.isReady(player, ritualDesc);
         
@@ -67,19 +64,15 @@ public class Hud implements PlayerMessageEvent.Listener {
         int textBoxWidth = overlay.getWidth()-70;
         
         font.setColor(ready ? COLOR_READY : COLOR_NOT_READY);
-
-        font.setScale(1.0f);
         
         float offset = Gdx.graphics.getHeight() - 190;
-        offset += font.drawWrapped(DrawUtil.batch, ritualDesc.getName(), 50, offset, textBoxWidth).height;
-
-        font.setScale(0.72f);
+        offset += font.drawWrapped(DrawUtil.batch, ritualDesc.getName(), 50, (int)offset, textBoxWidth).height;
         
         offset += 15;
-        offset += font.drawWrapped(DrawUtil.batch, ritualDesc.getDescription(), 50, offset, textBoxWidth).height;
+        offset += font.drawWrapped(DrawUtil.batch, ritualDesc.getDescription(), 50, (int)offset, textBoxWidth).height;
 
         offset += 15;
-        font.drawWrapped(DrawUtil.batch, ready ? "Press SPACE to cast" : ("Missing: "+missingResourceList), 50, offset, textBoxWidth);
+        font.drawWrapped(DrawUtil.batch, ready ? "Press SPACE to cast" : ("Missing: "+missingResourceList), 50, (int)offset, textBoxWidth);
         
         
         if(messageTimout>0.f) {
@@ -90,12 +83,8 @@ public class Hud implements PlayerMessageEvent.Listener {
             DrawUtil.batch.draw(messageBubble, msgX, msgY + (msgDir<0 ? messageBubble.getHeight() : 0), messageBubble.getWidth(), msgDir*messageBubble.getHeight());
             
             font.setColor(Color.WHITE);
-            font.setScale(message.length()<6 ? 1.2f :0.8f);
-            font.drawWrapped(DrawUtil.batch, message, msgX+20, msgY+20, messageBubble.getWidth()-40);
+            font.drawWrapped(DrawUtil.batch, message, (int) msgX+15, (int) msgY+15, (int) messageBubble.getWidth()-30);
         }
-
-        
-        font.setScale(fontScaleX, fontScaleY);
     }
 
     private String buildMissingResourceList(RitualDesc ritualDesc) {
@@ -140,7 +129,7 @@ public class Hud implements PlayerMessageEvent.Listener {
 
     @Override
     public void onPlayerMessageEvent(String message, boolean clear) {
-        if(this.message!=null && (messageTimout>1.0f || this.message.length()<3) && !clear) {
+        if(this.message!=null && (messageTimout>1.5f || this.message.length()<3) && !clear) {
             this.message+="\n"+message;
             
             String[] lines = this.message.split("\n");

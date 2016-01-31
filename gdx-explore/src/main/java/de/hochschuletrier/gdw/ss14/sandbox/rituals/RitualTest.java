@@ -194,8 +194,7 @@ public class RitualTest extends SandboxGame {
                     .listResources(lastCreated)) {
                 out.append(
                         "Res: " + res.count + " * " + res.desc.getId() + "; "
-                        + res.desc.getName() + "; "
-                        + res.desc.getDescription()).append('\n');
+                        + res.desc.getName()).append('\n');
             }
             for (RitualDesc ritual : ritualSystem.listRituals(lastCreated)) {
                 out.append(

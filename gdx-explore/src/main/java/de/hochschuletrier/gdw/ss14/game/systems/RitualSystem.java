@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
@@ -44,6 +45,8 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
     private static final Logger LOGGER = LoggerFactory.getLogger(RitualSystem.class);
     
     private static final float SUMMONING_TIME = 1.f;
+
+    private static final Random RAND =new Random();
     
     private final EntityBuilder entityBuilder;
 
@@ -124,7 +127,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
             return;
         }
         
-        PlayerMessageEvent.emit("!");
+        PlayerMessageEvent.emit(SUMMON_MESSAGES[RAND.nextInt(SUMMON_MESSAGES.length)]);
         RitualCastedEvent.emit(mage);
         comp.remainingTime = SUMMONING_TIME;
         InputComponent inputComp = ComponentMappers.input.get(mage);
@@ -201,9 +204,16 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
                 } else {
                     Game.entityBuilder.createEntity("bridge_horizontal_fixed", bridgePos.x, bridgePos.y);
                 }
-                break;
+                return;
             }
         }
+        
+        if(RAND.nextDouble()<0.1)
+            PlayerMessageEvent.emit("Why can't I create a nice new bridge for once!", true);
+        else if(RAND.nextDouble()<0.3)
+            PlayerMessageEvent.emit("A bridge on dry land? What a wonderfull idea!", true);
+        else    
+            PlayerMessageEvent.emit("I may need a bridge near by for this.", true);
     }
 
     private void createSummonedEntity(Entity mage, RitualDesc ritual) {
@@ -251,7 +261,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
         return true;
     }
-
+    
     @Override
     public void onPickupEvent(Entity entityWhoPickup, Entity whatsPickedUp) {
         RitualCasterComponent caster = ComponentMappers.ritualCaster.get(entityWhoPickup);
@@ -263,14 +273,25 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
         if(comp.resourceId!=null && comp.resourceCount>=1) {
             caster.addResources(comp.resourceId, comp.resourceCount);
             ResourceDesc desc = resources.get(comp.resourceId);
-            if(desc!=null)
-                PlayerMessageEvent.emit("Oh, "+desc.getName()+"");
+            if(desc!=null) {
+                if(RAND.nextDouble()<0.05)
+                    PlayerMessageEvent.emit("Oh shit, "+desc.pickupName+"");
+                else if(RAND.nextDouble()<0.25)
+                    PlayerMessageEvent.emit("Cool, "+desc.pickupName+"");
+                else
+                    PlayerMessageEvent.emit("Oh, "+desc.pickupName+"");
+            }
         }
         
         if(comp.ritualId!=null&& caster.addRitual(comp.ritualId)) {
              RitualDesc desc = rituals.get(comp.ritualId);
              if(desc!=null)
-                 PlayerMessageEvent.emit("Oh, '"+desc.getName()+"'");
+                 if(RAND.nextDouble()<0.05)
+                     PlayerMessageEvent.emit("Holy shit, "+desc.pickupName+"");
+                 else if(RAND.nextDouble()<0.25)
+                     PlayerMessageEvent.emit("Interesting, "+desc.pickupName+"");
+                 else
+                     PlayerMessageEvent.emit("Oh, '"+desc.pickupName+"'");
         }
         
         entityBuilder.removeEntity(whatsPickedUp);
@@ -393,6 +414,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
         String id;
         String name;
+        String pickupName;
         String description;
         RitualAction action;
         String entityName;
@@ -422,7 +444,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
         private String id;
         private String name;
-        private String description;
+        private String pickupName;
 
         public String getId() {
             return id;
@@ -430,10 +452,6 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
 
         public String getName() {
             return name;
-        }
-
-        public String getDescription() {
-            return description;
         }
     }
 
@@ -447,5 +465,16 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
             this.count = count;
         }
     }
+    
+    private static final String[] SUMMON_MESSAGES = {
+        "!",
+        "It worked",
+        "And what should I do with that!?",
+        "Why did that even work!?",
+        "It worked",
+        "Behold! I'm Tim the mighty sorcerer",
+        "Shouldn't I sacrifice something now?",
+        "It worked"
+    };
     
 }

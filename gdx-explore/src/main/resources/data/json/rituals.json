@@ -4,74 +4,75 @@
         {
             "id": "mana",
             "name": "mana",
-            "description": ""
+            "pickupName": "a mana poton"
         },
         {
             "id": "coal",
             "name": "coal",
-            "description": ""
+            "pickupName": "a piece of coal"
         },
         {
             "id": "mushroom",
             "name": "mushroom",
-            "description": ""
+            "pickupName": "that mushroom looks delicious"
         },
         {
             "id": "phosphor",
             "name": "phosphor",
-            "description": ""
+            "pickupName": "a piece of phosphor"
         },
         {
             "id": "rope",
             "name": "rope",
-            "description": ""
+            "pickupName": "a rope"
         },
         {
             "id": "wood",
             "name": "wood",
-            "description": ""
+            "pickupName": "a piece of wood"
         },
         {
             "id": "orb1",
             "name": "orb",
-            "description": ""
+            "pickupName": "one of the orbs"
         },
         {
             "id": "orb2",
             "name": "orb",
-            "description": ""
+            "pickupName": "one of the orbs"
         },
         {
             "id": "orb3",
             "name": "orb",
-            "description": ""
+            "pickupName": "one of the orbs"
         },
         {
             "id": "orb4",
             "name": "orb",
-            "description": ""
+            "pickupName": "one of the orbs"
         },
         {
             "id": "orb5",
             "name": "orb",
-            "description": ""
+            "pickupName": "one of the orbs"
         },
         {
             "id": "orb6",
             "name": "orb",
-            "description": ""
+            "pickupName": "one of the orbs"
         },
         {
             "id": "orb7",
             "name": "orb",
-            "description": ""
+            "pickupName": "one of the orbs"
         }
     ],
     "rituals": [
         {
             "id": "winRitual",
-            "name": "Win",
-            "description": "TODO",
+            "name": "Sacrefice orbs",
+            "description": "Summons a mighty spirit to end this madness",
+            "pickupName": "a mysterious scroll",
             "resources": ["orb1", "orb2", "orb3", "orb4", "orb5", "orb6", "orb7"],
             "action": "WIN",
             "minDistance": 0.0
@@ -79,6 +80,7 @@
         {
             "id": "fireball",
             "name": "Fireball",
+            "pickupName": "a partly burned scroll",
             "description": "Summons a fireball",
             "resources": ["mana", "phosphor"],
             "action": "SPAWN",
@@ -88,6 +90,7 @@
         {
             "id": "bomb",
             "name": "Bomb",
+            "pickupName": "a spell to summon explosives",
             "description": "Summons a bomb",
             "resources": ["coal", "phosphor"],
             "action": "SPAWN",
@@ -96,6 +99,7 @@
         {
             "id": "bridge",
             "name": "Bridge",
+            "pickupName": "a paper 'Repairing bridges 101'",
             "description": "Repairs a broken bridge",
             "resources": ["wood", "rope"],
             "action": "REPAIR_BRIDGE",
@@ -104,6 +108,7 @@
         {
             "id": "poisonElemental",
             "name": "Poison Elemental",
+            "pickupName": "a scroll to summon a elemental spirit",
             "description": "Summons a poison elemental",
             "resources": ["mana", "mushroom"],
             "action": "SPAWN",
