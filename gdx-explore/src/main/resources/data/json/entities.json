@@ -43,7 +43,7 @@
         "components": {
             "Position": { },
             "PointLight": {
-                "color": "0.05, 0.05, 0",
+                "color": "0.05, 0.05, 0, 0.3",
                 "distance": 5,
                 "static": true,
                 "xRay": true
@@ -153,7 +153,8 @@
             "PhysixBody": {
                 "type": "circle",
                 "size": 10,
-                "sensor": true
+                "sensor": true,
+                "category": 4
             },
             "Pickable": {
                 "resourceCount": 1,
@@ -257,7 +258,8 @@
             "PhysixBody": {
                 "type": "box",
                 "size": 32,
-                "static": true
+                "static": true,
+                "category": 4
             },
             "BrokenBridge": { 
                 "vertical": true
@@ -283,7 +285,8 @@
             "PhysixBody": {
                 "type": "box",
                 "size": 32,
-                "static": true
+                "static": true,
+                "category": 4
             },
             "BrokenBridge": { 
                 "vertical": false
