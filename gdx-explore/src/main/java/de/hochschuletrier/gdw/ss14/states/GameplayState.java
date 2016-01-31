@@ -43,7 +43,7 @@ public class GameplayState extends BaseGameState {
         this.game = game;
         font = assetManager.getFont("verdana_32");
 
-        music = assetManager.getMusic("gameplay");
+        music = assetManager.getMusic("menu");
 
         Skin skin = ((MainMenuState) Main.getInstance().getPersistentState(MainMenuState.class)).getSkin();
         final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager, MenuPageRoot.Type.INGAME);
@@ -95,6 +95,7 @@ public class GameplayState extends BaseGameState {
 
     @Override
     public void onEnter(BaseGameState previousState) {
+        MusicManager.setGlobalVolume(GameConstants.MUSIC_VOLUME_INGAME);
         MusicManager.play(music, GameConstants.MUSIC_FADE_TIME);
     }
 

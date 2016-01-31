@@ -29,10 +29,15 @@ public class GameConstants {
     public static final short CATEGORY_WATER = 0x008;
     
     public static float MUSIC_FADE_TIME = 2;
+    public static float MUSIC_VOLUME_MENU = 0.4f;
+    public static float MUSIC_VOLUME_INGAME = 0.08f;
+    public static float WATER_LISTEN_MIN_DISTANCE = 50;
+    public static float WATER_LISTEN_MAX_DISTANCE = 300;
+    public static float AMBIENT_VOLUME = 0.1f;
 
     // Light parameters
     public static final int LIGHT_RAYS = 360;
-    public static final float LIGHT_AMBIENT = 0.4f;
+    public static final float LIGHT_AMBIENT = 0.05f;
     public static final boolean LIGHT_BLUR = true;
     public static final int LIGHT_BLURNUM = 3;
     public static final boolean LIGHT_SHADOW = true;

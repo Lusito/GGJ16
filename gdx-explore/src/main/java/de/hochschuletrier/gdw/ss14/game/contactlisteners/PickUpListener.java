@@ -6,7 +6,6 @@ import de.hochschuletrier.gdw.commons.gdx.physix.PhysixContactAdapter;
 import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
 import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
-import de.hochschuletrier.gdw.ss14.game.components.PickableComponent;
 
 public class PickUpListener extends PhysixContactAdapter {
 

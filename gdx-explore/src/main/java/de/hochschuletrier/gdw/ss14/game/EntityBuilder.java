@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ss14.game;
 
+import de.hochschuletrier.gdw.ss14.game.utils.WaterRectangle;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -78,8 +79,10 @@ public class EntityBuilder {
     private void addSolid(PhysixSystem physixSystem, Rectangle rect, int tileWidth, int tileHeight, boolean isWater) {
         float width = rect.width * tileWidth;
         float height = rect.height * tileHeight;
-        float x = rect.x * tileWidth + width / 2;
-        float y = rect.y * tileHeight + height / 2;
+        final int x0 = rect.x * tileWidth;
+        final int y0 = rect.y * tileHeight;
+        float x = x0 + width / 2;
+        float y = y0 + height / 2;
 
         PhysixBodyDef bodyDef = new PhysixBodyDef(BodyDef.BodyType.StaticBody, physixSystem)
                     .position(x, y).fixedRotation(false);
@@ -90,6 +93,7 @@ public class EntityBuilder {
             body.createFixture(new PhysixFixtureDef(physixSystem)
             .density(1).friction(0.5f).shapeBox(width, height)
             .mask(GameConstants.MASK_EVERYTHING).category(GameConstants.CATEGORY_WATER));
+            body.setUserData(new WaterRectangle(x0, y0, width, height));
         } else {
             body.createFixture(new PhysixFixtureDef(physixSystem)
             .density(1).friction(0.5f).shapeBox(width, height));
