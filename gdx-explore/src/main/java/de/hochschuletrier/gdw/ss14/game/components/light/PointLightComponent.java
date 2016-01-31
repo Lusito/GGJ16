@@ -13,6 +13,8 @@ public class PointLightComponent extends Component implements Pool.Poolable {
     public PointLight pointLight = new PointLight(LightRenderer.rayHandler, GameConstants.LIGHT_RAYS);
     public float offsetX = 0;
     public float offsetY = 0;
+    public boolean blink = false;
+    public float blinkingTime = 0;
 
     public void set(Color color, float distance, float offsetX, 
                     float offsetY, boolean isStatic, boolean active) {
@@ -45,5 +47,8 @@ public class PointLightComponent extends Component implements Pool.Poolable {
         pointLight.setActive(false);
         pointLight.setStaticLight(false);
         pointLight.setXray(false);
+        
+        blink = false;
+        blinkingTime = 0;
     }
 }

@@ -8,13 +8,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.events.PlayerMessageEvent;
+import de.hochschuletrier.gdw.ss14.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ss14.game.components.RitualCasterComponent;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.ResourceDesc;
 import de.hochschuletrier.gdw.ss14.game.systems.RitualSystem.RitualDesc;
 
 public class Hud implements PlayerMessageEvent.Listener {
@@ -38,14 +41,20 @@ public class Hud implements PlayerMessageEvent.Listener {
     
     private float messageTimout = 0.f;
     
+    private Vector2 msgPos;
+    
     public Hud(AssetManagerX assetManager, RitualSystem ritualSystem, Entity player) {
         overlay = assetManager.getTexture("hud_bg");
         messageBubble = assetManager.getTexture("hud_msg_bg");
         font = assetManager.getFont("verdana_16");
+        font.setUseIntegerPositions(true);
         this.ritualSystem = ritualSystem;
         this.player = player;
         
         PlayerMessageEvent.register(this);
+
+        PositionComponent posComp = ComponentMappers.position.get(player);
+        msgPos = new Vector2(posComp.x, posComp.y);
     }
 
     public void render() {
@@ -72,12 +81,17 @@ public class Hud implements PlayerMessageEvent.Listener {
         offset += font.drawWrapped(DrawUtil.batch, ritualDesc.getDescription(), 50, (int)offset, textBoxWidth).height;
 
         offset += 15;
+        offset += font.drawWrapped(DrawUtil.batch, "Uses: "+ buildIngredientStr(ritualDesc.getResources()), 50, (int)offset, textBoxWidth).height;
+        
+        offset += 15;
         font.drawWrapped(DrawUtil.batch, ready ? "Press SPACE to cast" : ("Missing: "+missingResourceList), 50, (int)offset, textBoxWidth);
         
         
         if(messageTimout>0.f) {
-            float msgX = Gdx.graphics.getWidth()/2.f - messageBubble.getWidth() + 30; // TODO
-            float msgY = Gdx.graphics.getHeight()/2.f - messageBubble.getHeight() - 30;
+            MainCamera.bind();
+            
+            float msgX = msgPos.x;
+            float msgY = msgPos.y;
             int msgDir = -1;
             
             DrawUtil.batch.draw(messageBubble, msgX, msgY + (msgDir<0 ? messageBubble.getHeight() : 0), messageBubble.getWidth(), msgDir*messageBubble.getHeight());
@@ -85,6 +99,41 @@ public class Hud implements PlayerMessageEvent.Listener {
             font.setColor(Color.WHITE);
             font.drawWrapped(DrawUtil.batch, message, (int) msgX+25, (int) msgY+25, (int) messageBubble.getWidth()-50);
         }
+    }
+
+    private String buildIngredientStr(List<String> resources) {
+        RitualCasterComponent comp = ComponentMappers.ritualCaster.get(player);
+        if(comp==null)
+            return "";
+        
+        StringBuilder str = new StringBuilder();
+        int sameResCount = 0;
+        int ownedRes = 0;
+        String lastName = null;
+        boolean first = true;
+        for(String resId : resources) {
+            if(first) first = false;
+            else str.append(", ");
+            
+            ResourceDesc desc = ritualSystem.getResource(resId);
+            int count = comp.getResourceCount(resId);
+            
+            str.append(desc.getName()).append("(").append(count).append(")");
+
+            if(count>0)
+                ownedRes++;
+            
+            if(lastName==null)
+                lastName = desc.getName();
+                
+            if(lastName.equals(desc.getName()))
+                sameResCount++;
+        }
+
+        if(sameResCount==resources.size() && sameResCount>1)
+            return sameResCount+" "+lastName+"s ("+ownedRes+")";
+        
+        return str.toString();
     }
 
     private String buildMissingResourceList(RitualDesc ritualDesc) {
@@ -122,6 +171,18 @@ public class Hud implements PlayerMessageEvent.Listener {
     public void update(float delta) {
         if(messageTimout>0.f)
             messageTimout-=delta;
+        
+        PositionComponent posComp = ComponentMappers.position.get(player);
+        
+        float msgX = posComp.x - messageBubble.getWidth() + 60;
+        float msgY = posComp.y - messageBubble.getHeight() - 30;
+        
+        Vector2 newPos = new Vector2(msgX, msgY);
+        
+        if(Vector2.len(newPos.x-msgPos.x, newPos.y-msgPos.y)>200.f)
+            msgPos = newPos;
+        else
+            msgPos.lerp(newPos, delta * 5.f);
     }
     
     public void dispose() {

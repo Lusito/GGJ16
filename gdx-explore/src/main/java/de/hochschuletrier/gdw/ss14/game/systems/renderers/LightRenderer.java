@@ -4,6 +4,7 @@ import box2dLight.RayHandler;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.ashley.SortedSubIteratingSystem.SubSystem;
 import de.hochschuletrier.gdw.ss14.game.ComponentMappers;
@@ -30,6 +31,13 @@ public class LightRenderer extends SubSystem {
 
         if (pointLight != null) {
             pointLight.pointLight.setPosition((position.x + pointLight.offsetX) / GameConstants.BOX2D_SCALE, (position.y + pointLight.offsetY) / GameConstants.BOX2D_SCALE);
+        
+            if(pointLight.blink){
+            	pointLight.blinkingTime += deltaTime;
+            	Color colorTemp = pointLight.pointLight.getColor();
+        		colorTemp.a = (float) ((Math.sin(pointLight.blinkingTime)+1)/2.f);
+        		pointLight.pointLight.setColor(colorTemp);
+            }
         }
         if (chainLight != null) {
             chainLight.chainLight.setPosition((position.x + chainLight.offsetX) / GameConstants.BOX2D_SCALE, (position.y + chainLight.offsetY) / GameConstants.BOX2D_SCALE);
@@ -37,6 +45,7 @@ public class LightRenderer extends SubSystem {
         if (coneLight != null) {
             coneLight.coneLight.setPosition((position.x + coneLight.offsetX) / GameConstants.BOX2D_SCALE, (position.y + coneLight.offsetY) / GameConstants.BOX2D_SCALE);
         }
+        
     }
 
     public static void setLightsActive(Entity entity, boolean active) {
