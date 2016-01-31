@@ -528,6 +528,12 @@
             },
             "Material": {
                 "type": "ELEMENTAL"
+            },
+            "PointLight": {
+                "color": "0.7, 0.25, 1",
+                "distance": 1,
+                "static": true,
+                "xRay": false
             }
         }
     },
