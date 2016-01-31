@@ -31,7 +31,7 @@
                 "rituals": "winRitual"
             },
             "PointLight": {
-                "color": "0.3, 0, 0",
+                "color": "0.3, 0, 0, 0.75",
                 "distance": 7,
                 "static": true,
                 "xRay": false
@@ -43,8 +43,8 @@
         "components": {
             "Position": { },
             "PointLight": {
-                "color": "0.05, 0.05, 0, 0.3",
-                "distance": 5,
+                "color": "0.05, 0.05, 0, 0.5",
+                "distance": 15,
                 "static": true,
                 "xRay": true
             }
