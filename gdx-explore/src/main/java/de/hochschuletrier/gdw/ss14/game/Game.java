@@ -25,7 +25,12 @@ import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.commons.tiled.LayerObject;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
 import de.hochschuletrier.gdw.ss14.Main;
+import de.hochschuletrier.gdw.ss14.events.GameWonEvent;
+import de.hochschuletrier.gdw.ss14.events.InputActionEvent;
+import de.hochschuletrier.gdw.ss14.events.PickUpEvent;
 import de.hochschuletrier.gdw.ss14.events.PlayerMessageEvent;
+import de.hochschuletrier.gdw.ss14.events.ReactionEvent;
+import de.hochschuletrier.gdw.ss14.events.RitualCastedEvent;
 import de.hochschuletrier.gdw.ss14.events.TeleportEvent;
 import de.hochschuletrier.gdw.ss14.game.components.MaterialComponent;
 import de.hochschuletrier.gdw.ss14.game.components.PlayerComponent;
@@ -47,39 +52,37 @@ import de.hochschuletrier.gdw.ss14.game.systems.SoundSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.UpdatePositionSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ss14.game.systems.TeleportSystem;
+import de.hochschuletrier.gdw.ss14.game.systems.renderers.LightRenderer;
 
 public class Game extends InputAdapter {
 
     private final CVarBool physixDebug = new CVarBool("physix_debug", false, 0, "Draw physix debug");
     private final Hotkey togglePhysixDebug = new Hotkey(() -> physixDebug.toggle(false), Input.Keys.F1, HotkeyModifier.CTRL);
 
-    public static final PooledEngine engine = new PooledEngine(
-            GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE,
-            GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE
-    );
+    public static PooledEngine engine;
 
-    public static final EntityBuilder entityBuilder = new EntityBuilder(engine);
+    public static EntityBuilder entityBuilder;
 
-    private final PhysixSystem physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE,
-            GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX
-    );
-    private final PhysixDebugRenderSystem physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
+    private PhysixSystem physixSystem;
+    private PhysixDebugRenderSystem physixDebugRenderSystem;
 
-    private final RenderSystem renderSystem = new RenderSystem(new RayHandler(physixSystem.getWorld()), GameConstants.PRIORITY_RENDER);
-    private final UpdatePositionSystem updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
-    private final InputSystem inputSystem = new InputSystem();
-    private final CameraSystem cameraSystem = new CameraSystem(0);
+    private RenderSystem renderSystem;
+    private UpdatePositionSystem updatePositionSystem;
+    private InputSystem inputSystem;
+    private CameraSystem cameraSystem;
 
-    private final AnimationStateSystem animStateSystem = new AnimationStateSystem(GameConstants.PRIORITY_ANIMATION_STATE);
-    private final SoundSystem soundSystem = new SoundSystem(GameConstants.PRIORITY_SOUND);
-    private final RitualSystem ritualSystem = new RitualSystem(entityBuilder);
-    private final DeathSystem deathSystem = new DeathSystem(0);
-
+    private AnimationStateSystem animStateSystem;
+    private SoundSystem soundSystem;
+    private RitualSystem ritualSystem;
+    private DeathSystem deathSystem;
+    private ReactionSystem reactionSystem;
+    private TeleportSystem teleportSystem;
+    
     private Entity player;
     
     private Hud hud;
 
-    private final BasemapRenderSystem basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
+    private BasemapRenderSystem basemapRenderSystem;
 
     public Game() {
         // If this is a build jar file, disable hotkeys
@@ -94,6 +97,22 @@ public class Game extends InputAdapter {
     }
 
     public void init(AssetManagerX assetManager) {
+        if(engine != null)
+            reset();
+        if(physixDebug != null)
+            Main.getInstance().console.unregister(physixDebug);
+        if(LightRenderer.rayHandler != null)
+            LightRenderer.rayHandler.removeAll();
+        
+        engine = new PooledEngine(
+                GameConstants.ENTITY_POOL_INITIAL_SIZE, GameConstants.ENTITY_POOL_MAX_SIZE,
+                GameConstants.COMPONENT_POOL_INITIAL_SIZE, GameConstants.COMPONENT_POOL_MAX_SIZE
+        );
+        
+        entityBuilder = new EntityBuilder(engine);
+        
+        createSystems();
+        
         Main.getInstance().console.register(physixDebug);
         physixDebug.addListener((CVar) -> physixDebugRenderSystem.setProcessing(physixDebug.get()));
         physixDebugRenderSystem.setProcessing(physixDebug.get());
@@ -112,6 +131,23 @@ public class Game extends InputAdapter {
         TeleportEvent.emit(null, player);
         PlayerMessageEvent.emit("!");
     }
+    
+    private void createSystems() {
+        physixSystem = new PhysixSystem(GameConstants.BOX2D_SCALE,
+                GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS, GameConstants.PRIORITY_PHYSIX);
+        physixDebugRenderSystem = new PhysixDebugRenderSystem(GameConstants.PRIORITY_DEBUG_WORLD);
+        renderSystem = new RenderSystem(new RayHandler(physixSystem.getWorld()), GameConstants.PRIORITY_RENDER);
+        updatePositionSystem = new UpdatePositionSystem(GameConstants.PRIORITY_PHYSIX + 1);
+        inputSystem = new InputSystem();
+        cameraSystem = new CameraSystem(0);
+        animStateSystem = new AnimationStateSystem(GameConstants.PRIORITY_ANIMATION_STATE);
+        soundSystem = new SoundSystem(GameConstants.PRIORITY_SOUND);
+        deathSystem = new DeathSystem(0);
+        reactionSystem = new ReactionSystem();
+        teleportSystem = new TeleportSystem(0);
+        ritualSystem = new RitualSystem(entityBuilder);
+        basemapRenderSystem = new BasemapRenderSystem(GameConstants.PRIORITY_TILE_RENDERER);
+    }
 
     private void addSystems() {
         engine.addSystem(physixSystem);
@@ -124,12 +160,38 @@ public class Game extends InputAdapter {
         engine.addSystem(animStateSystem);
         engine.addSystem(ritualSystem);
         engine.addSystem(soundSystem);
-        engine.addSystem(new ReactionSystem());
-        engine.addSystem(new TeleportSystem(0));
+        engine.addSystem(reactionSystem);
+        engine.addSystem(teleportSystem);
         engine.addSystem(deathSystem);
     }
+    
+    private void reset() {
+        GameWonEvent.unregisterAll();
+        InputActionEvent.unregisterAll();
+        PickUpEvent.unregisterAll();
+        PlayerMessageEvent.unregisterAll();
+        ReactionEvent.unregisterAll();
+        RitualCastedEvent.unregisterAll();
+        TeleportEvent.unregisterAll();
+        
+        engine.removeSystem(physixSystem);
+        engine.removeSystem(physixDebugRenderSystem);
+        engine.removeSystem(renderSystem);
+        engine.removeSystem(updatePositionSystem);
+        engine.removeSystem(inputSystem);
+        engine.removeSystem(basemapRenderSystem);
+        engine.removeSystem(cameraSystem);
+        engine.removeSystem(animStateSystem);
+        engine.removeSystem(ritualSystem);
+        engine.removeSystem(soundSystem);
+        engine.removeSystem(reactionSystem);
+        engine.removeSystem(teleportSystem);
+        engine.removeSystem(deathSystem);
+        
+        engine.removeAllEntities();
+    }
 
-    private TiledMap loadMap(String filename) {
+    private TiledMap loadMap(String filename) { 
         try {
             return new TiledMap(filename, LayerObject.PolyMode.ABSOLUTE);
         } catch (Exception ex) {
