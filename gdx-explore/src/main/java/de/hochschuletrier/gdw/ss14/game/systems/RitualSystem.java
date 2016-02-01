@@ -208,7 +208,7 @@ public class RitualSystem extends IteratingSystem implements PickUpEvent.Listene
                 }
                 
                 entityBuilder.createEntity("puff", bridgePos.x, bridgePos.y);
-                SoundSystem.playSound(bridge, Main.getInstance().getAssetManager().getSound("poof"));
+                SoundSystem.playSound(bridge, Main.getInstance().getAssetManager().getSound("poof"), 0.2f);
                 return;
             }
         }
