@@ -41,6 +41,7 @@ import de.hochschuletrier.gdw.commons.gdx.utils.KeyUtil;
 import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import de.hochschuletrier.gdw.commons.utils.ClassUtils;
 import de.hochschuletrier.gdw.ss14.game.GameConstants;
+import de.hochschuletrier.gdw.ss14.game.MainCamera;
 import de.hochschuletrier.gdw.ss14.sandbox.SandboxCommand;
 import de.hochschuletrier.gdw.ss14.states.LoadGameState;
 import de.hochschuletrier.gdw.ss14.states.MainMenuState;
@@ -125,6 +126,7 @@ public class Main extends StateBasedGame {
         consoleSkin = new Skin(Gdx.files.internal("data/skins/basic.json"));
         consoleView.init(consoleSkin);
         addScreenListener(consoleView);
+        addScreenListener((int width, int height)-> MainCamera.resize(width, height));
         inputMultiplexer.addProcessor(consoleView.getInputProcessor());
         inputMultiplexer.addProcessor(HotkeyManager.getInputProcessor());
 
