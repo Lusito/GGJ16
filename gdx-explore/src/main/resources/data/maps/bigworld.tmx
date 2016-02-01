@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="180" height="120" tilewidth="32" tileheight="32" nextobjectid="4072">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="180" height="120" tilewidth="32" tileheight="32" nextobjectid="4076">
  <tileset firstgid="1" source="tiles/items.tsx"/>
  <tileset firstgid="17" source="tiles/monsters.tsx"/>
  <tileset firstgid="33" source="tiles/scrolls.tsx"/>
@@ -2387,6 +2387,10 @@
   <object id="4066" gid="6" x="1408" y="2304" width="32" height="32"/>
   <object id="4068" gid="5" x="1408" y="2400" width="32" height="32"/>
   <object id="4070" gid="5" x="1664" y="2624" width="32" height="32"/>
+  <object id="4072" gid="1" x="2432" y="3808" width="32" height="32"/>
+  <object id="4073" gid="1" x="2400" y="3808" width="32" height="32"/>
+  <object id="4074" gid="2" x="3072" y="3456" width="32" height="32"/>
+  <object id="4075" gid="2" x="3136" y="3456" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="bridges">
   <object id="89" gid="89" x="1952" y="1440" width="96" height="32"/>
